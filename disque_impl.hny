@@ -9,12 +9,12 @@ def insert(d, v):
     acquire(?d -> lock)
 
     if d->current == None:
-      node.next = node
-      node.prev = node
+      node -> next = node
+      node -> prev = node
       d->current = node
     else:
       d -> current -> prev -> next = node
-      node.next = d -> current
+      node -> next = d -> current
 
     release(?d -> lock)
 
