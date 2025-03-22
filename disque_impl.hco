@@ -54,12 +54,12 @@
                 "    if d->current == None:",
                 "      node -> next = node",
                 "      node -> prev = node",
-                "      d->current = node",
-                "    else:",
-                "      node -> prev = d -> current -> prev",
-                "      node -> next = d -> current",
-                "      d -> current -> prev -> next = node",
-                "      d -> current -> prev = node",
+                "      d -> current = node",
+                "    # else:",
+                "    #   node -> prev = d -> current -> prev",
+                "    #   node -> next = d -> current",
+                "    #   d -> current -> prev -> next = node",
+                "    #   d -> current -> prev = node",
                 "",
                 "    release(?d -> lock)",
                 "",
@@ -100,7 +100,8 @@
                 "",
                 "        free(node)",
                 "",
-                "    release(?d -> lock)"
+                "    release(?d -> lock)",
+                ""
               ],
             "identifiers": {
                 "d": "local-const",
@@ -470,7 +471,7 @@
           }
       },
     "labels": {
-        "__end__": 1391
+        "__end__": 1352
       },
     "pretty": [
         [
@@ -4914,8 +4915,8 @@
             "pop a value and store it in shared variable next"
           ],
         [
-            "Jump 1389",
-            "jump over method definition: set program counter to 1389"
+            "Jump 1350",
+            "jump over method definition: set program counter to 1350"
           ],
         [
             "Frame malloc(v)",
@@ -4994,8 +4995,8 @@
             "delete method variable copy"
           ],
         [
-            "Jump 1389",
-            "jump over method definition: set program counter to 1389"
+            "Jump 1350",
+            "jump over method definition: set program counter to 1350"
           ],
         [
             "Frame free(r)",
@@ -5026,8 +5027,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1389",
-            "jump over method definition: set program counter to 1389"
+            "Jump 1350",
+            "jump over method definition: set program counter to 1350"
           ],
         [
             "Frame leak_check()",
@@ -5074,8 +5075,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1389",
-            "jump over method definition: set program counter to 1389"
+            "Jump 1350",
+            "jump over method definition: set program counter to 1350"
           ],
         [
             "Frame Disque()",
@@ -5126,8 +5127,8 @@
             "delete method variable d"
           ],
         [
-            "Jump 1389",
-            "jump over method definition: set program counter to 1389"
+            "Jump 1350",
+            "jump over method definition: set program counter to 1350"
           ],
         [
             "Frame insert(d, v)",
@@ -5230,8 +5231,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1207",
-            "pop a value and jump to 1207 if the value is False"
+            "JumpCond False 1206",
+            "pop a value and jump to 1206 if the value is False"
           ],
         [
             "LoadVar node",
@@ -5298,164 +5299,8 @@
             "pop a value and an address and store the value at the address"
           ],
         [
-            "Jump 1246",
-            "set program counter to 1246"
-          ],
-        [
-            "LoadVar node",
-            "push the value of node"
-          ],
-        [
-            "Push \"prev\"",
-            "push constant \"prev\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "LoadVar d",
-            "push the value of d"
-          ],
-        [
-            "Push \"current\"",
-            "push constant \"current\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
-          ],
-        [
-            "Push \"prev\"",
-            "push constant \"prev\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
-          ],
-        [
-            "Store",
-            "pop a value and an address and store the value at the address"
-          ],
-        [
-            "LoadVar node",
-            "push the value of node"
-          ],
-        [
-            "Push \"next\"",
-            "push constant \"next\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "LoadVar d",
-            "push the value of d"
-          ],
-        [
-            "Push \"current\"",
-            "push constant \"current\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
-          ],
-        [
-            "Store",
-            "pop a value and an address and store the value at the address"
-          ],
-        [
-            "LoadVar d",
-            "push the value of d"
-          ],
-        [
-            "Push \"current\"",
-            "push constant \"current\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
-          ],
-        [
-            "Push \"prev\"",
-            "push constant \"prev\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
-          ],
-        [
-            "Push \"next\"",
-            "push constant \"next\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "LoadVar node",
-            "push the value of node"
-          ],
-        [
-            "Store",
-            "pop a value and an address and store the value at the address"
-          ],
-        [
-            "LoadVar d",
-            "push the value of d"
-          ],
-        [
-            "Push \"current\"",
-            "push constant \"current\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
-          ],
-        [
-            "Push \"prev\"",
-            "push constant \"prev\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "LoadVar node",
-            "push the value of node"
-          ],
-        [
             "DelVar node",
             "delete method variable node"
-          ],
-        [
-            "Store",
-            "pop a value and an address and store the value at the address"
           ],
         [
             "LoadVar d",
@@ -5486,8 +5331,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1389",
-            "jump over method definition: set program counter to 1389"
+            "Jump 1350",
+            "jump over method definition: set program counter to 1350"
           ],
         [
             "Frame delete(d)",
@@ -5546,8 +5391,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1273",
-            "pop a value and jump to 1273 if the value is False"
+            "JumpCond False 1234",
+            "pop a value and jump to 1234 if the value is False"
           ],
         [
             "DelVar node",
@@ -5562,8 +5407,8 @@
             "pop a value and store in returnVal"
           ],
         [
-            "Jump 1330",
-            "set program counter to 1330"
+            "Jump 1291",
+            "set program counter to 1291"
           ],
         [
             "LoadVar node",
@@ -5610,8 +5455,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1301",
-            "pop a value and jump to 1301 if the value is False"
+            "JumpCond False 1262",
+            "pop a value and jump to 1262 if the value is False"
           ],
         [
             "LoadVar node",
@@ -5674,8 +5519,8 @@
             "pop a value and an address and store the value at the address"
           ],
         [
-            "Jump 1326",
-            "set program counter to 1326"
+            "Jump 1287",
+            "set program counter to 1287"
           ],
         [
             "LoadVar node",
@@ -5826,8 +5671,8 @@
             "delete method variable returnVal"
           ],
         [
-            "Jump 1389",
-            "jump over method definition: set program counter to 1389"
+            "Jump 1350",
+            "jump over method definition: set program counter to 1350"
           ],
         [
             "Frame next(d)",
@@ -5886,8 +5731,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1358",
-            "pop a value and jump to 1358 if the value is False"
+            "JumpCond False 1319",
+            "pop a value and jump to 1319 if the value is False"
           ],
         [
             "DelVar node",
@@ -5902,8 +5747,8 @@
             "pop a value and store in returnVal"
           ],
         [
-            "Jump 1381",
-            "set program counter to 1381"
+            "Jump 1342",
+            "set program counter to 1342"
           ],
         [
             "LoadVar d",
@@ -6041,15 +5886,15 @@
     "locs": [
         {
             "module": "__main__",
-            "endline": 60,
+            "endline": 62,
             "stmt": [
                 1,
                 1,
-                60,
-                29
+                62,
+                6
               ],
             "line": 1,
-            "endcolumn": 29,
+            "endcolumn": 6,
             "column": 1
           },
         {
@@ -21646,7 +21491,7 @@
                 14,
                 7,
                 14,
-                23
+                25
               ],
             "line": 14,
             "endcolumn": 7,
@@ -21659,11 +21504,11 @@
                 14,
                 7,
                 14,
-                23
+                25
               ],
             "line": 14,
-            "endcolumn": 16,
-            "column": 10
+            "endcolumn": 18,
+            "column": 12
           },
         {
             "module": "__main__",
@@ -21672,46 +21517,7 @@
                 14,
                 7,
                 14,
-                23
-              ],
-            "line": 14,
-            "endcolumn": 16,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 14,
-            "stmt": [
-                14,
-                7,
-                14,
-                23
-              ],
-            "line": 14,
-            "endcolumn": 23,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 14,
-            "stmt": [
-                14,
-                7,
-                14,
-                23
-              ],
-            "line": 14,
-            "endcolumn": 23,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 14,
-            "stmt": [
-                14,
-                7,
-                14,
-                23
+                25
               ],
             "line": 14,
             "endcolumn": 18,
@@ -21719,523 +21525,55 @@
           },
         {
             "module": "__main__",
-            "endline": 11,
+            "endline": 14,
             "stmt": [
-                11,
+                14,
+                7,
+                14,
+                25
+              ],
+            "line": 14,
+            "endcolumn": 25,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                7,
+                14,
+                25
+              ],
+            "line": 14,
+            "endcolumn": 25,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                7,
+                14,
+                25
+              ],
+            "line": 14,
+            "endcolumn": 20,
+            "column": 7
+          },
+        {
+            "module": "__main__",
+            "endline": 21,
+            "stmt": [
+                21,
                 5,
-                11,
-                26
+                21,
+                23
               ],
-            "line": 11,
-            "endcolumn": 26,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 10,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 18,
-            "column": 15
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 18,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 22,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 33,
-            "column": 27
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 41,
-            "column": 38
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 41,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 41,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 20,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 10,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 18,
-            "column": 15
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 18,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 22,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 33,
-            "column": 27
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                33
-              ],
-            "line": 17,
-            "endcolumn": 20,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 7,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 18,
-            "column": 12
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 18,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 18,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 26,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 26,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 34,
-            "column": 31
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 34,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 41,
-            "column": 38
-          },
-        {
-            "module": "__main__",
-            "endline": 18,
-            "stmt": [
-                18,
-                7,
-                18,
-                41
-              ],
-            "line": 18,
-            "endcolumn": 36,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 7,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 18,
-            "column": 12
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 18,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 18,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 26,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 33,
-            "column": 30
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 33,
-            "column": 30
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                33
-              ],
-            "line": 19,
-            "endcolumn": 28,
-            "column": 7
+            "line": 21,
+            "endcolumn": 14,
+            "column": 14
           },
         {
             "module": "__main__",
@@ -24072,55 +23410,55 @@
           },
         {
             "module": "__main__",
-            "endline": 60,
+            "endline": 62,
             "stmt": [
-                60,
-                24,
-                60,
-                29
+                62,
+                1,
+                62,
+                6
               ],
-            "line": 60,
-            "endcolumn": 29,
-            "column": 24
+            "line": 62,
+            "endcolumn": 6,
+            "column": 1
           },
         {
             "module": "__main__",
-            "endline": 60,
+            "endline": 62,
             "stmt": [
-                60,
-                24,
-                60,
-                29
+                62,
+                1,
+                62,
+                6
               ],
-            "line": 60,
-            "endcolumn": 29,
-            "column": 24
+            "line": 62,
+            "endcolumn": 6,
+            "column": 1
           },
         {
             "module": "__main__",
-            "endline": 60,
+            "endline": 62,
             "stmt": [
-                60,
-                29,
-                60,
-                29
+                62,
+                6,
+                62,
+                6
               ],
-            "line": 60,
-            "endcolumn": 29,
-            "column": 29
+            "line": 62,
+            "endcolumn": 6,
+            "column": 6
           },
         {
             "module": "__main__",
-            "endline": 60,
+            "endline": 62,
             "stmt": [
-                60,
-                29,
-                60,
-                29
+                62,
+                6,
+                62,
+                6
               ],
-            "line": 60,
-            "endcolumn": 29,
-            "column": 29
+            "line": 62,
+            "endcolumn": 6,
+            "column": 6
           }
       ],
     "code": [
@@ -29382,7 +28720,7 @@
             "op": "Store"
           },
         {
-            "pc": "1389",
+            "pc": "1350",
             "op": "Jump"
           },
         {
@@ -29511,7 +28849,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1389",
+            "pc": "1350",
             "op": "Jump"
           },
         {
@@ -29545,7 +28883,7 @@
             "op": "Return"
           },
         {
-            "pc": "1389",
+            "pc": "1350",
             "op": "Jump"
           },
         {
@@ -29607,7 +28945,7 @@
             "op": "Return"
           },
         {
-            "pc": "1389",
+            "pc": "1350",
             "op": "Jump"
           },
         {
@@ -29683,7 +29021,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1389",
+            "pc": "1350",
             "op": "Jump"
           },
         {
@@ -29824,7 +29162,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1207",
+            "pc": "1206",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -29905,194 +29243,8 @@
             "op": "Store"
           },
         {
-            "pc": "1246",
-            "op": "Jump"
-          },
-        {
-            "value": "node",
-            "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "prev"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "value": "d",
-            "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "current"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "prev"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
-          },
-        {
-            "op": "Store"
-          },
-        {
-            "value": "node",
-            "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "next"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "value": "d",
-            "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "current"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
-          },
-        {
-            "op": "Store"
-          },
-        {
-            "value": "d",
-            "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "current"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "prev"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "next"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "value": "node",
-            "op": "LoadVar"
-          },
-        {
-            "op": "Store"
-          },
-        {
-            "value": "d",
-            "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "current"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "prev"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "value": "node",
-            "op": "LoadVar"
-          },
-        {
             "value": "node",
             "op": "DelVar"
-          },
-        {
-            "op": "Store"
           },
         {
             "value": "d",
@@ -30132,7 +29284,7 @@
             "op": "Return"
           },
         {
-            "pc": "1389",
+            "pc": "1350",
             "op": "Jump"
           },
         {
@@ -30205,7 +29357,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1273",
+            "pc": "1234",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -30227,7 +29379,7 @@
             "op": "StoreVar"
           },
         {
-            "pc": "1330",
+            "pc": "1291",
             "op": "Jump"
           },
         {
@@ -30282,7 +29434,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1301",
+            "pc": "1262",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -30365,7 +29517,7 @@
             "op": "Store"
           },
         {
-            "pc": "1326",
+            "pc": "1287",
             "op": "Jump"
           },
         {
@@ -30575,7 +29727,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1389",
+            "pc": "1350",
             "op": "Jump"
           },
         {
@@ -30648,7 +29800,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1358",
+            "pc": "1319",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -30670,7 +29822,7 @@
             "op": "StoreVar"
           },
         {
-            "pc": "1381",
+            "pc": "1342",
             "op": "Jump"
           },
         {
@@ -31947,45 +31099,6 @@
     1,
     1,
     1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
     0,
     0,
     0,

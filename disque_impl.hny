@@ -11,7 +11,7 @@ def insert(d, v):
     if d->current == None:
       node -> next = node
       node -> prev = node
-      d->current = node
+      d -> current = node
     else:
       node -> prev = d -> current -> prev
       node -> next = d -> current
@@ -58,3 +58,4 @@ def next(d) returns returnVal:
         free(node)
 
     release(?d -> lock)
+
