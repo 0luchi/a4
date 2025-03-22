@@ -1,9 +1,9 @@
 {
-  "nstates": 200,
+  "nstates": 16,
   "hvm": {
     "modules": {
         "alloc": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/alloc.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/alloc.hny",
             "lines": [
                 "pool = {:}",
                 "next = 0",
@@ -66,8 +66,8 @@
                 "",
                 "for i in {1..N_INSERT}:",
                 "    spawn insert_test(i)",
-                "# for i in {1..N_DELETE}:",
-                "#     spawn delete_test(i)",
+                "for i in {1..N_DELETE}:",
+                "    spawn delete_test(i)",
                 "# for i in {1..N_NEXT}:",
                 "#     spawn next_test(i)"
               ],
@@ -88,7 +88,7 @@
               }
           },
         "bags": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/bags.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/bags.hny",
             "lines": [
                 "def empty() returns bg:",
                 "    bg = {:}",
@@ -190,7 +190,7 @@
               }
           },
         "synch": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/synch.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/synch.hny",
             "lines": [
                 "import lists",
                 "import bags",
@@ -348,19 +348,23 @@
                 "def delete(d) returns returnVal:",
                 "    acquire(?d -> lock)",
                 "    returnVal = None",
+                "    var toDelete =d->current",
                 "",
                 "    if d->current != None: ",
-                "      returnVal = d -> current -> value",
-                "      if d->current->next == d->current: ",
-                "          d->current->next = None",
-                "          d->current->prev = None",
-                "          d->current=None",
-                "      else: ",
-                "          currNext = d -> current -> next",
-                "          currPrev = d -> current -> prev",
-                "          currPrev -> next = currNext",
-                "          currNext -> prev = currPrev",
-                "          d -> current = currNext",
+                "",
+                "        returnVal = d -> current -> value",
+                "        if d->current->next == d->current: ",
+                "            d->current->next=None",
+                "            d->current->prev=None",
+                "            d->current=None",
+                "        else: ",
+                "            currNext =toDelete -> next",
+                "            currPrev = toDelete -> prev",
+                "            currPrev -> next = currNext",
+                "            currNext -> prev = currPrev",
+                "            d -> current = currNext",
+                "        free(toDelete)",
+                "    # notifyAll(?d->empty)",
                 "",
                 "    release(?d -> lock)",
                 "  ",
@@ -388,6 +392,7 @@
                 "Disque": "constant",
                 "malloc": "imported",
                 "next": "constant",
+                "toDelete": "local-var",
                 "delete": "constant",
                 "___": "___",
                 "insert": "constant",
@@ -395,7 +400,7 @@
               }
           },
         "lists": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/lists.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/lists.hny",
             "lines": [
                 "# return s[b:e]",
                 "def subseq(s, b, e) returns result:",
@@ -510,7 +515,7 @@
           }
       },
     "labels": {
-        "__end__": 1490
+        "__end__": 1508
       },
     "pretty": [
         [
@@ -4954,8 +4959,8 @@
             "pop a value and store it in shared variable next"
           ],
         [
-            "Jump 1396",
-            "jump over method definition: set program counter to 1396"
+            "Jump 1400",
+            "jump over method definition: set program counter to 1400"
           ],
         [
             "Frame malloc(v)",
@@ -5034,8 +5039,8 @@
             "delete method variable copy"
           ],
         [
-            "Jump 1396",
-            "jump over method definition: set program counter to 1396"
+            "Jump 1400",
+            "jump over method definition: set program counter to 1400"
           ],
         [
             "Frame free(r)",
@@ -5066,8 +5071,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1396",
-            "jump over method definition: set program counter to 1396"
+            "Jump 1400",
+            "jump over method definition: set program counter to 1400"
           ],
         [
             "Frame leak_check()",
@@ -5114,8 +5119,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1396",
-            "jump over method definition: set program counter to 1396"
+            "Jump 1400",
+            "jump over method definition: set program counter to 1400"
           ],
         [
             "Frame Disque()",
@@ -5166,8 +5171,8 @@
             "delete method variable d"
           ],
         [
-            "Jump 1396",
-            "jump over method definition: set program counter to 1396"
+            "Jump 1400",
+            "jump over method definition: set program counter to 1400"
           ],
         [
             "Frame insert(d, v)",
@@ -5526,8 +5531,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1396",
-            "jump over method definition: set program counter to 1396"
+            "Jump 1400",
+            "jump over method definition: set program counter to 1400"
           ],
         [
             "Frame delete(d)",
@@ -5578,6 +5583,26 @@
             "pop an address and push the value at the address"
           ],
         [
+            "StoreVar toDelete",
+            "pop a value and store in toDelete"
+          ],
+        [
+            "LoadVar d",
+            "push the value of d"
+          ],
+        [
+            "Push \"current\"",
+            "push constant \"current\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Load",
+            "pop an address and push the value at the address"
+          ],
+        [
             "Push None",
             "push constant None"
           ],
@@ -5586,8 +5611,8 @@
             "pop 2 values and push the result of applying !="
           ],
         [
-            "JumpCond False 1344",
-            "pop a value and jump to 1344 if the value is False"
+            "JumpCond False 1347",
+            "pop a value and jump to 1347 if the value is False"
           ],
         [
             "DelVar returnVal",
@@ -5674,8 +5699,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1313",
-            "pop a value and jump to 1313 if the value is False"
+            "JumpCond False 1318",
+            "pop a value and jump to 1318 if the value is False"
           ],
         [
             "LoadVar d",
@@ -5762,24 +5787,12 @@
             "pop a value and an address and store the value at the address"
           ],
         [
-            "Jump 1344",
-            "set program counter to 1344"
+            "Jump 1343",
+            "set program counter to 1343"
           ],
         [
-            "LoadVar d",
-            "push the value of d"
-          ],
-        [
-            "Push \"current\"",
-            "push constant \"current\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
+            "LoadVar toDelete",
+            "push the value of toDelete"
           ],
         [
             "Push \"next\"",
@@ -5798,20 +5811,8 @@
             "pop a value and store it in shared variable currNext"
           ],
         [
-            "LoadVar d",
-            "push the value of d"
-          ],
-        [
-            "Push \"current\"",
-            "push constant \"current\""
-          ],
-        [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
+            "LoadVar toDelete",
+            "push the value of toDelete"
           ],
         [
             "Push \"prev\"",
@@ -5890,6 +5891,26 @@
             "pop a value and an address and store the value at the address"
           ],
         [
+            "LoadVar toDelete",
+            "push the value of toDelete"
+          ],
+        [
+            "DelVar toDelete",
+            "delete method variable toDelete"
+          ],
+        [
+            "Apply PC(1131)",
+            "call method PC(1131)"
+          ],
+        [
+            "Pop",
+            "discard the top value on the stack"
+          ],
+        [
+            "DelVar toDelete",
+            "delete method variable toDelete"
+          ],
+        [
             "LoadVar d",
             "push the value of d"
           ],
@@ -5922,8 +5943,8 @@
             "delete method variable returnVal"
           ],
         [
-            "Jump 1396",
-            "jump over method definition: set program counter to 1396"
+            "Jump 1400",
+            "jump over method definition: set program counter to 1400"
           ],
         [
             "Frame next(d)",
@@ -5982,8 +6003,8 @@
             "pop 2 values and push the result of applying !="
           ],
         [
-            "JumpCond False 1388",
-            "pop a value and jump to 1388 if the value is False"
+            "JumpCond False 1392",
+            "pop a value and jump to 1392 if the value is False"
           ],
         [
             "DelVar returnVal",
@@ -6118,8 +6139,8 @@
             "pop a value and store it in shared variable d"
           ],
         [
-            "Jump 1474",
-            "jump over method definition: set program counter to 1474"
+            "Jump 1478",
+            "jump over method definition: set program counter to 1478"
           ],
         [
             "Frame insert_test(self)",
@@ -6218,8 +6239,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1474",
-            "jump over method definition: set program counter to 1474"
+            "Jump 1478",
+            "jump over method definition: set program counter to 1478"
           ],
         [
             "Frame delete_test(self)",
@@ -6314,8 +6335,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1474",
-            "jump over method definition: set program counter to 1474"
+            "Jump 1478",
+            "jump over method definition: set program counter to 1478"
           ],
         [
             "Frame next_test(self)",
@@ -6346,8 +6367,8 @@
             "pop a value and add to print history"
           ],
         [
-            "Push PC(1353)",
-            "push constant PC(1353)"
+            "Push PC(1357)",
+            "push constant PC(1357)"
           ],
         [
             "Push ?d",
@@ -6430,12 +6451,12 @@
             "get next element and assign to i; push False or True depending on success"
           ],
         [
-            "JumpCond False 1487",
-            "check if loop is done: pop a value and jump to 1487 if the value is False"
+            "JumpCond False 1491",
+            "check if loop is done: pop a value and jump to 1491 if the value is False"
           ],
         [
-            "Push ?PC(1402)",
-            "push constant ?PC(1402)"
+            "Push ?PC(1406)",
+            "push constant ?PC(1406)"
           ],
         [
             "LoadVar i",
@@ -6458,8 +6479,64 @@
             "pop thread-local state, argument, and pc and spawn a new thread"
           ],
         [
-            "Jump 1478",
-            "set program counter to 1478"
+            "Jump 1482",
+            "set program counter to 1482"
+          ],
+        [
+            "DelVar i",
+            "delete method variable i"
+          ],
+        [
+            "Push 1",
+            "push constant 1"
+          ],
+        [
+            "Push 2",
+            "push constant 2"
+          ],
+        [
+            "2-ary ..",
+            "pop 2 values and push the result of applying .."
+          ],
+        [
+            "Push 0",
+            "push constant 0"
+          ],
+        [
+            "Cut(i)",
+            "get next element and assign to i; push False or True depending on success"
+          ],
+        [
+            "JumpCond False 1505",
+            "check if loop is done: pop a value and jump to 1505 if the value is False"
+          ],
+        [
+            "Push ?PC(1431)",
+            "push constant ?PC(1431)"
+          ],
+        [
+            "LoadVar i",
+            "push the value of i"
+          ],
+        [
+            "DelVar i",
+            "delete method variable i"
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Push {:}",
+            "push constant {:}"
+          ],
+        [
+            "Spawn",
+            "pop thread-local state, argument, and pc and spawn a new thread"
+          ],
+        [
+            "Jump 1496",
+            "set program counter to 1496"
           ],
         [
             "DelVar i",
@@ -22883,93 +22960,67 @@
           },
         {
             "module": "disque",
-            "endline": 27,
+            "endline": 26,
             "stmt": [
-                27,
+                26,
                 5,
-                27,
-                26
+                26,
+                28
               ],
-            "line": 27,
-            "endcolumn": 8,
-            "column": 8
+            "line": 26,
+            "endcolumn": 19,
+            "column": 19
           },
         {
             "module": "disque",
-            "endline": 27,
+            "endline": 26,
             "stmt": [
-                27,
+                26,
                 5,
-                27,
-                26
+                26,
+                28
               ],
-            "line": 27,
-            "endcolumn": 17,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                26
-              ],
-            "line": 27,
-            "endcolumn": 17,
-            "column": 8
-          },
-        {
-            "module": "disque",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                26
-              ],
-            "line": 27,
-            "endcolumn": 17,
-            "column": 8
-          },
-        {
-            "module": "disque",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                26
-              ],
-            "line": 27,
-            "endcolumn": 25,
+            "line": 26,
+            "endcolumn": 28,
             "column": 22
           },
         {
             "module": "disque",
-            "endline": 27,
+            "endline": 26,
             "stmt": [
-                27,
+                26,
                 5,
-                27,
-                26
+                26,
+                28
               ],
-            "line": 27,
-            "endcolumn": 25,
-            "column": 8
+            "line": 26,
+            "endcolumn": 28,
+            "column": 19
           },
         {
             "module": "disque",
-            "endline": 27,
+            "endline": 26,
             "stmt": [
-                27,
+                26,
                 5,
-                27,
-                26
+                26,
+                28
               ],
-            "line": 27,
-            "endcolumn": 6,
+            "line": 26,
+            "endcolumn": 28,
+            "column": 19
+          },
+        {
+            "module": "disque",
+            "endline": 26,
+            "stmt": [
+                26,
+                5,
+                26,
+                28
+              ],
+            "line": 26,
+            "endcolumn": 28,
             "column": 5
           },
         {
@@ -22977,1649 +23028,1727 @@
             "endline": 28,
             "stmt": [
                 28,
-                7,
+                5,
                 28,
-                39
+                26
               ],
             "line": 28,
-            "endcolumn": 19,
-            "column": 19
+            "endcolumn": 8,
+            "column": 8
           },
         {
             "module": "disque",
             "endline": 28,
             "stmt": [
                 28,
-                7,
+                5,
                 28,
-                39
+                26
               ],
             "line": 28,
-            "endcolumn": 19,
-            "column": 19
+            "endcolumn": 17,
+            "column": 11
           },
         {
             "module": "disque",
             "endline": 28,
             "stmt": [
                 28,
-                7,
+                5,
                 28,
-                39
+                26
               ],
             "line": 28,
-            "endcolumn": 30,
+            "endcolumn": 17,
+            "column": 8
+          },
+        {
+            "module": "disque",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                26
+              ],
+            "line": 28,
+            "endcolumn": 17,
+            "column": 8
+          },
+        {
+            "module": "disque",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                26
+              ],
+            "line": 28,
+            "endcolumn": 25,
+            "column": 22
+          },
+        {
+            "module": "disque",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                26
+              ],
+            "line": 28,
+            "endcolumn": 25,
+            "column": 8
+          },
+        {
+            "module": "disque",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                26
+              ],
+            "line": 28,
+            "endcolumn": 6,
+            "column": 5
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 21,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 21,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 32,
+            "column": 26
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 32,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 32,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 41,
+            "column": 37
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 41,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 41,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                41
+              ],
+            "line": 30,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "disque",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                42
+              ],
+            "line": 31,
+            "endcolumn": 12,
+            "column": 12
+          },
+        {
+            "module": "disque",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                42
+              ],
+            "line": 31,
+            "endcolumn": 21,
+            "column": 15
+          },
+        {
+            "module": "disque",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                42
+              ],
+            "line": 31,
+            "endcolumn": 21,
+            "column": 12
+          },
+        {
+            "module": "disque",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                42
+              ],
+            "line": 31,
+            "endcolumn": 21,
+            "column": 12
+          },
+        {
+            "module": "disque",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                42
+              ],
+            "line": 31,
+            "endcolumn": 27,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
-                7,
-                28,
-                39
+                31,
+                9,
+                31,
+                42
               ],
-            "line": 28,
-            "endcolumn": 30,
-            "column": 19
+            "line": 31,
+            "endcolumn": 27,
+            "column": 12
           },
         {
             "module": "disque",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
-                7,
-                28,
-                39
+                31,
+                9,
+                31,
+                42
               ],
-            "line": 28,
-            "endcolumn": 30,
-            "column": 19
+            "line": 31,
+            "endcolumn": 27,
+            "column": 12
           },
         {
             "module": "disque",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
-                7,
-                28,
-                39
+                31,
+                9,
+                31,
+                42
               ],
-            "line": 28,
-            "endcolumn": 39,
+            "line": 31,
+            "endcolumn": 32,
+            "column": 32
+          },
+        {
+            "module": "disque",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                42
+              ],
+            "line": 31,
+            "endcolumn": 41,
             "column": 35
           },
         {
             "module": "disque",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
-                7,
-                28,
-                39
+                31,
+                9,
+                31,
+                42
               ],
-            "line": 28,
-            "endcolumn": 39,
-            "column": 19
+            "line": 31,
+            "endcolumn": 41,
+            "column": 32
           },
         {
             "module": "disque",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
-                7,
-                28,
-                39
+                31,
+                9,
+                31,
+                42
               ],
-            "line": 28,
-            "endcolumn": 39,
-            "column": 19
+            "line": 31,
+            "endcolumn": 41,
+            "column": 32
           },
         {
             "module": "disque",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
-                7,
-                28,
-                39
+                31,
+                9,
+                31,
+                42
               ],
-            "line": 28,
-            "endcolumn": 17,
-            "column": 7
+            "line": 31,
+            "endcolumn": 41,
+            "column": 12
           },
         {
             "module": "disque",
-            "endline": 29,
+            "endline": 31,
             "stmt": [
-                29,
-                7,
-                29,
-                40
+                31,
+                9,
+                31,
+                42
               ],
-            "line": 29,
+            "line": 31,
             "endcolumn": 10,
-            "column": 10
+            "column": 9
           },
         {
             "module": "disque",
-            "endline": 29,
+            "endline": 32,
             "stmt": [
-                29,
-                7,
-                29,
-                40
+                32,
+                13,
+                32,
+                33
               ],
-            "line": 29,
-            "endcolumn": 19,
+            "line": 32,
+            "endcolumn": 13,
             "column": 13
           },
         {
             "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 19,
-            "column": 10
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 19,
-            "column": 10
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 25,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 25,
-            "column": 10
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 25,
-            "column": 10
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 30,
-            "column": 30
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 39,
-            "column": 33
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 39,
-            "column": 30
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 39,
-            "column": 30
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 39,
-            "column": 10
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 8,
-            "column": 7
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 11,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 20,
-            "column": 14
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 20,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 20,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 26,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 33,
-            "column": 30
-          },
-        {
-            "module": "disque",
-            "endline": 30,
-            "stmt": [
-                30,
-                11,
-                30,
-                33
-              ],
-            "line": 30,
-            "endcolumn": 28,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 11,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 20,
-            "column": 14
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 20,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 20,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 26,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 33,
-            "column": 30
-          },
-        {
-            "module": "disque",
-            "endline": 31,
-            "stmt": [
-                31,
-                11,
-                31,
-                33
-              ],
-            "line": 31,
-            "endcolumn": 28,
-            "column": 11
-          },
-        {
-            "module": "disque",
             "endline": 32,
             "stmt": [
                 32,
-                11,
+                13,
                 32,
-                25
-              ],
-            "line": 32,
-            "endcolumn": 11,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 32,
-            "stmt": [
-                32,
-                11,
-                32,
-                25
-              ],
-            "line": 32,
-            "endcolumn": 20,
-            "column": 14
-          },
-        {
-            "module": "disque",
-            "endline": 32,
-            "stmt": [
-                32,
-                11,
-                32,
-                25
-              ],
-            "line": 32,
-            "endcolumn": 20,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 32,
-            "stmt": [
-                32,
-                11,
-                32,
-                25
-              ],
-            "line": 32,
-            "endcolumn": 25,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 32,
-            "stmt": [
-                32,
-                11,
-                32,
-                25
-              ],
-            "line": 32,
-            "endcolumn": 21,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 29,
-            "stmt": [
-                29,
-                7,
-                29,
-                40
-              ],
-            "line": 29,
-            "endcolumn": 40,
-            "column": 7
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 22,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 33,
-            "column": 27
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 41,
-            "column": 38
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 41,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 41,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 34,
-            "stmt": [
-                34,
-                11,
-                34,
-                41
-              ],
-            "line": 34,
-            "endcolumn": 20,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 22,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 33,
-            "column": 27
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 33,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 41,
-            "column": 38
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 41,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 41,
-            "column": 22
-          },
-        {
-            "module": "disque",
-            "endline": 35,
-            "stmt": [
-                35,
-                11,
-                35,
-                41
-              ],
-            "line": 35,
-            "endcolumn": 20,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 36,
-            "stmt": [
-                36,
-                11,
-                36,
-                37
-              ],
-            "line": 36,
-            "endcolumn": 18,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 36,
-            "stmt": [
-                36,
-                11,
-                36,
-                37
-              ],
-            "line": 36,
-            "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "disque",
-            "endline": 36,
-            "stmt": [
-                36,
-                11,
-                36,
-                37
-              ],
-            "line": 36,
-            "endcolumn": 26,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 36,
-            "stmt": [
-                36,
-                11,
-                36,
-                37
-              ],
-            "line": 36,
-            "endcolumn": 37,
-            "column": 30
-          },
-        {
-            "module": "disque",
-            "endline": 36,
-            "stmt": [
-                36,
-                11,
-                36,
-                37
-              ],
-            "line": 36,
-            "endcolumn": 28,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 37,
-            "stmt": [
-                37,
-                11,
-                37,
-                37
-              ],
-            "line": 37,
-            "endcolumn": 18,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 37,
-            "stmt": [
-                37,
-                11,
-                37,
-                37
-              ],
-            "line": 37,
-            "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "disque",
-            "endline": 37,
-            "stmt": [
-                37,
-                11,
-                37,
-                37
-              ],
-            "line": 37,
-            "endcolumn": 26,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 37,
-            "stmt": [
-                37,
-                11,
-                37,
-                37
-              ],
-            "line": 37,
-            "endcolumn": 37,
-            "column": 30
-          },
-        {
-            "module": "disque",
-            "endline": 37,
-            "stmt": [
-                37,
-                11,
-                37,
-                37
-              ],
-            "line": 37,
-            "endcolumn": 28,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 38,
-            "stmt": [
-                38,
-                11,
-                38,
                 33
               ],
-            "line": 38,
-            "endcolumn": 11,
-            "column": 11
-          },
-        {
-            "module": "disque",
-            "endline": 38,
-            "stmt": [
-                38,
-                11,
-                38,
-                33
-              ],
-            "line": 38,
+            "line": 32,
             "endcolumn": 22,
             "column": 16
           },
         {
             "module": "disque",
-            "endline": 38,
+            "endline": 32,
             "stmt": [
-                38,
-                11,
-                38,
+                32,
+                13,
+                32,
                 33
               ],
-            "line": 38,
+            "line": 32,
             "endcolumn": 22,
-            "column": 11
+            "column": 13
           },
         {
             "module": "disque",
-            "endline": 38,
+            "endline": 32,
             "stmt": [
-                38,
-                11,
-                38,
+                32,
+                13,
+                32,
                 33
               ],
-            "line": 38,
+            "line": 32,
+            "endcolumn": 22,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 32,
+            "stmt": [
+                32,
+                13,
+                32,
+                33
+              ],
+            "line": 32,
+            "endcolumn": 28,
+            "column": 25
+          },
+        {
+            "module": "disque",
+            "endline": 32,
+            "stmt": [
+                32,
+                13,
+                32,
+                33
+              ],
+            "line": 32,
+            "endcolumn": 28,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 32,
+            "stmt": [
+                32,
+                13,
+                32,
+                33
+              ],
+            "line": 32,
             "endcolumn": 33,
-            "column": 26
+            "column": 30
+          },
+        {
+            "module": "disque",
+            "endline": 32,
+            "stmt": [
+                32,
+                13,
+                32,
+                33
+              ],
+            "line": 32,
+            "endcolumn": 29,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 13,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 22,
+            "column": 16
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 22,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 22,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 28,
+            "column": 25
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 28,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 33,
+            "column": 30
+          },
+        {
+            "module": "disque",
+            "endline": 33,
+            "stmt": [
+                33,
+                13,
+                33,
+                33
+              ],
+            "line": 33,
+            "endcolumn": 29,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 34,
+            "stmt": [
+                34,
+                13,
+                34,
+                27
+              ],
+            "line": 34,
+            "endcolumn": 13,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 34,
+            "stmt": [
+                34,
+                13,
+                34,
+                27
+              ],
+            "line": 34,
+            "endcolumn": 22,
+            "column": 16
+          },
+        {
+            "module": "disque",
+            "endline": 34,
+            "stmt": [
+                34,
+                13,
+                34,
+                27
+              ],
+            "line": 34,
+            "endcolumn": 22,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 34,
+            "stmt": [
+                34,
+                13,
+                34,
+                27
+              ],
+            "line": 34,
+            "endcolumn": 27,
+            "column": 24
+          },
+        {
+            "module": "disque",
+            "endline": 34,
+            "stmt": [
+                34,
+                13,
+                34,
+                27
+              ],
+            "line": 34,
+            "endcolumn": 23,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                42
+              ],
+            "line": 31,
+            "endcolumn": 42,
+            "column": 9
+          },
+        {
+            "module": "disque",
+            "endline": 36,
+            "stmt": [
+                36,
+                13,
+                36,
+                38
+              ],
+            "line": 36,
+            "endcolumn": 30,
+            "column": 23
+          },
+        {
+            "module": "disque",
+            "endline": 36,
+            "stmt": [
+                36,
+                13,
+                36,
+                38
+              ],
+            "line": 36,
+            "endcolumn": 38,
+            "column": 35
+          },
+        {
+            "module": "disque",
+            "endline": 36,
+            "stmt": [
+                36,
+                13,
+                36,
+                38
+              ],
+            "line": 36,
+            "endcolumn": 38,
+            "column": 23
+          },
+        {
+            "module": "disque",
+            "endline": 36,
+            "stmt": [
+                36,
+                13,
+                36,
+                38
+              ],
+            "line": 36,
+            "endcolumn": 38,
+            "column": 23
+          },
+        {
+            "module": "disque",
+            "endline": 36,
+            "stmt": [
+                36,
+                13,
+                36,
+                38
+              ],
+            "line": 36,
+            "endcolumn": 22,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 37,
+            "stmt": [
+                37,
+                13,
+                37,
+                39
+              ],
+            "line": 37,
+            "endcolumn": 31,
+            "column": 24
+          },
+        {
+            "module": "disque",
+            "endline": 37,
+            "stmt": [
+                37,
+                13,
+                37,
+                39
+              ],
+            "line": 37,
+            "endcolumn": 39,
+            "column": 36
+          },
+        {
+            "module": "disque",
+            "endline": 37,
+            "stmt": [
+                37,
+                13,
+                37,
+                39
+              ],
+            "line": 37,
+            "endcolumn": 39,
+            "column": 24
+          },
+        {
+            "module": "disque",
+            "endline": 37,
+            "stmt": [
+                37,
+                13,
+                37,
+                39
+              ],
+            "line": 37,
+            "endcolumn": 39,
+            "column": 24
+          },
+        {
+            "module": "disque",
+            "endline": 37,
+            "stmt": [
+                37,
+                13,
+                37,
+                39
+              ],
+            "line": 37,
+            "endcolumn": 22,
+            "column": 13
           },
         {
             "module": "disque",
             "endline": 38,
             "stmt": [
                 38,
-                11,
+                13,
                 38,
-                33
+                39
               ],
             "line": 38,
+            "endcolumn": 20,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 38,
+            "stmt": [
+                38,
+                13,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 28,
+            "column": 25
+          },
+        {
+            "module": "disque",
+            "endline": 38,
+            "stmt": [
+                38,
+                13,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 28,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 38,
+            "stmt": [
+                38,
+                13,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 39,
+            "column": 32
+          },
+        {
+            "module": "disque",
+            "endline": 38,
+            "stmt": [
+                38,
+                13,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 30,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 39,
+            "stmt": [
+                39,
+                13,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 20,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 39,
+            "stmt": [
+                39,
+                13,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 28,
+            "column": 25
+          },
+        {
+            "module": "disque",
+            "endline": 39,
+            "stmt": [
+                39,
+                13,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 28,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 39,
+            "stmt": [
+                39,
+                13,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 39,
+            "column": 32
+          },
+        {
+            "module": "disque",
+            "endline": 39,
+            "stmt": [
+                39,
+                13,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 30,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 40,
+            "stmt": [
+                40,
+                13,
+                40,
+                35
+              ],
+            "line": 40,
+            "endcolumn": 13,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 40,
+            "stmt": [
+                40,
+                13,
+                40,
+                35
+              ],
+            "line": 40,
             "endcolumn": 24,
-            "column": 11
+            "column": 18
           },
         {
             "module": "disque",
             "endline": 40,
             "stmt": [
                 40,
-                5,
+                13,
                 40,
-                23
+                35
               ],
             "line": 40,
+            "endcolumn": 24,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 40,
+            "stmt": [
+                40,
+                13,
+                40,
+                35
+              ],
+            "line": 40,
+            "endcolumn": 35,
+            "column": 28
+          },
+        {
+            "module": "disque",
+            "endline": 40,
+            "stmt": [
+                40,
+                13,
+                40,
+                35
+              ],
+            "line": 40,
+            "endcolumn": 26,
+            "column": 13
+          },
+        {
+            "module": "disque",
+            "endline": 41,
+            "stmt": [
+                41,
+                9,
+                41,
+                22
+              ],
+            "line": 41,
+            "endcolumn": 21,
+            "column": 14
+          },
+        {
+            "module": "disque",
+            "endline": 41,
+            "stmt": [
+                41,
+                9,
+                41,
+                22
+              ],
+            "line": 41,
+            "endcolumn": 21,
+            "column": 14
+          },
+        {
+            "module": "disque",
+            "endline": 41,
+            "stmt": [
+                41,
+                9,
+                41,
+                22
+              ],
+            "line": 41,
+            "endcolumn": 22,
+            "column": 9
+          },
+        {
+            "module": "disque",
+            "endline": 41,
+            "stmt": [
+                41,
+                9,
+                41,
+                22
+              ],
+            "line": 41,
+            "endcolumn": 22,
+            "column": 9
+          },
+        {
+            "module": "disque",
+            "endline": 44,
+            "stmt": [
+                44,
+                5,
+                44,
+                23
+              ],
+            "line": 44,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 40,
+            "endline": 44,
             "stmt": [
-                40,
+                44,
                 5,
-                40,
+                44,
                 23
               ],
-            "line": 40,
+            "line": 44,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 40,
+            "endline": 44,
             "stmt": [
-                40,
+                44,
                 5,
-                40,
+                44,
                 23
               ],
-            "line": 40,
+            "line": 44,
+            "endcolumn": 14,
+            "column": 14
+          },
+        {
+            "module": "disque",
+            "endline": 44,
+            "stmt": [
+                44,
+                5,
+                44,
+                23
+              ],
+            "line": 44,
             "endcolumn": 22,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 40,
+            "endline": 44,
             "stmt": [
-                40,
+                44,
                 5,
-                40,
+                44,
                 23
               ],
-            "line": 40,
+            "line": 44,
             "endcolumn": 22,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 40,
+            "endline": 44,
             "stmt": [
-                40,
+                44,
                 5,
-                40,
+                44,
                 23
               ],
-            "line": 40,
+            "line": 44,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 40,
+            "endline": 44,
             "stmt": [
-                40,
+                44,
                 5,
-                40,
+                44,
                 23
               ],
-            "line": 40,
+            "line": 44,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 42,
+            "endline": 46,
             "stmt": [
-                42,
+                46,
                 1,
-                42,
+                46,
                 6
               ],
-            "line": 42,
+            "line": 46,
             "endcolumn": 6,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 42,
+            "endline": 46,
             "stmt": [
-                42,
+                46,
                 1,
-                42,
+                46,
                 6
               ],
-            "line": 42,
+            "line": 46,
             "endcolumn": 6,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 43,
+            "endline": 47,
             "stmt": [
-                43,
+                47,
                 1,
-                43,
+                47,
                 30
               ],
-            "line": 43,
+            "line": 47,
             "endcolumn": 3,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 43,
+            "endline": 47,
             "stmt": [
-                43,
+                47,
                 1,
-                43,
+                47,
                 30
               ],
-            "line": 43,
+            "line": 47,
             "endcolumn": 30,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 44,
+            "endline": 48,
             "stmt": [
-                44,
+                48,
                 5,
-                44,
+                48,
                 23
               ],
-            "line": 44,
+            "line": 48,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 44,
+            "endline": 48,
             "stmt": [
-                44,
+                48,
                 5,
-                44,
+                48,
                 23
               ],
-            "line": 44,
+            "line": 48,
             "endcolumn": 22,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 44,
+            "endline": 48,
             "stmt": [
-                44,
+                48,
                 5,
-                44,
+                48,
                 23
               ],
-            "line": 44,
+            "line": 48,
             "endcolumn": 22,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 44,
+            "endline": 48,
             "stmt": [
-                44,
+                48,
                 5,
-                44,
+                48,
                 23
               ],
-            "line": 44,
+            "line": 48,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 44,
+            "endline": 48,
             "stmt": [
-                44,
+                48,
                 5,
-                44,
+                48,
                 23
               ],
-            "line": 44,
+            "line": 48,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 45,
+            "endline": 49,
             "stmt": [
-                45,
+                49,
                 5,
-                45,
+                49,
                 20
               ],
-            "line": 45,
+            "line": 49,
             "endcolumn": 20,
             "column": 17
           },
         {
             "module": "disque",
-            "endline": 45,
+            "endline": 49,
             "stmt": [
-                45,
+                49,
                 5,
-                45,
+                49,
                 20
               ],
-            "line": 45,
+            "line": 49,
             "endcolumn": 15,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 47,
+            "endline": 51,
             "stmt": [
-                47,
+                51,
                 5,
-                47,
+                51,
                 28
               ],
-            "line": 47,
+            "line": 51,
             "endcolumn": 8,
             "column": 8
           },
         {
             "module": "disque",
-            "endline": 47,
+            "endline": 51,
             "stmt": [
-                47,
+                51,
                 5,
-                47,
+                51,
                 28
               ],
-            "line": 47,
+            "line": 51,
             "endcolumn": 19,
             "column": 13
           },
         {
             "module": "disque",
-            "endline": 47,
+            "endline": 51,
             "stmt": [
-                47,
+                51,
                 5,
-                47,
+                51,
                 28
               ],
-            "line": 47,
+            "line": 51,
             "endcolumn": 19,
             "column": 8
           },
         {
             "module": "disque",
-            "endline": 47,
+            "endline": 51,
             "stmt": [
-                47,
+                51,
                 5,
-                47,
+                51,
                 28
               ],
-            "line": 47,
+            "line": 51,
             "endcolumn": 19,
             "column": 8
           },
         {
             "module": "disque",
-            "endline": 47,
+            "endline": 51,
             "stmt": [
-                47,
+                51,
                 5,
-                47,
+                51,
                 28
               ],
-            "line": 47,
+            "line": 51,
             "endcolumn": 27,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 47,
+            "endline": 51,
             "stmt": [
-                47,
+                51,
                 5,
-                47,
+                51,
                 28
               ],
-            "line": 47,
+            "line": 51,
             "endcolumn": 27,
             "column": 8
           },
         {
             "module": "disque",
-            "endline": 47,
+            "endline": 51,
             "stmt": [
-                47,
+                51,
                 5,
-                47,
+                51,
                 28
               ],
-            "line": 47,
+            "line": 51,
             "endcolumn": 6,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 19,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 19,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 30,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 30,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 30,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 39,
             "column": 35
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 39,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 39,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 52,
             "stmt": [
-                48,
+                52,
                 7,
-                48,
+                52,
                 39
               ],
-            "line": 48,
+            "line": 52,
             "endcolumn": 17,
             "column": 7
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 7,
             "column": 7
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 17,
             "column": 11
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 17,
             "column": 7
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 21,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 30,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 30,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 30,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 37,
             "column": 34
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 37,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 37,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 49,
+            "endline": 53,
             "stmt": [
-                49,
+                53,
                 7,
-                49,
+                53,
                 37
               ],
-            "line": 49,
+            "line": 53,
             "endcolumn": 19,
             "column": 7
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 5,
-                51,
+                55,
                 23
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 5,
-                51,
+                55,
                 23
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 5,
-                51,
+                55,
                 23
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 22,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 5,
-                51,
+                55,
                 23
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 22,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 5,
-                51,
+                55,
                 23
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 5,
-                51,
+                55,
                 23
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 24,
-                51,
+                55,
                 29
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 29,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 51,
+            "endline": 55,
             "stmt": [
-                51,
+                55,
                 24,
-                51,
+                55,
                 29
               ],
-            "line": 51,
+            "line": 55,
             "endcolumn": 29,
             "column": 24
           },
@@ -25803,6 +25932,188 @@
                 22
               ],
             "line": 24,
+            "endcolumn": 22,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
+            "endcolumn": 11,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
+            "endcolumn": 11,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
+            "endcolumn": 21,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
+            "endcolumn": 21,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
+            "endcolumn": 3,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
+            "endcolumn": 3,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
+            "endcolumn": 3,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                5,
+                27,
+                24
+              ],
+            "line": 27,
+            "endcolumn": 21,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                5,
+                27,
+                24
+              ],
+            "line": 27,
+            "endcolumn": 23,
+            "column": 23
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                5,
+                27,
+                24
+              ],
+            "line": 27,
+            "endcolumn": 23,
+            "column": 23
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                5,
+                27,
+                24
+              ],
+            "line": 27,
+            "endcolumn": 24,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                5,
+                27,
+                24
+              ],
+            "line": 27,
+            "endcolumn": 24,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                5,
+                27,
+                24
+              ],
+            "line": 27,
+            "endcolumn": 24,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 26,
+            "stmt": [
+                26,
+                1,
+                26,
+                22
+              ],
+            "line": 26,
             "endcolumn": 22,
             "column": 22
           },
@@ -31105,7 +31416,7 @@
             "op": "Store"
           },
         {
-            "pc": "1396",
+            "pc": "1400",
             "op": "Jump"
           },
         {
@@ -31234,7 +31545,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1396",
+            "pc": "1400",
             "op": "Jump"
           },
         {
@@ -31268,7 +31579,7 @@
             "op": "Return"
           },
         {
-            "pc": "1396",
+            "pc": "1400",
             "op": "Jump"
           },
         {
@@ -31330,7 +31641,7 @@
             "op": "Return"
           },
         {
-            "pc": "1396",
+            "pc": "1400",
             "op": "Jump"
           },
         {
@@ -31406,7 +31717,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1396",
+            "pc": "1400",
             "op": "Jump"
           },
         {
@@ -31855,7 +32166,7 @@
             "op": "Return"
           },
         {
-            "pc": "1396",
+            "pc": "1400",
             "op": "Jump"
           },
         {
@@ -31919,6 +32230,29 @@
             "op": "Load"
           },
         {
+            "value": "toDelete",
+            "op": "StoreVar"
+          },
+        {
+            "value": "d",
+            "op": "LoadVar"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "current"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "op": "Load"
+          },
+        {
             "value": {
                 "type": "address"
               },
@@ -31930,7 +32264,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1344",
+            "pc": "1347",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -32038,7 +32372,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1313",
+            "pc": "1318",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -32151,27 +32485,12 @@
             "op": "Store"
           },
         {
-            "pc": "1344",
+            "pc": "1343",
             "op": "Jump"
           },
         {
-            "value": "d",
+            "value": "toDelete",
             "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "current"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
           },
         {
             "value": {
@@ -32198,23 +32517,8 @@
             "op": "Store"
           },
         {
-            "value": "d",
+            "value": "toDelete",
             "op": "LoadVar"
-          },
-        {
-            "value": {
-                "type": "atom",
-                "value": "current"
-              },
-            "op": "Push"
-          },
-        {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
           },
         {
             "value": {
@@ -32333,6 +32637,28 @@
           },
         {
             "op": "Store"
+          },
+        {
+            "value": "toDelete",
+            "op": "LoadVar"
+          },
+        {
+            "value": "toDelete",
+            "op": "DelVar"
+          },
+        {
+            "value": {
+                "type": "pc",
+                "value": "1131"
+              },
+            "op": "Apply"
+          },
+        {
+            "op": "Pop"
+          },
+        {
+            "value": "toDelete",
+            "op": "DelVar"
           },
         {
             "value": "d",
@@ -32373,7 +32699,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1396",
+            "pc": "1400",
             "op": "Jump"
           },
         {
@@ -32448,7 +32774,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1388",
+            "pc": "1392",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -32622,7 +32948,7 @@
             "op": "Store"
           },
         {
-            "pc": "1474",
+            "pc": "1478",
             "op": "Jump"
           },
         {
@@ -32765,7 +33091,7 @@
             "op": "Return"
           },
         {
-            "pc": "1474",
+            "pc": "1478",
             "op": "Jump"
           },
         {
@@ -32899,7 +33225,7 @@
             "op": "Return"
           },
         {
-            "pc": "1474",
+            "pc": "1478",
             "op": "Jump"
           },
         {
@@ -32943,7 +33269,7 @@
         {
             "value": {
                 "type": "pc",
-                "value": "1353"
+                "value": "1357"
               },
             "op": "Push"
           },
@@ -33063,7 +33389,7 @@
             "op": "Cut"
           },
         {
-            "pc": "1487",
+            "pc": "1491",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -33078,7 +33404,7 @@
                   ],
                 "func": {
                     "type": "pc",
-                    "value": "1402"
+                    "value": "1406"
                   }
               },
             "op": "Push"
@@ -33110,7 +33436,92 @@
             "op": "Spawn"
           },
         {
-            "pc": "1478",
+            "pc": "1482",
+            "op": "Jump"
+          },
+        {
+            "value": "i",
+            "op": "DelVar"
+          },
+        {
+            "value": {
+                "type": "int",
+                "value": 1
+              },
+            "op": "Push"
+          },
+        {
+            "value": {
+                "type": "int",
+                "value": 2
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "..",
+            "op": "Nary"
+          },
+        {
+            "value": {
+                "type": "int",
+                "value": 0
+              },
+            "op": "Push"
+          },
+        {
+            "value": "i",
+            "op": "Cut"
+          },
+        {
+            "pc": "1505",
+            "cond": {
+                "type": "bool",
+                "value": "False"
+              },
+            "op": "JumpCond"
+          },
+        {
+            "value": {
+                "type": "address",
+                "args": [
+
+                  ],
+                "func": {
+                    "type": "pc",
+                    "value": "1431"
+                  }
+              },
+            "op": "Push"
+          },
+        {
+            "value": "i",
+            "op": "LoadVar"
+          },
+        {
+            "value": "i",
+            "op": "DelVar"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "value": {
+                "type": "dict",
+                "value": [
+
+                  ]
+              },
+            "op": "Push"
+          },
+        {
+            "eternal": "False",
+            "op": "Spawn"
+          },
+        {
+            "pc": "1496",
             "op": "Jump"
           },
         {
@@ -33130,1498 +33541,1430 @@
           }
       ]
   },
-  "issue": "No issues",
-  "dfasize": 0,
-  "profile": [
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    1,
-    1,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    14,
-    56,
-    56,
-    56,
-    26,
-    26,
-    26,
-    10,
-    16,
-    16,
-    16,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    0,
-    10,
-    20,
-    20,
-    20,
-    20,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    1,
-    1,
-    14,
-    28,
-    28,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    0,
-    0,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    4,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    14,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    10,
-    34,
-    34,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    1,
-    1,
-    1,
-    1,
-    3,
-    3,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    1,
-    1,
-    0
+  "issue": "Behavior violation: unexpected output",
+  "macrosteps": [
+    {
+      "id": "12",
+      "tid": "0",
+      "shared": { },
+      "name": "__init__()",
+      "context": {
+        "tid": "0",
+        "hvalue": "15000141a",
+        "fp": "1",
+        "id": "0",
+        "name": "__init__()",
+        "entry": "0",
+        "pc": "0",
+        "sp": "1",
+        "stack": [{ "type": "list", "value": [] }],
+        "trace": [
+{"pc": "0","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0}
+        ],
+        "atomic": "1",
+        "next": { "type": "Frame", "name": "__init__", "args": "()", "value": { "type": "list", "value": [] } },
+        "mode": "runnable"
+      },
+      "microsteps": [
+        {
+          "code": "Frame __init__()",
+          "explain": "pop argument () and run method \"__init__\"",
+          "explain2": { "text": "pop argument () and run method #+", "args": [ { "type": "atom", "value": "__init__" } ] },
+          "npc": "1",
+          "fp": "1",
+          "trace": [
+{"pc": "1","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "pop": "1",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "0"
+        },
+
+        {
+          "code": "Jump 491",
+          "explain": "jump over method definition: set program counter to 491",
+          "explain2": { "text": "jump over method definition: set program counter to 491", "args": [] },
+          "npc": "491",
+          "push": [ ],
+          "pc": "1"
+        },
+
+        {
+          "code": "Push PC(494)",
+          "explain": "push constant PC(494)",
+          "explain2": { "text": "push constant PC(494)", "args": [] },
+          "npc": "492",
+          "push": [ { "type": "pc", "value": "494" } ],
+          "pc": "491"
+        },
+
+        {
+          "code": "Builtin(bag$multiplicity)",
+          "explain": "pop pc () and bind to built-in method bag$multiplicity",
+          "explain2": { "text": "pop pc () and bind to built-in method bag$multiplicity", "args": [ { "type": "pc", "value": "494" } ] },
+          "npc": "493",
+          "pop": "1",
+          "push": [ ],
+          "pc": "492"
+        },
+
+        {
+          "code": "Jump 513",
+          "explain": "jump over method definition: set program counter to 513",
+          "explain2": { "text": "jump over method definition: set program counter to 513", "args": [] },
+          "npc": "513",
+          "push": [ ],
+          "pc": "493"
+        },
+
+        {
+          "code": "Push PC(516)",
+          "explain": "push constant PC(516)",
+          "explain2": { "text": "push constant PC(516)", "args": [] },
+          "npc": "514",
+          "push": [ { "type": "pc", "value": "516" } ],
+          "pc": "513"
+        },
+
+        {
+          "code": "Builtin(bag$size)",
+          "explain": "pop pc () and bind to built-in method bag$size",
+          "explain2": { "text": "pop pc () and bind to built-in method bag$size", "args": [ { "type": "pc", "value": "516" } ] },
+          "npc": "515",
+          "pop": "1",
+          "push": [ ],
+          "pc": "514"
+        },
+
+        {
+          "code": "Jump 535",
+          "explain": "jump over method definition: set program counter to 535",
+          "explain2": { "text": "jump over method definition: set program counter to 535", "args": [] },
+          "npc": "535",
+          "push": [ ],
+          "pc": "515"
+        },
+
+        {
+          "code": "Push PC(538)",
+          "explain": "push constant PC(538)",
+          "explain2": { "text": "push constant PC(538)", "args": [] },
+          "npc": "536",
+          "push": [ { "type": "pc", "value": "538" } ],
+          "pc": "535"
+        },
+
+        {
+          "code": "Builtin(bag$bmin)",
+          "explain": "pop pc () and bind to built-in method bag$bmin",
+          "explain2": { "text": "pop pc () and bind to built-in method bag$bmin", "args": [ { "type": "pc", "value": "538" } ] },
+          "npc": "537",
+          "pop": "1",
+          "push": [ ],
+          "pc": "536"
+        },
+
+        {
+          "code": "Jump 554",
+          "explain": "jump over method definition: set program counter to 554",
+          "explain2": { "text": "jump over method definition: set program counter to 554", "args": [] },
+          "npc": "554",
+          "push": [ ],
+          "pc": "537"
+        },
+
+        {
+          "code": "Push PC(557)",
+          "explain": "push constant PC(557)",
+          "explain2": { "text": "push constant PC(557)", "args": [] },
+          "npc": "555",
+          "push": [ { "type": "pc", "value": "557" } ],
+          "pc": "554"
+        },
+
+        {
+          "code": "Builtin(bag$bmax)",
+          "explain": "pop pc () and bind to built-in method bag$bmax",
+          "explain2": { "text": "pop pc () and bind to built-in method bag$bmax", "args": [ { "type": "pc", "value": "557" } ] },
+          "npc": "556",
+          "pop": "1",
+          "push": [ ],
+          "pc": "555"
+        },
+
+        {
+          "code": "Jump 582",
+          "explain": "jump over method definition: set program counter to 582",
+          "explain2": { "text": "jump over method definition: set program counter to 582", "args": [] },
+          "npc": "582",
+          "push": [ ],
+          "pc": "556"
+        },
+
+        {
+          "code": "Push PC(585)",
+          "explain": "push constant PC(585)",
+          "explain2": { "text": "push constant PC(585)", "args": [] },
+          "npc": "583",
+          "push": [ { "type": "pc", "value": "585" } ],
+          "pc": "582"
+        },
+
+        {
+          "code": "Builtin(bag$add)",
+          "explain": "pop pc () and bind to built-in method bag$add",
+          "explain2": { "text": "pop pc () and bind to built-in method bag$add", "args": [ { "type": "pc", "value": "585" } ] },
+          "npc": "584",
+          "pop": "1",
+          "push": [ ],
+          "pc": "583"
+        },
+
+        {
+          "code": "Jump 611",
+          "explain": "jump over method definition: set program counter to 611",
+          "explain2": { "text": "jump over method definition: set program counter to 611", "args": [] },
+          "npc": "611",
+          "push": [ ],
+          "pc": "584"
+        },
+
+        {
+          "code": "Push PC(614)",
+          "explain": "push constant PC(614)",
+          "explain2": { "text": "push constant PC(614)", "args": [] },
+          "npc": "612",
+          "push": [ { "type": "pc", "value": "614" } ],
+          "pc": "611"
+        },
+
+        {
+          "code": "Builtin(bag$remove)",
+          "explain": "pop pc () and bind to built-in method bag$remove",
+          "explain2": { "text": "pop pc () and bind to built-in method bag$remove", "args": [ { "type": "pc", "value": "614" } ] },
+          "npc": "613",
+          "pop": "1",
+          "push": [ ],
+          "pc": "612"
+        },
+
+        {
+          "code": "Jump 1106",
+          "explain": "jump over method definition: set program counter to 1106",
+          "explain2": { "text": "jump over method definition: set program counter to 1106", "args": [] },
+          "npc": "1106",
+          "push": [ ],
+          "pc": "613"
+        },
+
+        {
+          "code": "Push {:}",
+          "explain": "push constant {:}",
+          "explain2": { "text": "push constant {:}", "args": [] },
+          "npc": "1107",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1106"
+        },
+
+        {
+          "code": "Store alloc$pool",
+          "explain": "pop value ({:}) and store into variable alloc$pool",
+          "explain2": { "text": "pop value (#+) and store into variable #@", "args": [ { "type": "dict", "value": [] }, { "type": "address", "func": { "type": "pc", "value": "-1" }, "args": [{ "type": "atom", "value": "alloc$pool" } ] } ] },
+          "shared": { "alloc$pool": { "type": "dict", "value": [] } },
+          "npc": "1108",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1107"
+        },
+
+        {
+          "code": "Push 0",
+          "explain": "push constant 0",
+          "explain2": { "text": "push constant 0", "args": [] },
+          "npc": "1109",
+          "push": [ { "type": "int", "value": "0" } ],
+          "pc": "1108"
+        },
+
+        {
+          "code": "Store alloc$next",
+          "explain": "pop value (0) and store into variable alloc$next",
+          "explain2": { "text": "pop value (#+) and store into variable #@", "args": [ { "type": "int", "value": "0" }, { "type": "address", "func": { "type": "pc", "value": "-1" }, "args": [{ "type": "atom", "value": "alloc$next" } ] } ] },
+          "shared": { "alloc$next": { "type": "int", "value": "0" }, "alloc$pool": { "type": "dict", "value": [] } },
+          "npc": "1110",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1109"
+        },
+
+        {
+          "code": "Jump 1400",
+          "explain": "jump over method definition: set program counter to 1400",
+          "explain2": { "text": "jump over method definition: set program counter to 1400", "args": [] },
+          "npc": "1400",
+          "push": [ ],
+          "pc": "1110"
+        },
+
+        {
+          "code": "Push PC(1151)",
+          "explain": "push program counter constant 1151 ()",
+          "explain2": { "text": "push program counter constant 1151 ()", "args": [ { "type": "atom", "value": "Disque" } ] },
+          "npc": "1401",
+          "push": [ { "type": "pc", "value": "1151" } ],
+          "pc": "1400"
+        },
+
+        {
+          "code": "Push ()",
+          "explain": "push constant ()",
+          "explain2": { "text": "push constant ()", "args": [] },
+          "npc": "1402",
+          "push": [ { "type": "list", "value": [] } ],
+          "pc": "1401"
+        },
+
+        {
+          "code": "2-ary Closure",
+          "explain": "pop 2 values ([], PC(1151)); push result (?PC(1151)[[]])",
+          "explain2": { "text": "pop 2 values (#+, #+); push result (#+)", "args": [ { "type": "list", "value": [] }, { "type": "pc", "value": "1151" }, { "type": "address", "func": { "type": "pc", "value": "1151" }, "args": [{ "type": "list", "value": [] } ] } ] },
+          "npc": "1403",
+          "pop": "2",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1151" }, "args": [{ "type": "list", "value": [] } ] } ],
+          "pc": "1402"
+        },
+
+        {
+          "code": "Load",
+          "explain": "pop an argument ([]) and call method (1151: \"Disque\")",
+          "explain2": { "text": "pop an argument (#+) and call method (1151: #+)", "args": [ { "type": "list", "value": [] }, { "type": "atom", "value": "Disque" } ] },
+          "npc": "1151",
+          "fp": "4",
+          "trace": [
+{"pc": "1404","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0},{"pc": "1151","xpc": "1151","method_name": { "type": "atom", "value": "Disque" },
+"method_arg": { "type": "list", "value": [] },
+"method": "Disque()","calltype": "normal","vars":{ },"sp": 3}
+          ],
+          "pop": "1",
+          "push": [ { "type": "list", "value": [] }, { "type": "int", "value": "22450" }, { "type": "list", "value": [] } ],
+          "pc": "1403"
+        },
+
+        {
+          "code": "Frame Disque()",
+          "explain": "pop argument () and run method \"Disque\"",
+          "explain2": { "text": "pop argument () and run method #+", "args": [ { "type": "atom", "value": "Disque" } ] },
+          "npc": "1152",
+          "pop": "1",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1151"
+        },
+
+        {
+          "code": "Push {:}",
+          "explain": "push constant {:}",
+          "explain2": { "text": "push constant {:}", "args": [] },
+          "npc": "1153",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1152"
+        },
+
+        {
+          "code": "Push \"current\"",
+          "explain": "push constant \"current\"",
+          "explain2": { "text": "push constant \"current\"", "args": [] },
+          "npc": "1154",
+          "push": [ { "type": "atom", "value": "current" } ],
+          "pc": "1153"
+        },
+
+        {
+          "code": "Push None",
+          "explain": "push constant None",
+          "explain2": { "text": "push constant None", "args": [] },
+          "npc": "1155",
+          "push": [ { "type": "address" } ],
+          "pc": "1154"
+        },
+
+        {
+          "code": "3-ary DictAdd",
+          "explain": "pop 3 values (None, \"current\", {:}); add key/value pair to dictionary; push result ({ \"current\": None })",
+          "explain2": { "text": "pop 3 values (#+, #+, #+); add key/value pair to dictionary; push result (#+)", "args": [ { "type": "address" }, { "type": "atom", "value": "current" }, { "type": "dict", "value": [] }, { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } } ] } ] },
+          "npc": "1156",
+          "pop": "3",
+          "push": [ { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } } ] } ],
+          "pc": "1155"
+        },
+
+        {
+          "code": "Push \"lock\"",
+          "explain": "push constant \"lock\"",
+          "explain2": { "text": "push constant \"lock\"", "args": [] },
+          "npc": "1157",
+          "push": [ { "type": "atom", "value": "lock" } ],
+          "pc": "1156"
+        },
+
+        {
+          "code": "Push ()",
+          "explain": "push constant ()",
+          "explain2": { "text": "push constant ()", "args": [] },
+          "npc": "1158",
+          "push": [ { "type": "list", "value": [] } ],
+          "pc": "1157"
+        },
+
+        {
+          "code": "Apply PC(820)",
+          "explain": "pop an argument ([]) and call method (820: \"Lock\")",
+          "explain2": { "text": "pop an argument (#+) and call method (820: #+)", "args": [ { "type": "list", "value": [] }, { "type": "atom", "value": "Lock" } ] },
+          "npc": "820",
+          "fp": "9",
+          "trace": [
+{"pc": "1404","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0},{"pc": "1159","xpc": "1151","method_name": { "type": "atom", "value": "Disque" },
+"method_arg": { "type": "list", "value": [] },
+"method": "Disque()","calltype": "normal","vars":{ },"sp": 3},{"pc": "820","xpc": "820","method_name": { "type": "atom", "value": "Lock" },
+"method_arg": { "type": "list", "value": [] },
+"method": "Lock()","calltype": "normal","vars":{ },"sp": 8}
+          ],
+          "push": [ { "type": "int", "value": "18530" }, { "type": "list", "value": [] } ],
+          "pc": "1158"
+        },
+
+        {
+          "code": "Frame Lock()",
+          "explain": "pop argument () and run method \"Lock\"",
+          "explain2": { "text": "pop argument () and run method #+", "args": [ { "type": "atom", "value": "Lock" } ] },
+          "npc": "821",
+          "pop": "1",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "820"
+        },
+
+        {
+          "code": "DelVar result",
+          "explain": "delete method variable result",
+          "explain2": { "text": "delete method variable result", "args": [] },
+          "npc": "822",
+          "push": [ ],
+          "pc": "821"
+        },
+
+        {
+          "code": "Push False",
+          "explain": "push constant False",
+          "explain2": { "text": "push constant False", "args": [] },
+          "npc": "823",
+          "push": [ { "type": "bool", "value": "False" } ],
+          "pc": "822"
+        },
+
+        {
+          "code": "StoreVar result",
+          "explain": "pop value (False) and store locally in variable \\\"result\\\"",
+          "explain2": { "text": "pop value (#+) and store locally in variable \"result\"", "args": [ { "type": "bool", "value": "False" } ] },
+          "npc": "824",
+          "local": { "result": { "type": "bool", "value": "False" } },
+          "pop": "1",
+          "push": [ ],
+          "pc": "823"
+        },
+
+        {
+          "code": "ReturnOp(result)",
+          "explain": "pop caller's method variables and pc and push result (), or terminate if no caller",
+          "explain2": { "text": "pop caller's method variables and pc and push result (), or terminate if no caller", "args": [ { "type": "bool", "value": "False" } ] },
+          "npc": "1159",
+          "fp": "4",
+          "trace": [
+{"pc": "1404","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0},{"pc": "1159","xpc": "1151","method_name": { "type": "atom", "value": "Disque" },
+"method_arg": { "type": "list", "value": [] },
+"method": "Disque()","calltype": "normal","vars":{ },"sp": 3}
+          ],
+          "local": { },
+          "pop": "3",
+          "push": [ { "type": "bool", "value": "False" } ],
+          "pc": "824"
+        },
+
+        {
+          "code": "3-ary DictAdd",
+          "explain": "pop 3 values (False, \"lock\", { \"current\": None }); add key/value pair to dictionary; push result ({ \"current\": None, \"lock\": False })",
+          "explain2": { "text": "pop 3 values (#+, #+, #+); add key/value pair to dictionary; push result (#+)", "args": [ { "type": "bool", "value": "False" }, { "type": "atom", "value": "lock" }, { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } } ] }, { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } ] },
+          "npc": "1160",
+          "pop": "3",
+          "push": [ { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } ],
+          "pc": "1159"
+        },
+
+        {
+          "code": "StoreVar d",
+          "explain": "pop value ({ \"current\": None, \"lock\": False }) and store locally in variable \\\"d\\\"",
+          "explain2": { "text": "pop value (#+) and store locally in variable \"d\"", "args": [ { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } ] },
+          "npc": "1161",
+          "local": { "d": { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } },
+          "pop": "1",
+          "push": [ ],
+          "pc": "1160"
+        },
+
+        {
+          "code": "ReturnOp(d)",
+          "explain": "pop caller's method variables and pc and push result (), or terminate if no caller",
+          "explain2": { "text": "pop caller's method variables and pc and push result (), or terminate if no caller", "args": [ { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } ] },
+          "npc": "1404",
+          "fp": "1",
+          "trace": [
+{"pc": "1404","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "local": { },
+          "pop": "3",
+          "push": [ { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } ],
+          "pc": "1161"
+        },
+
+        {
+          "code": "Store d",
+          "explain": "pop value ({ \"current\": None, \"lock\": False }) and store into variable d",
+          "explain2": { "text": "pop value (#+) and store into variable #@", "args": [ { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] }, { "type": "address", "func": { "type": "pc", "value": "-1" }, "args": [{ "type": "atom", "value": "d" } ] } ] },
+          "shared": { "alloc$next": { "type": "int", "value": "0" }, "alloc$pool": { "type": "dict", "value": [] }, "d": { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } },
+          "npc": "1405",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1404"
+        },
+
+        {
+          "code": "Jump 1478",
+          "explain": "jump over method definition: set program counter to 1478",
+          "explain2": { "text": "jump over method definition: set program counter to 1478", "args": [] },
+          "npc": "1478",
+          "push": [ ],
+          "pc": "1405"
+        },
+
+        {
+          "code": "Push 1",
+          "explain": "push constant 1",
+          "explain2": { "text": "push constant 1", "args": [] },
+          "npc": "1479",
+          "push": [ { "type": "int", "value": "1" } ],
+          "pc": "1478"
+        },
+
+        {
+          "code": "Push 2",
+          "explain": "push constant 2",
+          "explain2": { "text": "push constant 2", "args": [] },
+          "npc": "1480",
+          "push": [ { "type": "int", "value": "2" } ],
+          "pc": "1479"
+        },
+
+        {
+          "code": "2-ary ..",
+          "explain": "pop 2 values (2, 1); range of integers; push result ({ 1, 2 })",
+          "explain2": { "text": "pop 2 values (#+, #+); range of integers; push result (#+)", "args": [ { "type": "int", "value": "2" }, { "type": "int", "value": "1" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] } ] },
+          "npc": "1481",
+          "pop": "2",
+          "push": [ { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] } ],
+          "pc": "1480"
+        },
+
+        {
+          "code": "Push 0",
+          "explain": "push constant 0",
+          "explain2": { "text": "push constant 0", "args": [] },
+          "npc": "1482",
+          "push": [ { "type": "int", "value": "0" } ],
+          "pc": "1481"
+        },
+
+        {
+          "code": "Cut(i)",
+          "explain": "pop index (0) and value ({ 1, 2 }); assign value (1) to i; push new index (1) and True",
+          "explain2": { "text": "pop index (#+) and value (#+); assign value (#+) to i; push new index (1) and True", "args": [ { "type": "int", "value": "0" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] }, { "type": "int", "value": "1" } ] },
+          "npc": "1483",
+          "local": { "i": { "type": "int", "value": "1" } },
+          "pop": "1",
+          "push": [ { "type": "int", "value": "1" }, { "type": "bool", "value": "True" } ],
+          "pc": "1482"
+        },
+
+        {
+          "code": "JumpCond False 1491",
+          "explain": "pop value (True), compare to False, and jump to 1491 if the same",
+          "explain2": { "text": "pop value (#+), compare to #+, and jump to 1491 if the same", "args": [ { "type": "bool", "value": "True" }, { "type": "bool", "value": "False" } ] },
+          "npc": "1484",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1483"
+        },
+
+        {
+          "code": "Push ?PC(1406)",
+          "explain": "push constant ?PC(1406)",
+          "explain2": { "text": "push constant ?PC(1406)", "args": [] },
+          "npc": "1485",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [ ] } ],
+          "pc": "1484"
+        },
+
+        {
+          "code": "LoadVar i",
+          "explain": "push value (1) of variable \"i\"",
+          "explain2": { "text": "push value (#+) of variable #+", "args": [ { "type": "int", "value": "1" }, { "type": "atom", "value": "i" } ] },
+          "npc": "1486",
+          "push": [ { "type": "int", "value": "1" } ],
+          "pc": "1485"
+        },
+
+        {
+          "code": "DelVar i",
+          "explain": "delete method variable i",
+          "explain2": { "text": "delete method variable i", "args": [] },
+          "npc": "1487",
+          "local": { },
+          "push": [ ],
+          "pc": "1486"
+        },
+
+        {
+          "code": "2-ary AddArg",
+          "explain": "pop 2 values (1, ?PC(1406)); push result (?PC(1406)[1])",
+          "explain2": { "text": "pop 2 values (#+, #+); push result (#+)", "args": [ { "type": "int", "value": "1" }, { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [ ] }, { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [{ "type": "int", "value": "1" } ] } ] },
+          "npc": "1488",
+          "pop": "2",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [{ "type": "int", "value": "1" } ] } ],
+          "pc": "1487"
+        },
+
+        {
+          "code": "Push {:}",
+          "explain": "push constant {:}",
+          "explain2": { "text": "push constant {:}", "args": [] },
+          "npc": "1489",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1488"
+        },
+
+        {
+          "code": "Spawn",
+          "explain": "pop local state ({:}), arg (1), and pc (1406: \"insert_test\"), and spawn thread",
+          "explain2": { "text": "pop local state (#+), arg (#+), and pc (1406: #+), and spawn thread", "args": [ { "type": "dict", "value": [] }, { "type": "int", "value": "1" }, { "type": "atom", "value": "insert_test" } ] },
+          "npc": "1490",
+          "pop": "2",
+          "push": [ ],
+          "pc": "1489"
+        },
+
+        {
+          "code": "Jump 1482",
+          "explain": "set program counter to 1482",
+          "explain2": { "text": "set program counter to 1482", "args": [] },
+          "npc": "1482",
+          "push": [ ],
+          "pc": "1490"
+        },
+
+        {
+          "code": "Cut(i)",
+          "explain": "pop index (1) and value ({ 1, 2 }); assign value (2) to i; push new index (2) and True",
+          "explain2": { "text": "pop index (#+) and value (#+); assign value (#+) to i; push new index (2) and True", "args": [ { "type": "int", "value": "1" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] }, { "type": "int", "value": "2" } ] },
+          "npc": "1483",
+          "local": { "i": { "type": "int", "value": "2" } },
+          "pop": "1",
+          "push": [ { "type": "int", "value": "2" }, { "type": "bool", "value": "True" } ],
+          "pc": "1482"
+        },
+
+        {
+          "code": "JumpCond False 1491",
+          "explain": "pop value (True), compare to False, and jump to 1491 if the same",
+          "explain2": { "text": "pop value (#+), compare to #+, and jump to 1491 if the same", "args": [ { "type": "bool", "value": "True" }, { "type": "bool", "value": "False" } ] },
+          "npc": "1484",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1483"
+        },
+
+        {
+          "code": "Push ?PC(1406)",
+          "explain": "push constant ?PC(1406)",
+          "explain2": { "text": "push constant ?PC(1406)", "args": [] },
+          "npc": "1485",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [ ] } ],
+          "pc": "1484"
+        },
+
+        {
+          "code": "LoadVar i",
+          "explain": "push value (2) of variable \"i\"",
+          "explain2": { "text": "push value (#+) of variable #+", "args": [ { "type": "int", "value": "2" }, { "type": "atom", "value": "i" } ] },
+          "npc": "1486",
+          "push": [ { "type": "int", "value": "2" } ],
+          "pc": "1485"
+        },
+
+        {
+          "code": "DelVar i",
+          "explain": "delete method variable i",
+          "explain2": { "text": "delete method variable i", "args": [] },
+          "npc": "1487",
+          "local": { },
+          "push": [ ],
+          "pc": "1486"
+        },
+
+        {
+          "code": "2-ary AddArg",
+          "explain": "pop 2 values (2, ?PC(1406)); push result (?PC(1406)[2])",
+          "explain2": { "text": "pop 2 values (#+, #+); push result (#+)", "args": [ { "type": "int", "value": "2" }, { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [ ] }, { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [{ "type": "int", "value": "2" } ] } ] },
+          "npc": "1488",
+          "pop": "2",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1406" }, "args": [{ "type": "int", "value": "2" } ] } ],
+          "pc": "1487"
+        },
+
+        {
+          "code": "Push {:}",
+          "explain": "push constant {:}",
+          "explain2": { "text": "push constant {:}", "args": [] },
+          "npc": "1489",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1488"
+        },
+
+        {
+          "code": "Spawn",
+          "explain": "pop local state ({:}), arg (2), and pc (1406: \"insert_test\"), and spawn thread",
+          "explain2": { "text": "pop local state (#+), arg (#+), and pc (1406: #+), and spawn thread", "args": [ { "type": "dict", "value": [] }, { "type": "int", "value": "2" }, { "type": "atom", "value": "insert_test" } ] },
+          "npc": "1490",
+          "pop": "2",
+          "push": [ ],
+          "pc": "1489"
+        },
+
+        {
+          "code": "Jump 1482",
+          "explain": "set program counter to 1482",
+          "explain2": { "text": "set program counter to 1482", "args": [] },
+          "npc": "1482",
+          "push": [ ],
+          "pc": "1490"
+        },
+
+        {
+          "code": "Cut(i)",
+          "explain": "pop index (2) and value ({ 1, 2 }); out of range -> push False",
+          "explain2": { "text": "pop index (#+) and value (#+); out of range -> push False", "args": [ { "type": "int", "value": "2" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] } ] },
+          "npc": "1483",
+          "pop": "2",
+          "push": [ { "type": "bool", "value": "False" } ],
+          "pc": "1482"
+        },
+
+        {
+          "code": "JumpCond False 1491",
+          "explain": "pop value (False), compare to False, and jump to 1491 if the same",
+          "explain2": { "text": "pop value (#+), compare to #+, and jump to 1491 if the same", "args": [ { "type": "bool", "value": "False" }, { "type": "bool", "value": "False" } ] },
+          "npc": "1491",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1483"
+        },
+
+        {
+          "code": "DelVar i",
+          "explain": "delete method variable i",
+          "explain2": { "text": "delete method variable i", "args": [] },
+          "npc": "1492",
+          "push": [ ],
+          "pc": "1491"
+        },
+
+        {
+          "code": "Push 1",
+          "explain": "push constant 1",
+          "explain2": { "text": "push constant 1", "args": [] },
+          "npc": "1493",
+          "push": [ { "type": "int", "value": "1" } ],
+          "pc": "1492"
+        },
+
+        {
+          "code": "Push 2",
+          "explain": "push constant 2",
+          "explain2": { "text": "push constant 2", "args": [] },
+          "npc": "1494",
+          "push": [ { "type": "int", "value": "2" } ],
+          "pc": "1493"
+        },
+
+        {
+          "code": "2-ary ..",
+          "explain": "pop 2 values (2, 1); range of integers; push result ({ 1, 2 })",
+          "explain2": { "text": "pop 2 values (#+, #+); range of integers; push result (#+)", "args": [ { "type": "int", "value": "2" }, { "type": "int", "value": "1" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] } ] },
+          "npc": "1495",
+          "pop": "2",
+          "push": [ { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] } ],
+          "pc": "1494"
+        },
+
+        {
+          "code": "Push 0",
+          "explain": "push constant 0",
+          "explain2": { "text": "push constant 0", "args": [] },
+          "npc": "1496",
+          "push": [ { "type": "int", "value": "0" } ],
+          "pc": "1495"
+        },
+
+        {
+          "code": "Cut(i)",
+          "explain": "pop index (0) and value ({ 1, 2 }); assign value (1) to i; push new index (1) and True",
+          "explain2": { "text": "pop index (#+) and value (#+); assign value (#+) to i; push new index (1) and True", "args": [ { "type": "int", "value": "0" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] }, { "type": "int", "value": "1" } ] },
+          "npc": "1497",
+          "local": { "i": { "type": "int", "value": "1" } },
+          "pop": "1",
+          "push": [ { "type": "int", "value": "1" }, { "type": "bool", "value": "True" } ],
+          "pc": "1496"
+        },
+
+        {
+          "code": "JumpCond False 1505",
+          "explain": "pop value (True), compare to False, and jump to 1505 if the same",
+          "explain2": { "text": "pop value (#+), compare to #+, and jump to 1505 if the same", "args": [ { "type": "bool", "value": "True" }, { "type": "bool", "value": "False" } ] },
+          "npc": "1498",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1497"
+        },
+
+        {
+          "code": "Push ?PC(1431)",
+          "explain": "push constant ?PC(1431)",
+          "explain2": { "text": "push constant ?PC(1431)", "args": [] },
+          "npc": "1499",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [ ] } ],
+          "pc": "1498"
+        },
+
+        {
+          "code": "LoadVar i",
+          "explain": "push value (1) of variable \"i\"",
+          "explain2": { "text": "push value (#+) of variable #+", "args": [ { "type": "int", "value": "1" }, { "type": "atom", "value": "i" } ] },
+          "npc": "1500",
+          "push": [ { "type": "int", "value": "1" } ],
+          "pc": "1499"
+        },
+
+        {
+          "code": "DelVar i",
+          "explain": "delete method variable i",
+          "explain2": { "text": "delete method variable i", "args": [] },
+          "npc": "1501",
+          "local": { },
+          "push": [ ],
+          "pc": "1500"
+        },
+
+        {
+          "code": "2-ary AddArg",
+          "explain": "pop 2 values (1, ?PC(1431)); push result (?PC(1431)[1])",
+          "explain2": { "text": "pop 2 values (#+, #+); push result (#+)", "args": [ { "type": "int", "value": "1" }, { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [ ] }, { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [{ "type": "int", "value": "1" } ] } ] },
+          "npc": "1502",
+          "pop": "2",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [{ "type": "int", "value": "1" } ] } ],
+          "pc": "1501"
+        },
+
+        {
+          "code": "Push {:}",
+          "explain": "push constant {:}",
+          "explain2": { "text": "push constant {:}", "args": [] },
+          "npc": "1503",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1502"
+        },
+
+        {
+          "code": "Spawn",
+          "explain": "pop local state ({:}), arg (1), and pc (1431: \"delete_test\"), and spawn thread",
+          "explain2": { "text": "pop local state (#+), arg (#+), and pc (1431: #+), and spawn thread", "args": [ { "type": "dict", "value": [] }, { "type": "int", "value": "1" }, { "type": "atom", "value": "delete_test" } ] },
+          "npc": "1504",
+          "pop": "2",
+          "push": [ ],
+          "pc": "1503"
+        },
+
+        {
+          "code": "Jump 1496",
+          "explain": "set program counter to 1496",
+          "explain2": { "text": "set program counter to 1496", "args": [] },
+          "npc": "1496",
+          "push": [ ],
+          "pc": "1504"
+        },
+
+        {
+          "code": "Cut(i)",
+          "explain": "pop index (1) and value ({ 1, 2 }); assign value (2) to i; push new index (2) and True",
+          "explain2": { "text": "pop index (#+) and value (#+); assign value (#+) to i; push new index (2) and True", "args": [ { "type": "int", "value": "1" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] }, { "type": "int", "value": "2" } ] },
+          "npc": "1497",
+          "local": { "i": { "type": "int", "value": "2" } },
+          "pop": "1",
+          "push": [ { "type": "int", "value": "2" }, { "type": "bool", "value": "True" } ],
+          "pc": "1496"
+        },
+
+        {
+          "code": "JumpCond False 1505",
+          "explain": "pop value (True), compare to False, and jump to 1505 if the same",
+          "explain2": { "text": "pop value (#+), compare to #+, and jump to 1505 if the same", "args": [ { "type": "bool", "value": "True" }, { "type": "bool", "value": "False" } ] },
+          "npc": "1498",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1497"
+        },
+
+        {
+          "code": "Push ?PC(1431)",
+          "explain": "push constant ?PC(1431)",
+          "explain2": { "text": "push constant ?PC(1431)", "args": [] },
+          "npc": "1499",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [ ] } ],
+          "pc": "1498"
+        },
+
+        {
+          "code": "LoadVar i",
+          "explain": "push value (2) of variable \"i\"",
+          "explain2": { "text": "push value (#+) of variable #+", "args": [ { "type": "int", "value": "2" }, { "type": "atom", "value": "i" } ] },
+          "npc": "1500",
+          "push": [ { "type": "int", "value": "2" } ],
+          "pc": "1499"
+        },
+
+        {
+          "code": "DelVar i",
+          "explain": "delete method variable i",
+          "explain2": { "text": "delete method variable i", "args": [] },
+          "npc": "1501",
+          "local": { },
+          "push": [ ],
+          "pc": "1500"
+        },
+
+        {
+          "code": "2-ary AddArg",
+          "explain": "pop 2 values (2, ?PC(1431)); push result (?PC(1431)[2])",
+          "explain2": { "text": "pop 2 values (#+, #+); push result (#+)", "args": [ { "type": "int", "value": "2" }, { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [ ] }, { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [{ "type": "int", "value": "2" } ] } ] },
+          "npc": "1502",
+          "pop": "2",
+          "push": [ { "type": "address", "func": { "type": "pc", "value": "1431" }, "args": [{ "type": "int", "value": "2" } ] } ],
+          "pc": "1501"
+        },
+
+        {
+          "code": "Push {:}",
+          "explain": "push constant {:}",
+          "explain2": { "text": "push constant {:}", "args": [] },
+          "npc": "1503",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1502"
+        },
+
+        {
+          "code": "Spawn",
+          "explain": "pop local state ({:}), arg (2), and pc (1431: \"delete_test\"), and spawn thread",
+          "explain2": { "text": "pop local state (#+), arg (#+), and pc (1431: #+), and spawn thread", "args": [ { "type": "dict", "value": [] }, { "type": "int", "value": "2" }, { "type": "atom", "value": "delete_test" } ] },
+          "npc": "1504",
+          "pop": "2",
+          "push": [ ],
+          "pc": "1503"
+        },
+
+        {
+          "code": "Jump 1496",
+          "explain": "set program counter to 1496",
+          "explain2": { "text": "set program counter to 1496", "args": [] },
+          "npc": "1496",
+          "push": [ ],
+          "pc": "1504"
+        },
+
+        {
+          "code": "Cut(i)",
+          "explain": "pop index (2) and value ({ 1, 2 }); out of range -> push False",
+          "explain2": { "text": "pop index (#+) and value (#+); out of range -> push False", "args": [ { "type": "int", "value": "2" }, { "type": "set", "value": [{ "type": "int", "value": "1" }, { "type": "int", "value": "2" } ] } ] },
+          "npc": "1497",
+          "pop": "2",
+          "push": [ { "type": "bool", "value": "False" } ],
+          "pc": "1496"
+        },
+
+        {
+          "code": "JumpCond False 1505",
+          "explain": "pop value (False), compare to False, and jump to 1505 if the same",
+          "explain2": { "text": "pop value (#+), compare to #+, and jump to 1505 if the same", "args": [ { "type": "bool", "value": "False" }, { "type": "bool", "value": "False" } ] },
+          "npc": "1505",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1497"
+        },
+
+        {
+          "code": "DelVar i",
+          "explain": "delete method variable i",
+          "explain2": { "text": "delete method variable i", "args": [] },
+          "npc": "1506",
+          "push": [ ],
+          "pc": "1505"
+        },
+
+        {
+          "code": "ReturnOp(result. None)",
+          "explain": "pop caller's method variables and pc and push result (), or terminate if no caller",
+          "explain2": { "text": "pop caller's method variables and pc and push result (), or terminate if no caller", "args": [ { "type": "address" } ] },
+          "npc": "1506",
+          "mode": "terminated",
+          "pop": "1",
+          "push": [ { "type": "address" } ],
+          "pc": "1506"
+        }
+
+      ],
+      "ctxbag": {
+          "1500015ea": "1",
+          "15000165a": "1",
+          "1500016aa": "1",
+          "1500016fa": "1"
+      },
+      "contexts": [
+        {
+          "tid": "0",
+          "hvalue": "15000172a",
+          "fp": "1",
+          "id": "0",
+          "name": "__init__()",
+          "entry": "0",
+          "pc": "1506",
+          "sp": "1",
+          "stack": [{ "type": "address" }],
+          "trace": [
+{"pc": "1506","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "atomic": "1",
+          "mode": "terminated"
+        },
+        {
+          "tid": "1",
+          "hvalue": "1500015ea",
+          "fp": "1",
+          "name": "insert_test(1)",
+          "entry": "1406",
+          "pc": "1406",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "1" }],
+          "trace": [
+{"pc": "1406","xpc": "1406","method_name": { "type": "atom", "value": "insert_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "insert_test(1)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "insert_test", "args": "self", "value": { "type": "int", "value": "1" } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "2",
+          "hvalue": "15000165a",
+          "fp": "1",
+          "name": "insert_test(2)",
+          "entry": "1406",
+          "pc": "1406",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "2" }],
+          "trace": [
+{"pc": "1406","xpc": "1406","method_name": { "type": "atom", "value": "insert_test" },
+"method_arg": { "type": "int", "value": "2" },
+"method": "insert_test(2)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "insert_test", "args": "self", "value": { "type": "int", "value": "2" } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "3",
+          "hvalue": "1500016aa",
+          "fp": "1",
+          "name": "delete_test(1)",
+          "entry": "1431",
+          "pc": "1431",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "1" }],
+          "trace": [
+{"pc": "1431","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "delete_test(1)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "delete_test", "args": "self", "value": { "type": "int", "value": "1" } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "4",
+          "hvalue": "1500016fa",
+          "fp": "1",
+          "name": "delete_test(2)",
+          "entry": "1431",
+          "pc": "1431",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "2" }],
+          "trace": [
+{"pc": "1431","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "2" },
+"method": "delete_test(2)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "delete_test", "args": "self", "value": { "type": "int", "value": "2" } },
+          "mode": "runnable"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "tid": "3",
+      "shared": { "alloc$next": { "type": "int", "value": "0" }, "alloc$pool": { "type": "dict", "value": [] }, "d": { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } },
+      "name": "delete_test(1)",
+      "context": {
+        "tid": "3",
+        "hvalue": "1500016aa",
+        "fp": "1",
+        "name": "delete_test(1)",
+        "entry": "1431",
+        "pc": "1431",
+        "sp": "1",
+        "stack": [{ "type": "int", "value": "1" }],
+        "trace": [
+{"pc": "1431","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "delete_test(1)","calltype": "process","vars":{ },"sp": 0}
+        ],
+        "next": { "type": "Frame", "name": "delete_test", "args": "self", "value": { "type": "int", "value": "1" } },
+        "mode": "runnable"
+      },
+      "microsteps": [
+        {
+          "code": "Frame delete_test(self)",
+          "explain": "pop argument (1), assign to self, and run method \"delete_test\"",
+          "explain2": { "text": "pop argument (#+), assign to self, and run method #+", "args": [ { "type": "int", "value": "1" }, { "type": "atom", "value": "delete_test" } ] },
+          "npc": "1432",
+          "fp": "1",
+          "trace": [
+{"pc": "1432","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "delete_test(1)","calltype": "process","vars":{ "self": { "type": "int", "value": "1" } },"sp": 0}
+          ],
+          "local": { "self": { "type": "int", "value": "1" } },
+          "pop": "1",
+          "push": [ { "type": "dict", "value": [] } ],
+          "pc": "1431"
+        },
+
+        {
+          "code": "Push ()",
+          "explain": "building a tuple: push constant ()",
+          "explain2": { "text": "building a tuple: push constant ()", "args": [] },
+          "npc": "1433",
+          "push": [ { "type": "list", "value": [] } ],
+          "pc": "1432"
+        },
+
+        {
+          "code": "Push \"Testing delete\"",
+          "explain": "push constant \"Testing delete\"",
+          "explain2": { "text": "push constant \"Testing delete\"", "args": [] },
+          "npc": "1434",
+          "push": [ { "type": "atom", "value": "Testing delete" } ],
+          "pc": "1433"
+        },
+
+        {
+          "code": "2-ary ListAdd",
+          "explain": "pop 2 values (\"Testing delete\", []); insert first value into the second; push result ([\"Testing delete\"])",
+          "explain2": { "text": "pop 2 values (#+, #+); insert first value into the second; push result (#+)", "args": [ { "type": "atom", "value": "Testing delete" }, { "type": "list", "value": [] }, { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" } ] } ] },
+          "npc": "1435",
+          "pop": "2",
+          "push": [ { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" } ] } ],
+          "pc": "1434"
+        },
+
+        {
+          "code": "LoadVar self",
+          "explain": "push value (1) of variable \"self\"",
+          "explain2": { "text": "push value (#+) of variable #+", "args": [ { "type": "int", "value": "1" }, { "type": "atom", "value": "self" } ] },
+          "npc": "1436",
+          "push": [ { "type": "int", "value": "1" } ],
+          "pc": "1435"
+        },
+
+        {
+          "code": "2-ary ListAdd",
+          "explain": "pop 2 values (1, [\"Testing delete\"]); insert first value into the second; push result ([\"Testing delete\", 1])",
+          "explain2": { "text": "pop 2 values (#+, #+); insert first value into the second; push result (#+)", "args": [ { "type": "int", "value": "1" }, { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" } ] }, { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] } ] },
+          "npc": "1437",
+          "pop": "2",
+          "push": [ { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] } ],
+          "pc": "1436"
+        }
+
+      ],
+      "ctxbag": {
+          "1500015ea": "1",
+          "15000165a": "1",
+          "1500016fa": "1",
+          "3e000010a": "1"
+      },
+      "contexts": [
+        {
+          "tid": "0",
+          "hvalue": "15000172a",
+          "fp": "1",
+          "id": "0",
+          "name": "__init__()",
+          "entry": "0",
+          "pc": "1506",
+          "sp": "1",
+          "stack": [{ "type": "address" }],
+          "trace": [
+{"pc": "1506","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "atomic": "1",
+          "mode": "terminated"
+        },
+        {
+          "tid": "1",
+          "hvalue": "1500015ea",
+          "fp": "1",
+          "name": "insert_test(1)",
+          "entry": "1406",
+          "pc": "1406",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "1" }],
+          "trace": [
+{"pc": "1406","xpc": "1406","method_name": { "type": "atom", "value": "insert_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "insert_test(1)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "insert_test", "args": "self", "value": { "type": "int", "value": "1" } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "2",
+          "hvalue": "15000165a",
+          "fp": "1",
+          "name": "insert_test(2)",
+          "entry": "1406",
+          "pc": "1406",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "2" }],
+          "trace": [
+{"pc": "1406","xpc": "1406","method_name": { "type": "atom", "value": "insert_test" },
+"method_arg": { "type": "int", "value": "2" },
+"method": "insert_test(2)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "insert_test", "args": "self", "value": { "type": "int", "value": "2" } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "3",
+          "hvalue": "3e000010a",
+          "fp": "1",
+          "name": "delete_test(1)",
+          "entry": "1431",
+          "pc": "1437",
+          "sp": "2",
+          "stack": [{ "type": "dict", "value": [] }, { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] }],
+          "trace": [
+{"pc": "1437","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "delete_test(1)","calltype": "process","vars":{ "self": { "type": "int", "value": "1" } },"sp": 0}
+          ],
+          "next": { "type": "Print", "value": { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "4",
+          "hvalue": "1500016fa",
+          "fp": "1",
+          "name": "delete_test(2)",
+          "entry": "1431",
+          "pc": "1431",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "2" }],
+          "trace": [
+{"pc": "1431","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "2" },
+"method": "delete_test(2)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "delete_test", "args": "self", "value": { "type": "int", "value": "2" } },
+          "mode": "runnable"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "tid": "3",
+      "shared": { "alloc$next": { "type": "int", "value": "0" }, "alloc$pool": { "type": "dict", "value": [] }, "d": { "type": "dict", "value": [{ "key": { "type": "atom", "value": "current" }, "value": { "type": "address" } }, { "key": { "type": "atom", "value": "lock" }, "value": { "type": "bool", "value": "False" } } ] } },
+      "name": "delete_test(1)",
+      "context": {
+        "tid": "3",
+        "hvalue": "3e000010a",
+        "fp": "1",
+        "name": "delete_test(1)",
+        "entry": "1431",
+        "pc": "1437",
+        "sp": "2",
+        "stack": [{ "type": "dict", "value": [] }, { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] }],
+        "trace": [
+{"pc": "1437","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "delete_test(1)","calltype": "process","vars":{ "self": { "type": "int", "value": "1" } },"sp": 0}
+        ],
+        "next": { "type": "Print", "value": { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] } },
+        "mode": "runnable"
+      },
+      "microsteps": [
+        {
+          "code": "Print",
+          "explain": "pop value ([\"Testing delete\", 1]) and add to print log",
+          "explain2": { "text": "pop value (#+) and add to print log", "args": [ { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] } ] },
+          "print": { "type": "list", "value": [{ "type": "atom", "value": "Testing delete" }, { "type": "int", "value": "1" } ] },
+          "npc": "1437",
+          "fp": "1",
+          "trace": [
+{"pc": "1437","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "delete_test(1)","calltype": "process","vars":{ "self": { "type": "int", "value": "1" } },"sp": 0}
+          ],
+          "failure": "Behavior failure on [\"Testing delete\", 1]",
+          "mode": "failed",
+          "pop": "1",
+          "push": [ ],
+          "pc": "1437"
+        }
+
+      ],
+      "ctxbag": {
+          "1500015ea": "1",
+          "15000165a": "1",
+          "1500016fa": "1",
+          "3a00001aa": "1"
+      },
+      "contexts": [
+        {
+          "tid": "0",
+          "hvalue": "15000172a",
+          "fp": "1",
+          "id": "0",
+          "name": "__init__()",
+          "entry": "0",
+          "pc": "1506",
+          "sp": "1",
+          "stack": [{ "type": "address" }],
+          "trace": [
+{"pc": "1506","xpc": "0","method_name": { "type": "atom", "value": "__init__" },
+"method_arg": { "type": "list", "value": [] },
+"method": "__init__()","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "atomic": "1",
+          "mode": "terminated"
+        },
+        {
+          "tid": "1",
+          "hvalue": "1500015ea",
+          "fp": "1",
+          "name": "insert_test(1)",
+          "entry": "1406",
+          "pc": "1406",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "1" }],
+          "trace": [
+{"pc": "1406","xpc": "1406","method_name": { "type": "atom", "value": "insert_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "insert_test(1)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "insert_test", "args": "self", "value": { "type": "int", "value": "1" } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "2",
+          "hvalue": "15000165a",
+          "fp": "1",
+          "name": "insert_test(2)",
+          "entry": "1406",
+          "pc": "1406",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "2" }],
+          "trace": [
+{"pc": "1406","xpc": "1406","method_name": { "type": "atom", "value": "insert_test" },
+"method_arg": { "type": "int", "value": "2" },
+"method": "insert_test(2)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "insert_test", "args": "self", "value": { "type": "int", "value": "2" } },
+          "mode": "runnable"
+        },
+        {
+          "tid": "3",
+          "hvalue": "10862bd4a",
+          "fp": "1",
+          "name": "delete_test(1)",
+          "entry": "1431",
+          "pc": "1437",
+          "sp": "1",
+          "stack": [{ "type": "dict", "value": [] }],
+          "trace": [
+{"pc": "1437","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "1" },
+"method": "delete_test(1)","calltype": "process","vars":{ "self": { "type": "int", "value": "1" } },"sp": 0}
+          ],
+          "failure": "Behavior failure on [\"Testing delete\", 1]",
+          "this": { "type": "dict", "value": [] },
+          "mode": "failed"
+        },
+        {
+          "tid": "4",
+          "hvalue": "1500016fa",
+          "fp": "1",
+          "name": "delete_test(2)",
+          "entry": "1431",
+          "pc": "1431",
+          "sp": "1",
+          "stack": [{ "type": "int", "value": "2" }],
+          "trace": [
+{"pc": "1431","xpc": "1431","method_name": { "type": "atom", "value": "delete_test" },
+"method_arg": { "type": "int", "value": "2" },
+"method": "delete_test(2)","calltype": "process","vars":{ },"sp": 0}
+          ],
+          "next": { "type": "Frame", "name": "delete_test", "args": "self", "value": { "type": "int", "value": "2" } },
+          "mode": "runnable"
+        }
+      ]
+    }
+
   ]
 }
