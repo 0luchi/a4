@@ -1,0 +1,769 @@
+Issue: Behavior violation: unexpected output
+
+Modules:
+  alloc: /Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/alloc.hny
+  __main__: disque_btest.hny
+  bags: /Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/bags.hny
+  synch: /Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/synch.hny
+  disque: disque_impl.hny
+  lists: /Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/lists.hny
+
+================================================
+Running thread T0: __init__()
+mode:  runnable atomic
+stack: ['[]']
+state id: 1
+================================================
+
+Step 1:
+  program counter:   0
+  hvm code:          Frame __init__()
+  explanation:       pop argument () and run method "__init__"
+  module:            __main__
+  start statement:   line=1 column=1
+  end statement:     line=32 column=6
+  source code:       import disque
+  call trace:        __init__()
+  stack:             [{:}]
+
+Step 2:
+  program counter:   1
+  hvm code:          Jump 491
+  explanation:       jump over method definition: set program counter to 491
+  module:            lists
+  start statement:   line=2 column=1
+  end statement:     line=2 column=35
+  source code:       def subseq(s, b, e) returns result:
+                     ^^^
+
+Step 3:
+  program counter:   491
+  hvm code:          Push PC(494)
+  explanation:       push constant PC(494)
+  module:            bags
+  start statement:   line=15 column=1
+  end statement:     line=15 column=39
+  source code:       builtin multiplicity "bag$multiplicity"
+                             ^^^^^^^^^^^^
+  stack:             [{:}, PC(494)]
+
+Step 4:
+  program counter:   492
+  hvm code:          Builtin(bag$multiplicity)
+  explanation:       pop pc () and bind to built-in method bag$multiplicity
+  source code:       builtin multiplicity "bag$multiplicity"
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}]
+
+Step 5:
+  program counter:   493
+  hvm code:          Jump 513
+  explanation:       jump over method definition: set program counter to 513
+  start statement:   line=16 column=1
+  end statement:     line=16 column=40
+  source code:       def multiplicity(bg, elt) returns count:
+                     ^^^
+
+Step 6:
+  program counter:   513
+  hvm code:          Push PC(516)
+  explanation:       push constant PC(516)
+  start statement:   line=22 column=1
+  end statement:     line=22 column=23
+  source code:       builtin size "bag$size"
+                             ^^^^
+  stack:             [{:}, PC(516)]
+
+Step 7:
+  program counter:   514
+  hvm code:          Builtin(bag$size)
+  explanation:       pop pc () and bind to built-in method bag$size
+  source code:       builtin size "bag$size"
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}]
+
+Step 8:
+  program counter:   515
+  hvm code:          Jump 535
+  explanation:       jump over method definition: set program counter to 535
+  start statement:   line=23 column=1
+  end statement:     line=23 column=27
+  source code:       def size(bg) returns count:
+                     ^^^
+
+Step 9:
+  program counter:   535
+  hvm code:          Push PC(538)
+  explanation:       push constant PC(538)
+  start statement:   line=28 column=1
+  end statement:     line=28 column=23
+  source code:       builtin bmin "bag$bmin"
+                             ^^^^
+  stack:             [{:}, PC(538)]
+
+Step 10:
+  program counter:   536
+  hvm code:          Builtin(bag$bmin)
+  explanation:       pop pc () and bind to built-in method bag$bmin
+  source code:       builtin bmin "bag$bmin"
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}]
+
+Step 11:
+  program counter:   537
+  hvm code:          Jump 554
+  explanation:       jump over method definition: set program counter to 554
+  start statement:   line=29 column=1
+  end statement:     line=29 column=27
+  source code:       def bmin(bg) returns count:
+                     ^^^
+
+Step 12:
+  program counter:   554
+  hvm code:          Push PC(557)
+  explanation:       push constant PC(557)
+  start statement:   line=33 column=1
+  end statement:     line=33 column=23
+  source code:       builtin bmax "bag$bmax"
+                             ^^^^
+  stack:             [{:}, PC(557)]
+
+Step 13:
+  program counter:   555
+  hvm code:          Builtin(bag$bmax)
+  explanation:       pop pc () and bind to built-in method bag$bmax
+  source code:       builtin bmax "bag$bmax"
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}]
+
+Step 14:
+  program counter:   556
+  hvm code:          Jump 582
+  explanation:       jump over method definition: set program counter to 582
+  start statement:   line=34 column=1
+  end statement:     line=34 column=27
+  source code:       def bmax(bg) returns count:
+                     ^^^
+
+Step 15:
+  program counter:   582
+  hvm code:          Push PC(585)
+  explanation:       push constant PC(585)
+  start statement:   line=41 column=1
+  end statement:     line=41 column=21
+  source code:       builtin add "bag$add"
+                             ^^^
+  stack:             [{:}, PC(585)]
+
+Step 16:
+  program counter:   583
+  hvm code:          Builtin(bag$add)
+  explanation:       pop pc () and bind to built-in method bag$add
+  source code:       builtin add "bag$add"
+                     ^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}]
+
+Step 17:
+  program counter:   584
+  hvm code:          Jump 611
+  explanation:       jump over method definition: set program counter to 611
+  start statement:   line=42 column=1
+  end statement:     line=42 column=32
+  source code:       def add(bg, elt) returns result:
+                     ^^^
+
+Step 18:
+  program counter:   611
+  hvm code:          Push PC(614)
+  explanation:       push constant PC(614)
+  start statement:   line=49 column=1
+  end statement:     line=49 column=27
+  source code:       builtin remove "bag$remove"
+                             ^^^^^^
+  stack:             [{:}, PC(614)]
+
+Step 19:
+  program counter:   612
+  hvm code:          Builtin(bag$remove)
+  explanation:       pop pc () and bind to built-in method bag$remove
+  source code:       builtin remove "bag$remove"
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}]
+
+Step 20:
+  program counter:   613
+  hvm code:          Jump 1106
+  explanation:       jump over method definition: set program counter to 1106
+  start statement:   line=50 column=1
+  end statement:     line=50 column=35
+  source code:       def remove(bg, elt) returns result:
+                     ^^^
+
+Step 21:
+  program counter:   1106
+  hvm code:          Push {:}
+  explanation:       push constant {:}
+  module:            alloc
+  start statement:   line=1 column=1
+  end statement:     line=1 column=10
+  source code:       pool = {:}
+                            ^^^
+  stack:             [{:}, {:}]
+
+Step 22:
+  program counter:   1107
+  hvm code:          Store alloc$pool
+  explanation:       pop value ({:}) and store into variable alloc$pool
+  source code:       pool = {:}
+                     ^^^^^^
+  shared variables:  { alloc$pool: {:} }
+  stack:             [{:}]
+
+Step 23:
+  program counter:   1108
+  hvm code:          Push 0
+  explanation:       push constant 0
+  start statement:   line=2 column=1
+  end statement:     line=2 column=8
+  source code:       next = 0
+                            ^
+  stack:             [{:}, 0]
+
+Step 24:
+  program counter:   1109
+  hvm code:          Store alloc$next
+  explanation:       pop value (0) and store into variable alloc$next
+  source code:       next = 0
+                     ^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:} }
+  stack:             [{:}]
+
+Step 25:
+  program counter:   1110
+  hvm code:          Jump 1441
+  explanation:       jump over method definition: set program counter to 1441
+  start statement:   line=6 column=1
+  end statement:     line=6 column=27
+  source code:       def malloc(v) returns copy:
+                     ^^^
+
+Step 26:
+  program counter:   1441
+  hvm code:          Push PC(1151)
+  explanation:       push program counter constant 1151 ()
+  module:            __main__
+  start statement:   line=7 column=1
+  end statement:     line=7 column=19
+  source code:       d = disque.Disque()
+                         ^^^^^^^^^^^^^
+  stack:             [{:}, PC(1151)]
+
+Step 27:
+  program counter:   1442
+  hvm code:          Push ()
+  explanation:       push constant ()
+  source code:       d = disque.Disque()
+                                      ^^
+  stack:             [{:}, PC(1151), []]
+
+Step 28:
+  program counter:   1443
+  hvm code:          2-ary Closure
+  explanation:       pop 2 values ([], PC(1151)); push result (?PC(1151)[[]])
+  source code:       d = disque.Disque()
+                         ^^^^^^^^^^^^^^^
+  stack:             [{:}, ?PC(1151)[[]]]
+
+Step 29:
+  program counter:   1444
+  hvm code:          Load
+  explanation:       pop an argument ([]) and call method (1151: "Disque")
+  start expression:  line=7 column=5
+  end expression:    line=7 column=19
+  call trace:        __init__() --> Disque()
+  stack:             [{:}, [], 23106, []]
+
+Step 30:
+  program counter:   1151
+  hvm code:          Frame Disque()
+  explanation:       pop argument () and run method "Disque"
+  module:            disque
+  start statement:   line=4 column=1
+  end statement:     line=4 column=23
+  source code:       def Disque() returns d:
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 23106, {:}]
+
+Step 31:
+  program counter:   1152
+  hvm code:          Push {:}
+  explanation:       push constant {:}
+  start statement:   line=5 column=3
+  end statement:     line=5 column=37
+  source code:       d = {.current: None, .lock: Lock()}
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 23106, {:}, {:}]
+
+Step 32:
+  program counter:   1153
+  hvm code:          Push "current"
+  explanation:       push constant "current"
+  source code:       d = {.current: None, .lock: Lock()}
+                          ^^^^^^^^
+  stack:             [{:}, [], 23106, {:}, {:}, "current"]
+
+Step 33:
+  program counter:   1154
+  hvm code:          Push None
+  explanation:       push constant None
+  source code:       d = {.current: None, .lock: Lock()}
+                                    ^^^^
+  stack:             [{:}, [], 23106, {:}, {:}, "current", None]
+
+Step 34:
+  program counter:   1155
+  hvm code:          3-ary DictAdd
+  explanation:       pop 3 values (None, "current", {:}); add key/value pair to dictionary; push result ({ "current": None })
+  source code:       d = {.current: None, .lock: Lock()}
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 23106, {:}, { "current": None }]
+
+Step 35:
+  program counter:   1156
+  hvm code:          Push "lock"
+  explanation:       push constant "lock"
+  source code:       d = {.current: None, .lock: Lock()}
+                                          ^^^^^
+  stack:             [{:}, [], 23106, {:}, { "current": None }, "lock"]
+
+Step 36:
+  program counter:   1157
+  hvm code:          Push ()
+  explanation:       push constant ()
+  source code:       d = {.current: None, .lock: Lock()}
+                                                     ^^
+  stack:             [{:}, [], 23106, {:}, { "current": None }, "lock", []]
+
+Step 37:
+  program counter:   1158
+  hvm code:          Apply PC(820)
+  explanation:       pop an argument ([]) and call method (820: "Lock")
+  source code:       d = {.current: None, .lock: Lock()}
+                                                 ^^^^^^
+  call trace:        __init__() --> Disque() --> Lock()
+  stack:             [{:}, [], 23106, {:}, { "current": None }, "lock", [], 18530, []]
+
+Step 38:
+  program counter:   820
+  hvm code:          Frame Lock()
+  explanation:       pop argument () and run method "Lock"
+  module:            synch
+  start statement:   line=25 column=1
+  end statement:     line=25 column=26
+  source code:       def Lock() returns result:
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 23106, {:}, { "current": None }, "lock", [], 18530, {:}]
+
+Step 39:
+  program counter:   821
+  hvm code:          DelVar result
+  explanation:       delete method variable result
+  start statement:   line=26 column=5
+  end statement:     line=26 column=18
+  source code:       result = False
+                              ^^^^^
+
+Step 40:
+  program counter:   822
+  hvm code:          Push False
+  explanation:       push constant False
+  start expression:  line=26 column=14
+  end expression:    line=26 column=18
+  stack:             [{:}, [], 23106, {:}, { "current": None }, "lock", [], 18530, {:}, False]
+
+Step 41:
+  program counter:   823
+  hvm code:          StoreVar result
+  explanation:       pop value (False) and store locally in variable \"result\"
+  source code:       result = False
+                     ^^^^^^^^
+  method variables:  { result: False }
+  stack:             [{:}, [], 23106, {:}, { "current": None }, "lock", [], 18530, {:}]
+
+Step 42:
+  program counter:   824
+  hvm code:          ReturnOp(result)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=27 column=1
+  end statement:     line=27 column=6
+  source code:       
+                     ^^^^^^
+  method variables:  { }
+  call trace:        __init__() --> Disque()
+  stack:             [{:}, [], 23106, {:}, { "current": None }, "lock", False]
+
+Step 43:
+  program counter:   1159
+  hvm code:          3-ary DictAdd
+  explanation:       pop 3 values (False, "lock", { "current": None }); add key/value pair to dictionary; push result ({ "current": None, "lock": False })
+  module:            disque
+  start statement:   line=5 column=3
+  end statement:     line=5 column=37
+  source code:       d = {.current: None, .lock: Lock()}
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 23106, {:}, { "current": None, "lock": False }]
+
+Step 44:
+  program counter:   1160
+  hvm code:          StoreVar d
+  explanation:       pop value ({ "current": None, "lock": False }) and store locally in variable \"d\"
+  source code:       d = {.current: None, .lock: Lock()}
+                     ^^^
+  method variables:  { d: { "current": None, "lock": False } }
+  stack:             [{:}, [], 23106, {:}]
+
+Step 45:
+  program counter:   1161
+  hvm code:          ReturnOp(d)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=6 column=1
+  end statement:     line=6 column=6
+  source code:       
+                     ^^^^^^
+  method variables:  { }
+  call trace:        __init__()
+  stack:             [{:}, { "current": None, "lock": False }]
+
+Step 46:
+  program counter:   1445
+  hvm code:          Store d
+  explanation:       pop value ({ "current": None, "lock": False }) and store into variable d
+  module:            __main__
+  start statement:   line=7 column=1
+  end statement:     line=7 column=19
+  source code:       d = disque.Disque()
+                     ^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "current": None, "lock": False } }
+  stack:             [{:}]
+
+Step 47:
+  program counter:   1446
+  hvm code:          Jump 1523
+  explanation:       jump over method definition: set program counter to 1523
+  start statement:   line=9 column=1
+  end statement:     line=9 column=22
+  source code:       def insert_test(self):
+                     ^^^
+
+Step 48:
+  program counter:   1523
+  hvm code:          Push 1
+  explanation:       push constant 1
+  start statement:   line=25 column=1
+  end statement:     line=25 column=22
+  source code:       for i in {1..N_INSERT}:
+                               ^
+  stack:             [{:}, 1]
+
+Step 49:
+  program counter:   1524
+  hvm code:          Push 2
+  explanation:       push constant 2
+  source code:       for i in {1..N_INSERT}:
+                                  ^^^^^^^^
+  stack:             [{:}, 1, 2]
+
+Step 50:
+  program counter:   1525
+  hvm code:          2-ary ..
+  explanation:       pop 2 values (2, 1); range of integers; push result ({ 1, 2 })
+  source code:       for i in {1..N_INSERT}:
+                               ^^^^^^^^^^^
+  stack:             [{:}, { 1, 2 }]
+
+Step 51:
+  program counter:   1526
+  hvm code:          Push 0
+  explanation:       push constant 0
+  source code:       for i in {1..N_INSERT}:
+                     ^^^
+  stack:             [{:}, { 1, 2 }, 0]
+
+Step 52:
+  program counter:   1527
+  hvm code:          Cut(i)
+  explanation:       pop index (0) and value ({ 1, 2 }); assign value (1) to i; push new index (1) and True
+  start expression:  line=25 column=1
+  end expression:    line=25 column=3
+  method variables:  { i: 1 }
+  stack:             [{:}, { 1, 2 }, 1, True]
+
+Step 53:
+  program counter:   1528
+  hvm code:          JumpCond False 1536
+  explanation:       pop value (True), compare to False, and jump to 1536 if the same
+  start expression:  line=25 column=1
+  end expression:    line=25 column=3
+  stack:             [{:}, { 1, 2 }, 1]
+
+Step 54:
+  program counter:   1529
+  hvm code:          Push ?PC(1447)
+  explanation:       push constant ?PC(1447)
+  start statement:   line=26 column=5
+  end statement:     line=26 column=24
+  source code:       spawn insert_test(i)
+                           ^^^^^^^^^^^
+  stack:             [{:}, { 1, 2 }, 1, ?PC(1447)]
+
+Step 55:
+  program counter:   1530
+  hvm code:          LoadVar i
+  explanation:       push value (1) of variable "i"
+  source code:       spawn insert_test(i)
+                                       ^
+  stack:             [{:}, { 1, 2 }, 1, ?PC(1447), 1]
+
+Step 56:
+  program counter:   1531
+  hvm code:          DelVar i
+  explanation:       delete method variable i
+  start expression:  line=26 column=23
+  end expression:    line=26 column=23
+  method variables:  { }
+
+Step 57:
+  program counter:   1532
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values (1, ?PC(1447)); push result (?PC(1447)[1])
+  source code:       spawn insert_test(i)
+                           ^^^^^^^^^^^^^^
+  stack:             [{:}, { 1, 2 }, 1, ?PC(1447)[1]]
+
+Step 58:
+  program counter:   1533
+  hvm code:          Push {:}
+  explanation:       push constant {:}
+  source code:       spawn insert_test(i)
+                     ^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, { 1, 2 }, 1, ?PC(1447)[1], {:}]
+
+Step 59:
+  program counter:   1534
+  hvm code:          Spawn
+  explanation:       pop local state ({:}), arg (1), and pc (1447: "insert_test"), and spawn thread
+  start expression:  line=26 column=5
+  end expression:    line=26 column=24
+  stack:             [{:}, { 1, 2 }, 1]
+
+Step 60:
+  program counter:   1535
+  hvm code:          Jump 1527
+  explanation:       set program counter to 1527
+  start statement:   line=25 column=1
+  end statement:     line=25 column=22
+  source code:       for i in {1..N_INSERT}:
+                                          ^
+
+Step 61:
+  program counter:   1527
+  hvm code:          Cut(i)
+  explanation:       pop index (1) and value ({ 1, 2 }); assign value (2) to i; push new index (2) and True
+  source code:       for i in {1..N_INSERT}:
+                     ^^^
+  method variables:  { i: 2 }
+  stack:             [{:}, { 1, 2 }, 2, True]
+
+Step 62:
+  program counter:   1528
+  hvm code:          JumpCond False 1536
+  explanation:       pop value (True), compare to False, and jump to 1536 if the same
+  start expression:  line=25 column=1
+  end expression:    line=25 column=3
+  stack:             [{:}, { 1, 2 }, 2]
+
+Step 63:
+  program counter:   1529
+  hvm code:          Push ?PC(1447)
+  explanation:       push constant ?PC(1447)
+  start statement:   line=26 column=5
+  end statement:     line=26 column=24
+  source code:       spawn insert_test(i)
+                           ^^^^^^^^^^^
+  stack:             [{:}, { 1, 2 }, 2, ?PC(1447)]
+
+Step 64:
+  program counter:   1530
+  hvm code:          LoadVar i
+  explanation:       push value (2) of variable "i"
+  source code:       spawn insert_test(i)
+                                       ^
+  stack:             [{:}, { 1, 2 }, 2, ?PC(1447), 2]
+
+Step 65:
+  program counter:   1531
+  hvm code:          DelVar i
+  explanation:       delete method variable i
+  start expression:  line=26 column=23
+  end expression:    line=26 column=23
+  method variables:  { }
+
+Step 66:
+  program counter:   1532
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values (2, ?PC(1447)); push result (?PC(1447)[2])
+  source code:       spawn insert_test(i)
+                           ^^^^^^^^^^^^^^
+  stack:             [{:}, { 1, 2 }, 2, ?PC(1447)[2]]
+
+Step 67:
+  program counter:   1533
+  hvm code:          Push {:}
+  explanation:       push constant {:}
+  source code:       spawn insert_test(i)
+                     ^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, { 1, 2 }, 2, ?PC(1447)[2], {:}]
+
+Step 68:
+  program counter:   1534
+  hvm code:          Spawn
+  explanation:       pop local state ({:}), arg (2), and pc (1447: "insert_test"), and spawn thread
+  start expression:  line=26 column=5
+  end expression:    line=26 column=24
+  stack:             [{:}, { 1, 2 }, 2]
+
+Step 69:
+  program counter:   1535
+  hvm code:          Jump 1527
+  explanation:       set program counter to 1527
+  start statement:   line=25 column=1
+  end statement:     line=25 column=22
+  source code:       for i in {1..N_INSERT}:
+                                          ^
+
+Step 70:
+  program counter:   1527
+  hvm code:          Cut(i)
+  explanation:       pop index (2) and value ({ 1, 2 }); out of range -> push False
+  source code:       for i in {1..N_INSERT}:
+                     ^^^
+  stack:             [{:}, False]
+
+Step 71:
+  program counter:   1528
+  hvm code:          JumpCond False 1536
+  explanation:       pop value (False), compare to False, and jump to 1536 if the same
+  start expression:  line=25 column=1
+  end expression:    line=25 column=3
+  stack:             [{:}]
+
+Step 72:
+  program counter:   1536
+  hvm code:          DelVar i
+  explanation:       delete method variable i
+  start statement:   line=32 column=6
+  end statement:     line=32 column=6
+  souce code:       <end>
+                          ^
+
+Step 73:
+  program counter:   1537
+  hvm code:          ReturnOp(result. None)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start expression:  line=32 column=6
+  end expression:    line=32 column=6
+  new mode:          terminated
+  stack:             [None]
+
+================================================
+Running thread T1: insert_test(1)
+mode:  runnable
+stack: ['1']
+other threads:
+  T0: pc=1537 terminated atomic __init__()
+  T2: pc=1447 runnable insert_test(2)
+    about to run method insert_test with argument 2
+shared variables:
+  alloc$next: 0
+  alloc$pool: {:}
+  d: { "current": None, "lock": False }
+state id: 2
+================================================
+
+Step 74:
+  program counter:   1447
+  hvm code:          Frame insert_test(self)
+  explanation:       pop argument (1), assign to self, and run method "insert_test"
+  start statement:   line=9 column=1
+  end statement:     line=9 column=22
+  source code:       def insert_test(self):
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { self: 1 }
+  call trace:        insert_test(1)
+  stack:             [{:}]
+
+Step 75:
+  program counter:   1448
+  hvm code:          Push ()
+  explanation:       building a tuple: push constant ()
+  start statement:   line=10 column=5
+  end statement:     line=10 column=33
+  source code:       print("Testing insert", self)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, []]
+
+Step 76:
+  program counter:   1449
+  hvm code:          Push "Testing insert"
+  explanation:       push constant "Testing insert"
+  source code:       print("Testing insert", self)
+                           ^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], "Testing insert"]
+
+Step 77:
+  program counter:   1450
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values ("Testing insert", []); insert first value into the second; push result (["Testing insert"])
+  source code:       print("Testing insert", self)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "Testing insert" ]]
+
+Step 78:
+  program counter:   1451
+  hvm code:          LoadVar self
+  explanation:       push value (1) of variable "self"
+  source code:       print("Testing insert", self)
+                                             ^^^^
+  stack:             [{:}, [ "Testing insert" ], 1]
+
+Step 79:
+  program counter:   1452
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values (1, ["Testing insert"]); insert first value into the second; push result (["Testing insert", 1])
+  source code:       print("Testing insert", self)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "Testing insert", 1 ]]
+
+Step 80:
+  program counter:   1453
+  hvm code:          Print
+  explanation:       pop value (["Testing insert", 1]) and add to print log
+  source code:       print("Testing insert", self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  call trace:        insert_test(1)
+  new mode:          failed
+  stack:             [{:}]
+  operation failed:  Behavior failure on ["Testing insert", 1]
+
+================================================
+Final state
+================================================
+Threads:
+  T0: pc=1537 terminated atomic __init__()
+  T1: pc=1453 failed insert_test(1)
+  T2: pc=1447 runnable insert_test(2)
+    about to run method insert_test with argument 2
+Variables:
+  alloc$next: 0
+  alloc$pool: {:}
+  d: { "current": None, "lock": False }

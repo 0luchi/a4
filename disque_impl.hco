@@ -3,7 +3,7 @@
   "hvm": {
     "modules": {
         "alloc": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/alloc.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/alloc.hny",
             "lines": [
                 "pool = {:}",
                 "next = 0",
@@ -45,19 +45,25 @@
                 "from alloc import malloc, free",
                 "",
                 "def Disque() returns d:",
-                "  d = {.current: None, .lock: lock()}",
+                "  d = {.current: None, .lock: Lock()}",
                 "",
                 "def insert(d, v):",
                 "  let node = malloc({.value: v, .next: None, .prev: None}):",
                 "    acquire(?d -> lock)",
                 "",
                 "    if d->current == None:",
-                "      node.next = node",
-                "      node.prev = node",
-                "      d->current = node",
+                "        node->next = node",
+                "        node->prev = node",
+                "        d->current = node",
                 "    else:",
-                "      d -> current -> prev -> next = node",
-                "      node.next = d -> current",
+                "        d -> current -> prev -> next = node",
+                "        node -> prev = d -> current ->prev",
+                "        node->next = d -> current",
+                "        d -> current -> prev = node",
+                "        print(\"prev:\" + node -> prev)",
+                "        print(\"next:\" + node -> next)",
+                "        print(\"curr:\" + node -> value)",
+                "",
                 "",
                 "    release(?d -> lock)",
                 "",
@@ -112,7 +118,7 @@
               }
           },
         "bags": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/bags.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/bags.hny",
             "lines": [
                 "def empty() returns bg:",
                 "    bg = {:}",
@@ -214,7 +220,7 @@
               }
           },
         "synch": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/synch.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/synch.hny",
             "lines": [
                 "import lists",
                 "import bags",
@@ -345,7 +351,7 @@
               }
           },
         "lists": {
-            "file": "/Users/stutigupta/.local/lib/python3.12/site-packages/harmony_model_checker/modules/lists.hny",
+            "file": "/Users/lulus_homegirl/.local/lib/python3.12/site-packages/harmony_model_checker/modules/lists.hny",
             "lines": [
                 "# return s[b:e]",
                 "def subseq(s, b, e) returns result:",
@@ -460,7 +466,7 @@
           }
       },
     "labels": {
-        "__end__": 1408
+        "__end__": 1443
       },
     "pretty": [
         [
@@ -4904,8 +4910,8 @@
             "pop a value and store it in shared variable next"
           ],
         [
-            "Jump 1406",
-            "jump over method definition: set program counter to 1406"
+            "Jump 1441",
+            "jump over method definition: set program counter to 1441"
           ],
         [
             "Frame malloc(v)",
@@ -4984,8 +4990,8 @@
             "delete method variable copy"
           ],
         [
-            "Jump 1406",
-            "jump over method definition: set program counter to 1406"
+            "Jump 1441",
+            "jump over method definition: set program counter to 1441"
           ],
         [
             "Frame free(r)",
@@ -5016,8 +5022,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1406",
-            "jump over method definition: set program counter to 1406"
+            "Jump 1441",
+            "jump over method definition: set program counter to 1441"
           ],
         [
             "Frame leak_check()",
@@ -5064,8 +5070,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1406",
-            "jump over method definition: set program counter to 1406"
+            "Jump 1441",
+            "jump over method definition: set program counter to 1441"
           ],
         [
             "Frame Disque()",
@@ -5092,20 +5098,12 @@
             "push constant \"lock\""
           ],
         [
-            "Push ?lock",
-            "push constant ?lock"
-          ],
-        [
             "Push ()",
             "push constant ()"
           ],
         [
-            "2-ary AddArg",
-            "pop 2 values and push the result of applying AddArg"
-          ],
-        [
-            "Load",
-            "pop an address and push the value at the address"
+            "Apply PC(820)",
+            "call method PC(820)"
           ],
         [
             "3-ary DictAdd",
@@ -5124,8 +5122,8 @@
             "delete method variable d"
           ],
         [
-            "Jump 1406",
-            "jump over method definition: set program counter to 1406"
+            "Jump 1441",
+            "jump over method definition: set program counter to 1441"
           ],
         [
             "Frame insert(d, v)",
@@ -5228,16 +5226,12 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1211",
-            "pop a value and jump to 1211 if the value is False"
+            "JumpCond False 1207",
+            "pop a value and jump to 1207 if the value is False"
           ],
         [
             "LoadVar node",
             "push the value of node"
-          ],
-        [
-            "1-ary Closure",
-            "pop 1 value and push the result of applying Closure"
           ],
         [
             "Push \"next\"",
@@ -5252,16 +5246,12 @@
             "push the value of node"
           ],
         [
-            "StoreVar [node]",
-            "pop a value and the address of a method variable and store the value at that address"
+            "Store",
+            "pop a value and an address and store the value at the address"
           ],
         [
             "LoadVar node",
             "push the value of node"
-          ],
-        [
-            "1-ary Closure",
-            "pop 1 value and push the result of applying Closure"
           ],
         [
             "Push \"prev\"",
@@ -5276,8 +5266,8 @@
             "push the value of node"
           ],
         [
-            "StoreVar [node]",
-            "pop a value and the address of a method variable and store the value at that address"
+            "Store",
+            "pop a value and an address and store the value at the address"
           ],
         [
             "LoadVar d",
@@ -5304,8 +5294,8 @@
             "pop a value and an address and store the value at the address"
           ],
         [
-            "Jump 1232",
-            "set program counter to 1232"
+            "Jump 1267",
+            "set program counter to 1267"
           ],
         [
             "LoadVar d",
@@ -5356,8 +5346,48 @@
             "push the value of node"
           ],
         [
-            "1-ary Closure",
-            "pop 1 value and push the result of applying Closure"
+            "Push \"prev\"",
+            "push constant \"prev\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "LoadVar d",
+            "push the value of d"
+          ],
+        [
+            "Push \"current\"",
+            "push constant \"current\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Load",
+            "pop an address and push the value at the address"
+          ],
+        [
+            "Push \"prev\"",
+            "push constant \"prev\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Load",
+            "pop an address and push the value at the address"
+          ],
+        [
+            "Store",
+            "pop a value and an address and store the value at the address"
+          ],
+        [
+            "LoadVar node",
+            "push the value of node"
           ],
         [
             "Push \"next\"",
@@ -5384,12 +5414,128 @@
             "pop an address and push the value at the address"
           ],
         [
-            "StoreVar [node]",
-            "pop a value and the address of a method variable and store the value at that address"
+            "Store",
+            "pop a value and an address and store the value at the address"
+          ],
+        [
+            "LoadVar d",
+            "push the value of d"
+          ],
+        [
+            "Push \"current\"",
+            "push constant \"current\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Load",
+            "pop an address and push the value at the address"
+          ],
+        [
+            "Push \"prev\"",
+            "push constant \"prev\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "LoadVar node",
+            "push the value of node"
+          ],
+        [
+            "Store",
+            "pop a value and an address and store the value at the address"
+          ],
+        [
+            "Push \"prev:\"",
+            "push constant \"prev:\""
+          ],
+        [
+            "LoadVar node",
+            "push the value of node"
+          ],
+        [
+            "Push \"prev\"",
+            "push constant \"prev\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Load",
+            "pop an address and push the value at the address"
+          ],
+        [
+            "2-ary +",
+            "pop 2 values and push the result of applying +"
+          ],
+        [
+            "Print",
+            "pop a value and add to print history"
+          ],
+        [
+            "Push \"next:\"",
+            "push constant \"next:\""
+          ],
+        [
+            "LoadVar node",
+            "push the value of node"
+          ],
+        [
+            "Push \"next\"",
+            "push constant \"next\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Load",
+            "pop an address and push the value at the address"
+          ],
+        [
+            "2-ary +",
+            "pop 2 values and push the result of applying +"
+          ],
+        [
+            "Print",
+            "pop a value and add to print history"
+          ],
+        [
+            "Push \"curr:\"",
+            "push constant \"curr:\""
+          ],
+        [
+            "LoadVar node",
+            "push the value of node"
           ],
         [
             "DelVar node",
             "delete method variable node"
+          ],
+        [
+            "Push \"value\"",
+            "push constant \"value\""
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Load",
+            "pop an address and push the value at the address"
+          ],
+        [
+            "2-ary +",
+            "pop 2 values and push the result of applying +"
+          ],
+        [
+            "Print",
+            "pop a value and add to print history"
           ],
         [
             "LoadVar d",
@@ -5420,8 +5566,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1406",
-            "jump over method definition: set program counter to 1406"
+            "Jump 1441",
+            "jump over method definition: set program counter to 1441"
           ],
         [
             "Frame delete(d)",
@@ -5472,8 +5618,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1263",
-            "pop a value and jump to 1263 if the value is False"
+            "JumpCond False 1298",
+            "pop a value and jump to 1298 if the value is False"
           ],
         [
             "LoadVar d",
@@ -5596,8 +5742,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1306",
-            "pop a value and jump to 1306 if the value is False"
+            "JumpCond False 1341",
+            "pop a value and jump to 1341 if the value is False"
           ],
         [
             "LoadVar d",
@@ -5684,8 +5830,8 @@
             "pop a value and an address and store the value at the address"
           ],
         [
-            "Jump 1337",
-            "set program counter to 1337"
+            "Jump 1372",
+            "set program counter to 1372"
           ],
         [
             "LoadVar d",
@@ -5860,8 +6006,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1406",
-            "jump over method definition: set program counter to 1406"
+            "Jump 1441",
+            "jump over method definition: set program counter to 1441"
           ],
         [
             "Frame next(d)",
@@ -5912,8 +6058,8 @@
             "pop 2 values and push the result of applying =="
           ],
         [
-            "JumpCond False 1375",
-            "pop a value and jump to 1375 if the value is False"
+            "JumpCond False 1410",
+            "pop a value and jump to 1410 if the value is False"
           ],
         [
             "LoadVar d",
@@ -5960,8 +6106,8 @@
             "discard the top value on the stack"
           ],
         [
-            "Jump 1405",
-            "set program counter to 1405"
+            "Jump 1440",
+            "set program counter to 1440"
           ],
         [
             "LoadVar d",
@@ -6099,11 +6245,11 @@
     "locs": [
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
                 1,
                 1,
-                50,
+                56,
                 30
               ],
             "line": 1,
@@ -21149,33 +21295,7 @@
               ],
             "line": 5,
             "endcolumn": 36,
-            "column": 31
-          },
-        {
-            "module": "__main__",
-            "endline": 5,
-            "stmt": [
-                5,
-                3,
-                5,
-                37
-              ],
-            "line": 5,
-            "endcolumn": 36,
             "column": 35
-          },
-        {
-            "module": "__main__",
-            "endline": 5,
-            "stmt": [
-                5,
-                3,
-                5,
-                37
-              ],
-            "line": 5,
-            "endcolumn": 36,
-            "column": 31
           },
         {
             "module": "__main__",
@@ -21598,234 +21718,208 @@
             "endline": 12,
             "stmt": [
                 12,
-                7,
+                9,
                 12,
-                22
+                25
               ],
             "line": 12,
-            "endcolumn": 10,
-            "column": 7
+            "endcolumn": 12,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 12,
             "stmt": [
                 12,
-                7,
+                9,
                 12,
-                22
+                25
               ],
             "line": 12,
-            "endcolumn": 10,
-            "column": 7
+            "endcolumn": 18,
+            "column": 15
           },
         {
             "module": "__main__",
             "endline": 12,
             "stmt": [
                 12,
-                7,
+                9,
                 12,
-                22
+                25
               ],
             "line": 12,
-            "endcolumn": 15,
-            "column": 11
+            "endcolumn": 18,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 12,
             "stmt": [
                 12,
-                7,
+                9,
                 12,
-                22
+                25
               ],
             "line": 12,
-            "endcolumn": 15,
-            "column": 7
+            "endcolumn": 25,
+            "column": 22
           },
         {
             "module": "__main__",
             "endline": 12,
             "stmt": [
                 12,
-                7,
+                9,
                 12,
-                22
+                25
               ],
             "line": 12,
-            "endcolumn": 22,
-            "column": 19
-          },
-        {
-            "module": "__main__",
-            "endline": 12,
-            "stmt": [
-                12,
-                7,
-                12,
-                22
-              ],
-            "line": 12,
-            "endcolumn": 17,
-            "column": 7
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 13,
             "stmt": [
                 13,
-                7,
+                9,
                 13,
-                22
+                25
               ],
             "line": 13,
-            "endcolumn": 10,
-            "column": 7
+            "endcolumn": 12,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 13,
             "stmt": [
                 13,
-                7,
+                9,
                 13,
-                22
+                25
               ],
             "line": 13,
-            "endcolumn": 10,
-            "column": 7
+            "endcolumn": 18,
+            "column": 15
           },
         {
             "module": "__main__",
             "endline": 13,
             "stmt": [
                 13,
-                7,
+                9,
                 13,
-                22
+                25
               ],
             "line": 13,
-            "endcolumn": 15,
-            "column": 11
+            "endcolumn": 18,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 13,
             "stmt": [
                 13,
-                7,
+                9,
                 13,
-                22
+                25
               ],
             "line": 13,
-            "endcolumn": 15,
-            "column": 7
+            "endcolumn": 25,
+            "column": 22
           },
         {
             "module": "__main__",
             "endline": 13,
             "stmt": [
                 13,
-                7,
+                9,
                 13,
-                22
+                25
               ],
             "line": 13,
-            "endcolumn": 22,
-            "column": 19
-          },
-        {
-            "module": "__main__",
-            "endline": 13,
-            "stmt": [
-                13,
-                7,
-                13,
-                22
-              ],
-            "line": 13,
-            "endcolumn": 17,
-            "column": 7
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 14,
             "stmt": [
                 14,
-                7,
+                9,
                 14,
-                23
+                25
               ],
             "line": 14,
-            "endcolumn": 7,
-            "column": 7
+            "endcolumn": 9,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 14,
             "stmt": [
                 14,
-                7,
+                9,
                 14,
-                23
-              ],
-            "line": 14,
-            "endcolumn": 16,
-            "column": 10
-          },
-        {
-            "module": "__main__",
-            "endline": 14,
-            "stmt": [
-                14,
-                7,
-                14,
-                23
-              ],
-            "line": 14,
-            "endcolumn": 16,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 14,
-            "stmt": [
-                14,
-                7,
-                14,
-                23
-              ],
-            "line": 14,
-            "endcolumn": 23,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 14,
-            "stmt": [
-                14,
-                7,
-                14,
-                23
-              ],
-            "line": 14,
-            "endcolumn": 23,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 14,
-            "stmt": [
-                14,
-                7,
-                14,
-                23
+                25
               ],
             "line": 14,
             "endcolumn": 18,
-            "column": 7
+            "column": 12
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                9,
+                14,
+                25
+              ],
+            "line": 14,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                9,
+                14,
+                25
+              ],
+            "line": 14,
+            "endcolumn": 25,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                9,
+                14,
+                25
+              ],
+            "line": 14,
+            "endcolumn": 25,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                9,
+                14,
+                25
+              ],
+            "line": 14,
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
@@ -21845,220 +21939,194 @@
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
+                43
               ],
             "line": 16,
-            "endcolumn": 7,
-            "column": 7
+            "endcolumn": 9,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
+                43
               ],
             "line": 16,
-            "endcolumn": 18,
-            "column": 12
+            "endcolumn": 20,
+            "column": 14
           },
         {
             "module": "__main__",
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
+                43
               ],
             "line": 16,
-            "endcolumn": 18,
-            "column": 7
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
+                43
               ],
             "line": 16,
-            "endcolumn": 18,
-            "column": 7
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
+                43
               ],
             "line": 16,
-            "endcolumn": 26,
-            "column": 23
+            "endcolumn": 28,
+            "column": 25
           },
         {
             "module": "__main__",
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
+                43
               ],
             "line": 16,
-            "endcolumn": 26,
-            "column": 7
+            "endcolumn": 28,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
+                43
               ],
             "line": 16,
-            "endcolumn": 26,
-            "column": 7
+            "endcolumn": 28,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 16,
             "stmt": [
                 16,
-                7,
+                9,
                 16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 34,
-            "column": 31
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 34,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
-              ],
-            "line": 16,
-            "endcolumn": 41,
-            "column": 38
-          },
-        {
-            "module": "__main__",
-            "endline": 16,
-            "stmt": [
-                16,
-                7,
-                16,
-                41
+                43
               ],
             "line": 16,
             "endcolumn": 36,
-            "column": 7
+            "column": 33
+          },
+        {
+            "module": "__main__",
+            "endline": 16,
+            "stmt": [
+                16,
+                9,
+                16,
+                43
+              ],
+            "line": 16,
+            "endcolumn": 36,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 16,
+            "stmt": [
+                16,
+                9,
+                16,
+                43
+              ],
+            "line": 16,
+            "endcolumn": 43,
+            "column": 40
+          },
+        {
+            "module": "__main__",
+            "endline": 16,
+            "stmt": [
+                16,
+                9,
+                16,
+                43
+              ],
+            "line": 16,
+            "endcolumn": 38,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 10,
-            "column": 7
+            "endcolumn": 12,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 10,
-            "column": 7
+            "endcolumn": 20,
+            "column": 17
           },
         {
             "module": "__main__",
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 15,
-            "column": 11
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 15,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                30
-              ],
-            "line": 17,
-            "endcolumn": 19,
-            "column": 19
-          },
-        {
-            "module": "__main__",
-            "endline": 17,
-            "stmt": [
-                17,
-                7,
-                17,
-                30
-              ],
-            "line": 17,
-            "endcolumn": 30,
+            "endcolumn": 24,
             "column": 24
           },
         {
@@ -22066,103 +22134,220 @@
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 30,
-            "column": 19
+            "endcolumn": 35,
+            "column": 29
           },
         {
             "module": "__main__",
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 30,
-            "column": 19
+            "endcolumn": 35,
+            "column": 24
           },
         {
             "module": "__main__",
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 17,
-            "column": 7
+            "endcolumn": 35,
+            "column": 24
           },
         {
             "module": "__main__",
             "endline": 17,
             "stmt": [
                 17,
-                7,
+                9,
                 17,
-                30
+                42
               ],
             "line": 17,
-            "endcolumn": 17,
-            "column": 7
+            "endcolumn": 42,
+            "column": 39
           },
         {
             "module": "__main__",
-            "endline": 19,
+            "endline": 17,
             "stmt": [
-                19,
-                5,
-                19,
-                23
+                17,
+                9,
+                17,
+                42
               ],
-            "line": 19,
-            "endcolumn": 14,
-            "column": 14
+            "line": 17,
+            "endcolumn": 42,
+            "column": 24
           },
         {
             "module": "__main__",
-            "endline": 19,
+            "endline": 17,
             "stmt": [
-                19,
-                5,
-                19,
-                23
+                17,
+                9,
+                17,
+                42
               ],
-            "line": 19,
-            "endcolumn": 14,
-            "column": 14
+            "line": 17,
+            "endcolumn": 42,
+            "column": 24
           },
         {
             "module": "__main__",
-            "endline": 19,
+            "endline": 17,
             "stmt": [
-                19,
-                5,
-                19,
-                23
+                17,
+                9,
+                17,
+                42
               ],
-            "line": 19,
+            "line": 17,
             "endcolumn": 22,
-            "column": 19
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 12,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 18,
+            "column": 15
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 22,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 33,
+            "column": 27
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 33,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 33,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 18,
+            "stmt": [
+                18,
+                9,
+                18,
+                33
+              ],
+            "line": 18,
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 19,
             "stmt": [
                 19,
-                5,
+                9,
                 19,
-                23
+                35
               ],
             "line": 19,
-            "endcolumn": 22,
+            "endcolumn": 9,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 19,
+            "stmt": [
+                19,
+                9,
+                19,
+                35
+              ],
+            "line": 19,
+            "endcolumn": 20,
             "column": 14
           },
         {
@@ -22170,1429 +22355,1325 @@
             "endline": 19,
             "stmt": [
                 19,
-                5,
+                9,
                 19,
-                23
+                35
               ],
             "line": 19,
-            "endcolumn": 23,
-            "column": 5
+            "endcolumn": 20,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 19,
             "stmt": [
                 19,
-                5,
+                9,
                 19,
-                23
+                35
               ],
             "line": 19,
-            "endcolumn": 23,
-            "column": 5
+            "endcolumn": 20,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 19,
+            "stmt": [
+                19,
+                9,
+                19,
+                35
+              ],
+            "line": 19,
+            "endcolumn": 28,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 19,
+            "stmt": [
+                19,
+                9,
+                19,
+                35
+              ],
+            "line": 19,
+            "endcolumn": 28,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 19,
+            "stmt": [
+                19,
+                9,
+                19,
+                35
+              ],
+            "line": 19,
+            "endcolumn": 35,
+            "column": 32
+          },
+        {
+            "module": "__main__",
+            "endline": 19,
+            "stmt": [
+                19,
+                9,
+                19,
+                35
+              ],
+            "line": 19,
+            "endcolumn": 30,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 20,
             "stmt": [
                 20,
-                1,
+                9,
                 20,
-                6
+                37
               ],
             "line": 20,
-            "endcolumn": 6,
-            "column": 1
+            "endcolumn": 21,
+            "column": 15
+          },
+        {
+            "module": "__main__",
+            "endline": 20,
+            "stmt": [
+                20,
+                9,
+                20,
+                37
+              ],
+            "line": 20,
+            "endcolumn": 28,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 20,
+            "stmt": [
+                20,
+                9,
+                20,
+                37
+              ],
+            "line": 20,
+            "endcolumn": 36,
+            "column": 33
+          },
+        {
+            "module": "__main__",
+            "endline": 20,
+            "stmt": [
+                20,
+                9,
+                20,
+                37
+              ],
+            "line": 20,
+            "endcolumn": 36,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 20,
+            "stmt": [
+                20,
+                9,
+                20,
+                37
+              ],
+            "line": 20,
+            "endcolumn": 36,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 20,
+            "stmt": [
+                20,
+                9,
+                20,
+                37
+              ],
+            "line": 20,
+            "endcolumn": 36,
+            "column": 15
+          },
+        {
+            "module": "__main__",
+            "endline": 20,
+            "stmt": [
+                20,
+                9,
+                20,
+                37
+              ],
+            "line": 20,
+            "endcolumn": 37,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 21,
             "stmt": [
                 21,
-                1,
+                9,
                 21,
-                14
+                37
               ],
             "line": 21,
-            "endcolumn": 3,
-            "column": 1
+            "endcolumn": 21,
+            "column": 15
           },
         {
             "module": "__main__",
             "endline": 21,
             "stmt": [
                 21,
-                1,
+                9,
                 21,
-                14
+                37
               ],
             "line": 21,
-            "endcolumn": 14,
-            "column": 1
-          },
-        {
-            "module": "__main__",
-            "endline": 22,
-            "stmt": [
-                22,
-                5,
-                22,
-                23
-              ],
-            "line": 22,
-            "endcolumn": 14,
-            "column": 14
-          },
-        {
-            "module": "__main__",
-            "endline": 22,
-            "stmt": [
-                22,
-                5,
-                22,
-                23
-              ],
-            "line": 22,
-            "endcolumn": 22,
-            "column": 19
-          },
-        {
-            "module": "__main__",
-            "endline": 22,
-            "stmt": [
-                22,
-                5,
-                22,
-                23
-              ],
-            "line": 22,
-            "endcolumn": 22,
-            "column": 14
-          },
-        {
-            "module": "__main__",
-            "endline": 22,
-            "stmt": [
-                22,
-                5,
-                22,
-                23
-              ],
-            "line": 22,
-            "endcolumn": 23,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 22,
-            "stmt": [
-                22,
-                5,
-                22,
-                23
-              ],
-            "line": 22,
-            "endcolumn": 23,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 23,
-            "stmt": [
-                23,
-                5,
-                23,
-                26
-              ],
-            "line": 23,
-            "endcolumn": 8,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 23,
-            "stmt": [
-                23,
-                5,
-                23,
-                26
-              ],
-            "line": 23,
-            "endcolumn": 17,
-            "column": 11
-          },
-        {
-            "module": "__main__",
-            "endline": 23,
-            "stmt": [
-                23,
-                5,
-                23,
-                26
-              ],
-            "line": 23,
-            "endcolumn": 17,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 23,
-            "stmt": [
-                23,
-                5,
-                23,
-                26
-              ],
-            "line": 23,
-            "endcolumn": 17,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 23,
-            "stmt": [
-                23,
-                5,
-                23,
-                26
-              ],
-            "line": 23,
-            "endcolumn": 25,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 23,
-            "stmt": [
-                23,
-                5,
-                23,
-                26
-              ],
-            "line": 23,
-            "endcolumn": 25,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 23,
-            "stmt": [
-                23,
-                5,
-                23,
-                26
-              ],
-            "line": 23,
-            "endcolumn": 6,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 24,
-            "stmt": [
-                24,
-                9,
-                24,
-                27
-              ],
-            "line": 24,
-            "endcolumn": 18,
-            "column": 18
-          },
-        {
-            "module": "__main__",
-            "endline": 24,
-            "stmt": [
-                24,
-                9,
-                24,
-                27
-              ],
-            "line": 24,
-            "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "__main__",
-            "endline": 24,
-            "stmt": [
-                24,
-                9,
-                24,
-                27
-              ],
-            "line": 24,
-            "endcolumn": 26,
-            "column": 18
-          },
-        {
-            "module": "__main__",
-            "endline": 24,
-            "stmt": [
-                24,
-                9,
-                24,
-                27
-              ],
-            "line": 24,
-            "endcolumn": 27,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 24,
-            "stmt": [
-                24,
-                9,
-                24,
-                27
-              ],
-            "line": 24,
-            "endcolumn": 27,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 25,
-            "stmt": [
-                25,
-                9,
-                25,
-                19
-              ],
-            "line": 25,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 25,
-            "stmt": [
-                25,
-                9,
-                25,
-                19
-              ],
-            "line": 25,
-            "endcolumn": 19,
-            "column": 16
-          },
-        {
-            "module": "__main__",
-            "endline": 25,
-            "stmt": [
-                25,
-                9,
-                25,
-                19
-              ],
-            "line": 25,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 25,
-            "stmt": [
-                25,
-                9,
-                25,
-                19
-              ],
-            "line": 25,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 25,
-            "stmt": [
-                25,
-                9,
-                25,
-                19
-              ],
-            "line": 25,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 26,
-            "stmt": [
-                26,
-                5,
-                26,
-                37
-              ],
-            "line": 26,
-            "endcolumn": 17,
-            "column": 17
-          },
-        {
-            "module": "__main__",
-            "endline": 26,
-            "stmt": [
-                26,
-                5,
-                26,
-                37
-              ],
-            "line": 26,
             "endcolumn": 28,
-            "column": 22
+            "column": 25
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 21,
             "stmt": [
-                26,
-                5,
-                26,
+                21,
+                9,
+                21,
                 37
               ],
-            "line": 26,
+            "line": 21,
+            "endcolumn": 36,
+            "column": 33
+          },
+        {
+            "module": "__main__",
+            "endline": 21,
+            "stmt": [
+                21,
+                9,
+                21,
+                37
+              ],
+            "line": 21,
+            "endcolumn": 36,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 21,
+            "stmt": [
+                21,
+                9,
+                21,
+                37
+              ],
+            "line": 21,
+            "endcolumn": 36,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 21,
+            "stmt": [
+                21,
+                9,
+                21,
+                37
+              ],
+            "line": 21,
+            "endcolumn": 36,
+            "column": 15
+          },
+        {
+            "module": "__main__",
+            "endline": 21,
+            "stmt": [
+                21,
+                9,
+                21,
+                37
+              ],
+            "line": 21,
+            "endcolumn": 37,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                9,
+                22,
+                38
+              ],
+            "line": 22,
+            "endcolumn": 21,
+            "column": 15
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                9,
+                22,
+                38
+              ],
+            "line": 22,
             "endcolumn": 28,
-            "column": 17
+            "column": 25
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 22,
             "stmt": [
-                26,
-                5,
-                26,
-                37
+                22,
+                9,
+                22,
+                38
               ],
-            "line": 26,
+            "line": 22,
             "endcolumn": 28,
-            "column": 17
+            "column": 25
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 22,
             "stmt": [
-                26,
-                5,
-                26,
-                37
+                22,
+                9,
+                22,
+                38
               ],
-            "line": 26,
+            "line": 22,
             "endcolumn": 37,
             "column": 33
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 22,
             "stmt": [
-                26,
-                5,
-                26,
-                37
+                22,
+                9,
+                22,
+                38
               ],
-            "line": 26,
+            "line": 22,
             "endcolumn": 37,
-            "column": 17
+            "column": 25
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 22,
             "stmt": [
-                26,
-                5,
-                26,
-                37
+                22,
+                9,
+                22,
+                38
               ],
-            "line": 26,
+            "line": 22,
             "endcolumn": 37,
-            "column": 17
+            "column": 25
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 22,
             "stmt": [
-                26,
-                5,
-                26,
-                37
-              ],
-            "line": 26,
-            "endcolumn": 15,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
+                22,
+                9,
+                22,
                 38
               ],
-            "line": 27,
-            "endcolumn": 8,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 17,
-            "column": 11
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 17,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 17,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 23,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 23,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 23,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 28,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
+            "line": 22,
             "endcolumn": 37,
-            "column": 31
+            "column": 15
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 22,
             "stmt": [
-                27,
-                5,
-                27,
+                22,
+                9,
+                22,
                 38
               ],
-            "line": 27,
-            "endcolumn": 37,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 37,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 37,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
-            "endcolumn": 6,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 9,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 18,
-            "column": 12
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 24,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 24,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 31,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 28,
-            "stmt": [
-                28,
-                9,
-                28,
-                31
-              ],
-            "line": 28,
-            "endcolumn": 26,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 9,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 18,
-            "column": 12
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 24,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 24,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 31,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 29,
-            "stmt": [
-                29,
-                9,
-                29,
-                31
-              ],
-            "line": 29,
-            "endcolumn": 26,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 30,
-            "stmt": [
-                30,
-                9,
-                30,
-                23
-              ],
-            "line": 30,
-            "endcolumn": 9,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 30,
-            "stmt": [
-                30,
-                9,
-                30,
-                23
-              ],
-            "line": 30,
-            "endcolumn": 18,
-            "column": 12
-          },
-        {
-            "module": "__main__",
-            "endline": 30,
-            "stmt": [
-                30,
-                9,
-                30,
-                23
-              ],
-            "line": 30,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 30,
-            "stmt": [
-                30,
-                9,
-                30,
-                23
-              ],
-            "line": 30,
-            "endcolumn": 23,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 30,
-            "stmt": [
-                30,
-                9,
-                30,
-                23
-              ],
-            "line": 30,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 27,
-            "stmt": [
-                27,
-                5,
-                27,
-                38
-              ],
-            "line": 27,
+            "line": 22,
             "endcolumn": 38,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 20,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 31,
-            "column": 25
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 31,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 31,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 39,
-            "column": 36
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 39,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 39,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 32,
-            "stmt": [
-                32,
-                9,
-                32,
-                39
-              ],
-            "line": 32,
-            "endcolumn": 18,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 33,
+            "endline": 25,
             "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 20,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 33,
-            "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 31,
-            "column": 25
-          },
-        {
-            "module": "__main__",
-            "endline": 33,
-            "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 31,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 33,
-            "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 31,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 33,
-            "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 39,
-            "column": 36
-          },
-        {
-            "module": "__main__",
-            "endline": 33,
-            "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 39,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 33,
-            "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 39,
-            "column": 20
-          },
-        {
-            "module": "__main__",
-            "endline": 33,
-            "stmt": [
-                33,
-                9,
-                33,
-                39
-              ],
-            "line": 33,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 34,
-            "stmt": [
-                34,
-                9,
-                34,
-                35
-              ],
-            "line": 34,
-            "endcolumn": 16,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 34,
-            "stmt": [
-                34,
-                9,
-                34,
-                35
-              ],
-            "line": 34,
-            "endcolumn": 24,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 34,
-            "stmt": [
-                34,
-                9,
-                34,
-                35
-              ],
-            "line": 34,
-            "endcolumn": 24,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 34,
-            "stmt": [
-                34,
-                9,
-                34,
-                35
-              ],
-            "line": 34,
-            "endcolumn": 35,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 34,
-            "stmt": [
-                34,
-                9,
-                34,
-                35
-              ],
-            "line": 34,
-            "endcolumn": 26,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 35,
-            "stmt": [
-                35,
-                9,
-                35,
-                35
-              ],
-            "line": 35,
-            "endcolumn": 16,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 35,
-            "stmt": [
-                35,
-                9,
-                35,
-                35
-              ],
-            "line": 35,
-            "endcolumn": 24,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 35,
-            "stmt": [
-                35,
-                9,
-                35,
-                35
-              ],
-            "line": 35,
-            "endcolumn": 24,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 35,
-            "stmt": [
-                35,
-                9,
-                35,
-                35
-              ],
-            "line": 35,
-            "endcolumn": 35,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 35,
-            "stmt": [
-                35,
-                9,
-                35,
-                35
-              ],
-            "line": 35,
-            "endcolumn": 26,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 36,
-            "stmt": [
-                36,
-                9,
-                36,
-                31
-              ],
-            "line": 36,
-            "endcolumn": 9,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 36,
-            "stmt": [
-                36,
-                9,
-                36,
-                31
-              ],
-            "line": 36,
-            "endcolumn": 20,
-            "column": 14
-          },
-        {
-            "module": "__main__",
-            "endline": 36,
-            "stmt": [
-                36,
-                9,
-                36,
-                31
-              ],
-            "line": 36,
-            "endcolumn": 20,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 36,
-            "stmt": [
-                36,
-                9,
-                36,
-                31
-              ],
-            "line": 36,
-            "endcolumn": 31,
-            "column": 24
-          },
-        {
-            "module": "__main__",
-            "endline": 36,
-            "stmt": [
-                36,
-                9,
-                36,
-                31
-              ],
-            "line": 36,
-            "endcolumn": 22,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 37,
-            "stmt": [
-                37,
+                25,
                 5,
-                37,
+                25,
                 23
               ],
-            "line": 37,
+            "line": 25,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "__main__",
-            "endline": 37,
+            "endline": 25,
             "stmt": [
-                37,
+                25,
                 5,
-                37,
+                25,
                 23
               ],
-            "line": 37,
+            "line": 25,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "__main__",
-            "endline": 37,
+            "endline": 25,
             "stmt": [
-                37,
+                25,
                 5,
-                37,
+                25,
                 23
               ],
-            "line": 37,
+            "line": 25,
             "endcolumn": 22,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 37,
+            "endline": 25,
             "stmt": [
-                37,
+                25,
                 5,
-                37,
+                25,
                 23
               ],
-            "line": 37,
+            "line": 25,
             "endcolumn": 22,
             "column": 14
           },
         {
             "module": "__main__",
-            "endline": 37,
+            "endline": 25,
             "stmt": [
-                37,
+                25,
                 5,
-                37,
+                25,
                 23
               ],
-            "line": 37,
+            "line": 25,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "__main__",
-            "endline": 37,
+            "endline": 25,
             "stmt": [
-                37,
+                25,
                 5,
-                37,
+                25,
                 23
               ],
-            "line": 37,
+            "line": 25,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "__main__",
-            "endline": 38,
+            "endline": 26,
             "stmt": [
-                38,
-                5,
-                38,
-                20
+                26,
+                1,
+                26,
+                6
               ],
-            "line": 38,
-            "endcolumn": 20,
+            "line": 26,
+            "endcolumn": 6,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                1,
+                27,
+                14
+              ],
+            "line": 27,
+            "endcolumn": 3,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 27,
+            "stmt": [
+                27,
+                1,
+                27,
+                14
+              ],
+            "line": 27,
+            "endcolumn": 14,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                23
+              ],
+            "line": 28,
+            "endcolumn": 14,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                23
+              ],
+            "line": 28,
+            "endcolumn": 22,
+            "column": 19
+          },
+        {
+            "module": "__main__",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                23
+              ],
+            "line": 28,
+            "endcolumn": 22,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 28,
+            "stmt": [
+                28,
+                5,
+                28,
+                23
+              ],
+            "line": 28,
+            "endcolumn": 23,
             "column": 5
           },
         {
             "module": "__main__",
-            "endline": 38,
+            "endline": 28,
             "stmt": [
-                38,
+                28,
                 5,
-                38,
-                20
+                28,
+                23
               ],
-            "line": 38,
-            "endcolumn": 20,
+            "line": 28,
+            "endcolumn": 23,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 29,
+            "stmt": [
+                29,
+                5,
+                29,
+                26
+              ],
+            "line": 29,
+            "endcolumn": 8,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 29,
+            "stmt": [
+                29,
+                5,
+                29,
+                26
+              ],
+            "line": 29,
+            "endcolumn": 17,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 29,
+            "stmt": [
+                29,
+                5,
+                29,
+                26
+              ],
+            "line": 29,
+            "endcolumn": 17,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 29,
+            "stmt": [
+                29,
+                5,
+                29,
+                26
+              ],
+            "line": 29,
+            "endcolumn": 17,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 29,
+            "stmt": [
+                29,
+                5,
+                29,
+                26
+              ],
+            "line": 29,
+            "endcolumn": 25,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 29,
+            "stmt": [
+                29,
+                5,
+                29,
+                26
+              ],
+            "line": 29,
+            "endcolumn": 25,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 29,
+            "stmt": [
+                29,
+                5,
+                29,
+                26
+              ],
+            "line": 29,
+            "endcolumn": 6,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                27
+              ],
+            "line": 30,
+            "endcolumn": 18,
+            "column": 18
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                27
+              ],
+            "line": 30,
+            "endcolumn": 26,
+            "column": 23
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                27
+              ],
+            "line": 30,
+            "endcolumn": 26,
+            "column": 18
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                27
+              ],
+            "line": 30,
+            "endcolumn": 27,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                9,
+                30,
+                27
+              ],
+            "line": 30,
+            "endcolumn": 27,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                19
+              ],
+            "line": 31,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                19
+              ],
+            "line": 31,
+            "endcolumn": 19,
+            "column": 16
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                19
+              ],
+            "line": 31,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                19
+              ],
+            "line": 31,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                9,
+                31,
+                19
+              ],
+            "line": 31,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 17,
+            "column": 17
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 28,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 28,
+            "column": 17
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 28,
+            "column": 17
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 37,
+            "column": 33
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 37,
+            "column": 17
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 37,
+            "column": 17
+          },
+        {
+            "module": "__main__",
+            "endline": 32,
+            "stmt": [
+                32,
+                5,
+                32,
+                37
+              ],
+            "line": 32,
+            "endcolumn": 15,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 8,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 17,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 17,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 17,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 23,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 23,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 23,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 28,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 37,
+            "column": 31
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 37,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 37,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 37,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 6,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 34,
+            "stmt": [
+                34,
+                9,
+                34,
+                31
+              ],
+            "line": 34,
+            "endcolumn": 9,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 34,
+            "stmt": [
+                34,
+                9,
+                34,
+                31
+              ],
+            "line": 34,
+            "endcolumn": 18,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 38,
+            "endline": 34,
             "stmt": [
-                38,
-                5,
-                38,
-                20
+                34,
+                9,
+                34,
+                31
               ],
-            "line": 38,
-            "endcolumn": 20,
+            "line": 34,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 34,
+            "stmt": [
+                34,
+                9,
+                34,
+                31
+              ],
+            "line": 34,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 34,
+            "stmt": [
+                34,
+                9,
+                34,
+                31
+              ],
+            "line": 34,
+            "endcolumn": 24,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 34,
+            "stmt": [
+                34,
+                9,
+                34,
+                31
+              ],
+            "line": 34,
+            "endcolumn": 24,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 34,
+            "stmt": [
+                34,
+                9,
+                34,
+                31
+              ],
+            "line": 34,
+            "endcolumn": 31,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 34,
+            "stmt": [
+                34,
+                9,
+                34,
+                31
+              ],
+            "line": 34,
+            "endcolumn": 26,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 9,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 18,
+            "column": 12
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 24,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 24,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 31,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 35,
+            "stmt": [
+                35,
+                9,
+                35,
+                31
+              ],
+            "line": 35,
+            "endcolumn": 26,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 36,
+            "stmt": [
+                36,
+                9,
+                36,
+                23
+              ],
+            "line": 36,
+            "endcolumn": 9,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 36,
+            "stmt": [
+                36,
+                9,
+                36,
+                23
+              ],
+            "line": 36,
+            "endcolumn": 18,
+            "column": 12
+          },
+        {
+            "module": "__main__",
+            "endline": 36,
+            "stmt": [
+                36,
+                9,
+                36,
+                23
+              ],
+            "line": 36,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 36,
+            "stmt": [
+                36,
+                9,
+                36,
+                23
+              ],
+            "line": 36,
+            "endcolumn": 23,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 36,
+            "stmt": [
+                36,
+                9,
+                36,
+                23
+              ],
+            "line": 36,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 33,
+            "stmt": [
+                33,
+                5,
+                33,
+                38
+              ],
+            "line": 33,
+            "endcolumn": 38,
             "column": 5
           },
         {
@@ -23600,804 +23681,1324 @@
             "endline": 38,
             "stmt": [
                 38,
-                5,
+                9,
                 38,
-                20
+                39
               ],
             "line": 38,
             "endcolumn": 20,
-            "column": 5
+            "column": 20
           },
         {
             "module": "__main__",
             "endline": 38,
             "stmt": [
                 38,
-                5,
+                9,
                 38,
-                20
+                39
               ],
             "line": 38,
+            "endcolumn": 31,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 38,
+            "stmt": [
+                38,
+                9,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 31,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 38,
+            "stmt": [
+                38,
+                9,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 31,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 38,
+            "stmt": [
+                38,
+                9,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 39,
+            "column": 36
+          },
+        {
+            "module": "__main__",
+            "endline": 38,
+            "stmt": [
+                38,
+                9,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 39,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 38,
+            "stmt": [
+                38,
+                9,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 39,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 38,
+            "stmt": [
+                38,
+                9,
+                38,
+                39
+              ],
+            "line": 38,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
             "endcolumn": 20,
-            "column": 5
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 31,
+            "column": 25
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 31,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 31,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 39,
+            "column": 36
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 39,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 39,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 39,
+            "stmt": [
+                39,
+                9,
+                39,
+                39
+              ],
+            "line": 39,
+            "endcolumn": 18,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 40,
             "stmt": [
                 40,
-                1,
+                9,
                 40,
-                6
+                35
               ],
             "line": 40,
-            "endcolumn": 6,
-            "column": 1
+            "endcolumn": 16,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 40,
+            "stmt": [
+                40,
+                9,
+                40,
+                35
+              ],
+            "line": 40,
+            "endcolumn": 24,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 40,
+            "stmt": [
+                40,
+                9,
+                40,
+                35
+              ],
+            "line": 40,
+            "endcolumn": 24,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 40,
+            "stmt": [
+                40,
+                9,
+                40,
+                35
+              ],
+            "line": 40,
+            "endcolumn": 35,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 40,
+            "stmt": [
+                40,
+                9,
+                40,
+                35
+              ],
+            "line": 40,
+            "endcolumn": 26,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 41,
             "stmt": [
                 41,
-                1,
+                9,
                 41,
-                12
+                35
               ],
             "line": 41,
-            "endcolumn": 3,
-            "column": 1
+            "endcolumn": 16,
+            "column": 9
           },
         {
             "module": "__main__",
             "endline": 41,
             "stmt": [
                 41,
-                1,
+                9,
                 41,
-                12
+                35
               ],
             "line": 41,
-            "endcolumn": 12,
-            "column": 1
+            "endcolumn": 24,
+            "column": 21
           },
         {
             "module": "__main__",
-            "endline": 42,
+            "endline": 41,
             "stmt": [
-                42,
-                5,
-                42,
-                23
-              ],
-            "line": 42,
-            "endcolumn": 14,
-            "column": 14
-          },
-        {
-            "module": "__main__",
-            "endline": 42,
-            "stmt": [
-                42,
-                5,
-                42,
-                23
-              ],
-            "line": 42,
-            "endcolumn": 22,
-            "column": 19
-          },
-        {
-            "module": "__main__",
-            "endline": 42,
-            "stmt": [
-                42,
-                5,
-                42,
-                23
-              ],
-            "line": 42,
-            "endcolumn": 22,
-            "column": 14
-          },
-        {
-            "module": "__main__",
-            "endline": 42,
-            "stmt": [
-                42,
-                5,
-                42,
-                23
-              ],
-            "line": 42,
-            "endcolumn": 23,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 42,
-            "stmt": [
-                42,
-                5,
-                42,
-                23
-              ],
-            "line": 42,
-            "endcolumn": 23,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 8,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 19,
-            "column": 13
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 19,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 19,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 27,
-            "column": 24
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 27,
-            "column": 8
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 6,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 44,
-            "stmt": [
-                44,
+                41,
                 9,
-                44,
-                27
+                41,
+                35
               ],
-            "line": 44,
-            "endcolumn": 18,
-            "column": 18
+            "line": 41,
+            "endcolumn": 24,
+            "column": 9
           },
         {
             "module": "__main__",
-            "endline": 44,
+            "endline": 41,
             "stmt": [
-                44,
+                41,
                 9,
-                44,
-                27
+                41,
+                35
               ],
-            "line": 44,
-            "endcolumn": 18,
-            "column": 18
+            "line": 41,
+            "endcolumn": 35,
+            "column": 28
           },
         {
             "module": "__main__",
-            "endline": 44,
+            "endline": 41,
             "stmt": [
-                44,
+                41,
                 9,
-                44,
-                27
+                41,
+                35
               ],
-            "line": 44,
+            "line": 41,
             "endcolumn": 26,
-            "column": 23
-          },
-        {
-            "module": "__main__",
-            "endline": 44,
-            "stmt": [
-                44,
-                9,
-                44,
-                27
-              ],
-            "line": 44,
-            "endcolumn": 26,
-            "column": 18
-          },
-        {
-            "module": "__main__",
-            "endline": 44,
-            "stmt": [
-                44,
-                9,
-                44,
-                27
-              ],
-            "line": 44,
-            "endcolumn": 27,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 44,
+            "endline": 42,
             "stmt": [
-                44,
+                42,
                 9,
-                44,
-                27
+                42,
+                31
               ],
-            "line": 44,
-            "endcolumn": 27,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 45,
-            "stmt": [
-                45,
-                9,
-                45,
-                19
-              ],
-            "line": 45,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 45,
-            "stmt": [
-                45,
-                9,
-                45,
-                19
-              ],
-            "line": 45,
-            "endcolumn": 19,
-            "column": 16
-          },
-        {
-            "module": "__main__",
-            "endline": 45,
-            "stmt": [
-                45,
-                9,
-                45,
-                19
-              ],
-            "line": 45,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 45,
-            "stmt": [
-                45,
-                9,
-                45,
-                19
-              ],
-            "line": 45,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 45,
-            "stmt": [
-                45,
-                9,
-                45,
-                19
-              ],
-            "line": 45,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 43,
-            "stmt": [
-                43,
-                5,
-                43,
-                28
-              ],
-            "line": 43,
-            "endcolumn": 28,
-            "column": 5
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 21,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 32,
-            "column": 26
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 32,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 32,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 41,
-            "column": 37
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 41,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 41,
-            "column": 21
-          },
-        {
-            "module": "__main__",
-            "endline": 47,
-            "stmt": [
-                47,
-                9,
-                47,
-                41
-              ],
-            "line": 47,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 48,
-            "stmt": [
-                48,
-                9,
-                48,
-                39
-              ],
-            "line": 48,
+            "line": 42,
             "endcolumn": 9,
             "column": 9
           },
         {
             "module": "__main__",
+            "endline": 42,
+            "stmt": [
+                42,
+                9,
+                42,
+                31
+              ],
+            "line": 42,
+            "endcolumn": 20,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 42,
+            "stmt": [
+                42,
+                9,
+                42,
+                31
+              ],
+            "line": 42,
+            "endcolumn": 20,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 42,
+            "stmt": [
+                42,
+                9,
+                42,
+                31
+              ],
+            "line": 42,
+            "endcolumn": 31,
+            "column": 24
+          },
+        {
+            "module": "__main__",
+            "endline": 42,
+            "stmt": [
+                42,
+                9,
+                42,
+                31
+              ],
+            "line": 42,
+            "endcolumn": 22,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 43,
+            "stmt": [
+                43,
+                5,
+                43,
+                23
+              ],
+            "line": 43,
+            "endcolumn": 14,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 43,
+            "stmt": [
+                43,
+                5,
+                43,
+                23
+              ],
+            "line": 43,
+            "endcolumn": 14,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 43,
+            "stmt": [
+                43,
+                5,
+                43,
+                23
+              ],
+            "line": 43,
+            "endcolumn": 22,
+            "column": 19
+          },
+        {
+            "module": "__main__",
+            "endline": 43,
+            "stmt": [
+                43,
+                5,
+                43,
+                23
+              ],
+            "line": 43,
+            "endcolumn": 22,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 43,
+            "stmt": [
+                43,
+                5,
+                43,
+                23
+              ],
+            "line": 43,
+            "endcolumn": 23,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 43,
+            "stmt": [
+                43,
+                5,
+                43,
+                23
+              ],
+            "line": 43,
+            "endcolumn": 23,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 44,
+            "stmt": [
+                44,
+                5,
+                44,
+                20
+              ],
+            "line": 44,
+            "endcolumn": 20,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 44,
+            "stmt": [
+                44,
+                5,
+                44,
+                20
+              ],
+            "line": 44,
+            "endcolumn": 20,
+            "column": 12
+          },
+        {
+            "module": "__main__",
+            "endline": 44,
+            "stmt": [
+                44,
+                5,
+                44,
+                20
+              ],
+            "line": 44,
+            "endcolumn": 20,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 44,
+            "stmt": [
+                44,
+                5,
+                44,
+                20
+              ],
+            "line": 44,
+            "endcolumn": 20,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 44,
+            "stmt": [
+                44,
+                5,
+                44,
+                20
+              ],
+            "line": 44,
+            "endcolumn": 20,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 46,
+            "stmt": [
+                46,
+                1,
+                46,
+                6
+              ],
+            "line": 46,
+            "endcolumn": 6,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 47,
+            "stmt": [
+                47,
+                1,
+                47,
+                12
+              ],
+            "line": 47,
+            "endcolumn": 3,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 47,
+            "stmt": [
+                47,
+                1,
+                47,
+                12
+              ],
+            "line": 47,
+            "endcolumn": 12,
+            "column": 1
+          },
+        {
+            "module": "__main__",
             "endline": 48,
             "stmt": [
                 48,
-                9,
+                5,
                 48,
-                39
+                23
               ],
             "line": 48,
+            "endcolumn": 14,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 48,
+            "stmt": [
+                48,
+                5,
+                48,
+                23
+              ],
+            "line": 48,
+            "endcolumn": 22,
+            "column": 19
+          },
+        {
+            "module": "__main__",
+            "endline": 48,
+            "stmt": [
+                48,
+                5,
+                48,
+                23
+              ],
+            "line": 48,
+            "endcolumn": 22,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 48,
+            "stmt": [
+                48,
+                5,
+                48,
+                23
+              ],
+            "line": 48,
+            "endcolumn": 23,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 48,
+            "stmt": [
+                48,
+                5,
+                48,
+                23
+              ],
+            "line": 48,
+            "endcolumn": 23,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 49,
+            "stmt": [
+                49,
+                5,
+                49,
+                28
+              ],
+            "line": 49,
+            "endcolumn": 8,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 49,
+            "stmt": [
+                49,
+                5,
+                49,
+                28
+              ],
+            "line": 49,
             "endcolumn": 19,
             "column": 13
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 49,
             "stmt": [
-                48,
-                9,
-                48,
-                39
+                49,
+                5,
+                49,
+                28
               ],
-            "line": 48,
+            "line": 49,
+            "endcolumn": 19,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 49,
+            "stmt": [
+                49,
+                5,
+                49,
+                28
+              ],
+            "line": 49,
+            "endcolumn": 19,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 49,
+            "stmt": [
+                49,
+                5,
+                49,
+                28
+              ],
+            "line": 49,
+            "endcolumn": 27,
+            "column": 24
+          },
+        {
+            "module": "__main__",
+            "endline": 49,
+            "stmt": [
+                49,
+                5,
+                49,
+                28
+              ],
+            "line": 49,
+            "endcolumn": 27,
+            "column": 8
+          },
+        {
+            "module": "__main__",
+            "endline": 49,
+            "stmt": [
+                49,
+                5,
+                49,
+                28
+              ],
+            "line": 49,
+            "endcolumn": 6,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 50,
+            "stmt": [
+                50,
+                9,
+                50,
+                27
+              ],
+            "line": 50,
+            "endcolumn": 18,
+            "column": 18
+          },
+        {
+            "module": "__main__",
+            "endline": 50,
+            "stmt": [
+                50,
+                9,
+                50,
+                27
+              ],
+            "line": 50,
+            "endcolumn": 18,
+            "column": 18
+          },
+        {
+            "module": "__main__",
+            "endline": 50,
+            "stmt": [
+                50,
+                9,
+                50,
+                27
+              ],
+            "line": 50,
+            "endcolumn": 26,
+            "column": 23
+          },
+        {
+            "module": "__main__",
+            "endline": 50,
+            "stmt": [
+                50,
+                9,
+                50,
+                27
+              ],
+            "line": 50,
+            "endcolumn": 26,
+            "column": 18
+          },
+        {
+            "module": "__main__",
+            "endline": 50,
+            "stmt": [
+                50,
+                9,
+                50,
+                27
+              ],
+            "line": 50,
+            "endcolumn": 27,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 50,
+            "stmt": [
+                50,
+                9,
+                50,
+                27
+              ],
+            "line": 50,
+            "endcolumn": 27,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 51,
+            "stmt": [
+                51,
+                9,
+                51,
+                19
+              ],
+            "line": 51,
             "endcolumn": 19,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 51,
             "stmt": [
-                48,
+                51,
                 9,
-                48,
-                39
+                51,
+                19
               ],
-            "line": 48,
-            "endcolumn": 23,
-            "column": 23
+            "line": 51,
+            "endcolumn": 19,
+            "column": 16
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 51,
             "stmt": [
-                48,
+                51,
                 9,
-                48,
-                39
+                51,
+                19
               ],
-            "line": 48,
+            "line": 51,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 51,
+            "stmt": [
+                51,
+                9,
+                51,
+                19
+              ],
+            "line": 51,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 51,
+            "stmt": [
+                51,
+                9,
+                51,
+                19
+              ],
+            "line": 51,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 49,
+            "stmt": [
+                49,
+                5,
+                49,
+                28
+              ],
+            "line": 49,
+            "endcolumn": 28,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 53,
+            "stmt": [
+                53,
+                9,
+                53,
+                41
+              ],
+            "line": 53,
+            "endcolumn": 21,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 53,
+            "stmt": [
+                53,
+                9,
+                53,
+                41
+              ],
+            "line": 53,
             "endcolumn": 32,
             "column": 26
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 53,
             "stmt": [
-                48,
+                53,
                 9,
-                48,
+                53,
+                41
+              ],
+            "line": 53,
+            "endcolumn": 32,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 53,
+            "stmt": [
+                53,
+                9,
+                53,
+                41
+              ],
+            "line": 53,
+            "endcolumn": 32,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 53,
+            "stmt": [
+                53,
+                9,
+                53,
+                41
+              ],
+            "line": 53,
+            "endcolumn": 41,
+            "column": 37
+          },
+        {
+            "module": "__main__",
+            "endline": 53,
+            "stmt": [
+                53,
+                9,
+                53,
+                41
+              ],
+            "line": 53,
+            "endcolumn": 41,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 53,
+            "stmt": [
+                53,
+                9,
+                53,
+                41
+              ],
+            "line": 53,
+            "endcolumn": 41,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 53,
+            "stmt": [
+                53,
+                9,
+                53,
+                41
+              ],
+            "line": 53,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 54,
+            "stmt": [
+                54,
+                9,
+                54,
                 39
               ],
-            "line": 48,
+            "line": 54,
+            "endcolumn": 9,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 54,
+            "stmt": [
+                54,
+                9,
+                54,
+                39
+              ],
+            "line": 54,
+            "endcolumn": 19,
+            "column": 13
+          },
+        {
+            "module": "__main__",
+            "endline": 54,
+            "stmt": [
+                54,
+                9,
+                54,
+                39
+              ],
+            "line": 54,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 54,
+            "stmt": [
+                54,
+                9,
+                54,
+                39
+              ],
+            "line": 54,
+            "endcolumn": 23,
+            "column": 23
+          },
+        {
+            "module": "__main__",
+            "endline": 54,
+            "stmt": [
+                54,
+                9,
+                54,
+                39
+              ],
+            "line": 54,
+            "endcolumn": 32,
+            "column": 26
+          },
+        {
+            "module": "__main__",
+            "endline": 54,
+            "stmt": [
+                54,
+                9,
+                54,
+                39
+              ],
+            "line": 54,
             "endcolumn": 32,
             "column": 23
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 54,
             "stmt": [
-                48,
+                54,
                 9,
-                48,
+                54,
                 39
               ],
-            "line": 48,
+            "line": 54,
             "endcolumn": 32,
             "column": 23
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 54,
             "stmt": [
-                48,
+                54,
                 9,
-                48,
+                54,
                 39
               ],
-            "line": 48,
+            "line": 54,
             "endcolumn": 39,
             "column": 36
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 54,
             "stmt": [
-                48,
+                54,
                 9,
-                48,
+                54,
                 39
               ],
-            "line": 48,
+            "line": 54,
             "endcolumn": 39,
             "column": 23
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 54,
             "stmt": [
-                48,
+                54,
                 9,
-                48,
+                54,
                 39
               ],
-            "line": 48,
+            "line": 54,
             "endcolumn": 39,
             "column": 23
           },
         {
             "module": "__main__",
-            "endline": 48,
+            "endline": 54,
             "stmt": [
-                48,
+                54,
                 9,
-                48,
+                54,
                 39
               ],
-            "line": 48,
+            "line": 54,
             "endcolumn": 21,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 49,
+            "endline": 55,
             "stmt": [
-                49,
+                55,
                 9,
-                49,
+                55,
                 27
               ],
-            "line": 49,
+            "line": 55,
             "endcolumn": 18,
             "column": 18
           },
         {
             "module": "__main__",
-            "endline": 49,
+            "endline": 55,
             "stmt": [
-                49,
+                55,
                 9,
-                49,
+                55,
                 27
               ],
-            "line": 49,
+            "line": 55,
             "endcolumn": 18,
             "column": 18
           },
         {
             "module": "__main__",
-            "endline": 49,
+            "endline": 55,
             "stmt": [
-                49,
+                55,
                 9,
-                49,
+                55,
                 27
               ],
-            "line": 49,
+            "line": 55,
             "endcolumn": 26,
             "column": 23
           },
         {
             "module": "__main__",
-            "endline": 49,
+            "endline": 55,
             "stmt": [
-                49,
+                55,
                 9,
-                49,
+                55,
                 27
               ],
-            "line": 49,
+            "line": 55,
             "endcolumn": 26,
             "column": 18
           },
         {
             "module": "__main__",
-            "endline": 49,
+            "endline": 55,
             "stmt": [
-                49,
+                55,
                 9,
-                49,
+                55,
                 27
               ],
-            "line": 49,
+            "line": 55,
             "endcolumn": 27,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 49,
+            "endline": 55,
             "stmt": [
-                49,
+                55,
                 9,
-                49,
+                55,
                 27
               ],
-            "line": 49,
+            "line": 55,
             "endcolumn": 27,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 9,
-                50,
+                56,
                 24
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 24,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 9,
-                50,
+                56,
                 24
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 24,
             "column": 16
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 9,
-                50,
+                56,
                 24
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 24,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 9,
-                50,
+                56,
                 24
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 24,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 9,
-                50,
+                56,
                 24
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 24,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 25,
-                50,
+                56,
                 30
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 30,
             "column": 25
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 30,
-                50,
+                56,
                 30
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 30,
             "column": 30
           },
         {
             "module": "__main__",
-            "endline": 50,
+            "endline": 56,
             "stmt": [
-                50,
+                56,
                 30,
-                50,
+                56,
                 30
               ],
-            "line": 50,
+            "line": 56,
             "endcolumn": 30,
             "column": 30
           }
@@ -29661,7 +30262,7 @@
             "op": "Store"
           },
         {
-            "pc": "1406",
+            "pc": "1441",
             "op": "Jump"
           },
         {
@@ -29790,7 +30391,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1406",
+            "pc": "1441",
             "op": "Jump"
           },
         {
@@ -29824,7 +30425,7 @@
             "op": "Return"
           },
         {
-            "pc": "1406",
+            "pc": "1441",
             "op": "Jump"
           },
         {
@@ -29886,7 +30487,7 @@
             "op": "Return"
           },
         {
-            "pc": "1406",
+            "pc": "1441",
             "op": "Jump"
           },
         {
@@ -29930,22 +30531,6 @@
           },
         {
             "value": {
-                "type": "address",
-                "args": [
-                    {
-                        "type": "atom",
-                        "value": "lock"
-                      }
-                  ],
-                "func": {
-                    "type": "pc",
-                    "value": "-1"
-                  }
-              },
-            "op": "Push"
-          },
-        {
-            "value": {
                 "type": "list",
                 "value": [
 
@@ -29954,12 +30539,11 @@
             "op": "Push"
           },
         {
-            "arity": 2,
-            "value": "AddArg",
-            "op": "Nary"
-          },
-        {
-            "op": "Load"
+            "value": {
+                "type": "pc",
+                "value": "820"
+              },
+            "op": "Apply"
           },
         {
             "arity": 3,
@@ -29979,7 +30563,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1406",
+            "pc": "1441",
             "op": "Jump"
           },
         {
@@ -30120,7 +30704,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1211",
+            "pc": "1207",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -30130,11 +30714,6 @@
         {
             "value": "node",
             "op": "LoadVar"
-          },
-        {
-            "arity": 1,
-            "value": "Closure",
-            "op": "Nary"
           },
         {
             "value": {
@@ -30153,16 +30732,11 @@
             "op": "LoadVar"
           },
         {
-            "op": "StoreVar"
+            "op": "Store"
           },
         {
             "value": "node",
             "op": "LoadVar"
-          },
-        {
-            "arity": 1,
-            "value": "Closure",
-            "op": "Nary"
           },
         {
             "value": {
@@ -30181,7 +30755,7 @@
             "op": "LoadVar"
           },
         {
-            "op": "StoreVar"
+            "op": "Store"
           },
         {
             "value": "d",
@@ -30211,7 +30785,7 @@
             "op": "Store"
           },
         {
-            "pc": "1232",
+            "pc": "1267",
             "op": "Jump"
           },
         {
@@ -30272,9 +30846,57 @@
             "op": "LoadVar"
           },
         {
-            "arity": 1,
-            "value": "Closure",
+            "value": {
+                "type": "atom",
+                "value": "prev"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
             "op": "Nary"
+          },
+        {
+            "value": "d",
+            "op": "LoadVar"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "current"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "op": "Load"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "prev"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "op": "Load"
+          },
+        {
+            "op": "Store"
+          },
+        {
+            "value": "node",
+            "op": "LoadVar"
           },
         {
             "value": {
@@ -30308,11 +30930,151 @@
             "op": "Load"
           },
         {
-            "op": "StoreVar"
+            "op": "Store"
+          },
+        {
+            "value": "d",
+            "op": "LoadVar"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "current"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "op": "Load"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "prev"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "value": "node",
+            "op": "LoadVar"
+          },
+        {
+            "op": "Store"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "prev:"
+              },
+            "op": "Push"
+          },
+        {
+            "value": "node",
+            "op": "LoadVar"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "prev"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "op": "Load"
+          },
+        {
+            "arity": 2,
+            "value": "+",
+            "op": "Nary"
+          },
+        {
+            "op": "Print"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "next:"
+              },
+            "op": "Push"
+          },
+        {
+            "value": "node",
+            "op": "LoadVar"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "next"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "op": "Load"
+          },
+        {
+            "arity": 2,
+            "value": "+",
+            "op": "Nary"
+          },
+        {
+            "op": "Print"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "curr:"
+              },
+            "op": "Push"
+          },
+        {
+            "value": "node",
+            "op": "LoadVar"
           },
         {
             "value": "node",
             "op": "DelVar"
+          },
+        {
+            "value": {
+                "type": "atom",
+                "value": "value"
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "op": "Load"
+          },
+        {
+            "arity": 2,
+            "value": "+",
+            "op": "Nary"
+          },
+        {
+            "op": "Print"
           },
         {
             "value": "d",
@@ -30352,7 +31114,7 @@
             "op": "Return"
           },
         {
-            "pc": "1406",
+            "pc": "1441",
             "op": "Jump"
           },
         {
@@ -30417,7 +31179,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1263",
+            "pc": "1298",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -30585,7 +31347,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1306",
+            "pc": "1341",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -30698,7 +31460,7 @@
             "op": "Store"
           },
         {
-            "pc": "1337",
+            "pc": "1372",
             "op": "Jump"
           },
         {
@@ -30955,7 +31717,7 @@
             "op": "Return"
           },
         {
-            "pc": "1406",
+            "pc": "1441",
             "op": "Jump"
           },
         {
@@ -31020,7 +31782,7 @@
             "op": "Nary"
           },
         {
-            "pc": "1375",
+            "pc": "1410",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -31091,7 +31853,7 @@
             "op": "Pop"
           },
         {
-            "pc": "1405",
+            "pc": "1440",
             "op": "Jump"
           },
         {
@@ -32390,6 +33152,41 @@
     1,
     1,
     1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,
