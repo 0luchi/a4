@@ -20,7 +20,6 @@ def delete(d) returns returnVal:
 def next(d) returns returnVal:
   atomically:
     returnVal = None
-
     if len d->elements > 0:
       returnVal = d->elements[d->current]
       d->current += 1
