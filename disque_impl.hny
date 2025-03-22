@@ -17,6 +17,7 @@ def insert(d, v):
       node -> next = d -> current
       d -> current -> prev -> next = node
       d -> current -> prev = node
+      d -> current = node
 
     release(?d -> lock)
 
@@ -29,16 +30,20 @@ def delete(d) returns returnVal:
       else:
         returnVal = node -> value
 
-        if node->next == node: 
-          node->next = None
-          node->prev = None
-          d -> current = None
-        else: 
-          currNext = node -> next
-          currPrev = node -> prev
-          currPrev -> next = currNext
-          currNext -> prev = currPrev
-          d -> current = currNext
+        let currNext = node -> next:
+          if currNext == node:
+            node->next = None
+            node->prev = None
+            d -> current = None
+          else: 
+            let currPrev = node -> prev:
+              currPrev -> next = currNext
+              currNext -> prev = currPrev
+              d -> current = currNext
+
+              # free(currPrev)
+
+          # free(currNext)
 
         free(node)
 
