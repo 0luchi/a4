@@ -24,4 +24,3 @@ def next(d) returns returnVal:
       returnVal = d->elements[d->current]
       d->current += 1
       if d->current >= len d->elements: d->current = 0
-      return returnVal
