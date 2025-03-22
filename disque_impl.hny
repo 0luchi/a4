@@ -3,7 +3,6 @@ from alloc import malloc, free
 
 def Disque() returns d:
   d = {.current: None, .lock: Lock()}
-  d = {.current: None, .lock: Lock()}
 
 def insert(d, v):
   let node = malloc({.value: v, .next: None, .prev: None}):
@@ -14,8 +13,10 @@ def insert(d, v):
       node -> prev = node
       d->current = node
     else:
-      d -> current -> prev -> next = node
+      node -> prev = d->current-> prev
       node -> next = d -> current
+      d -> current -> prev -> next = node
+      d-> current->prev = node
 
     release(?d -> lock)
 
