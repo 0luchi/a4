@@ -19,25 +19,32 @@ def insert(d, v):
     release(?d -> lock)
 
 def delete(d):
-  acquire(?d -> lock)
-  if d->current == None: return None
-  returnVal = d -> current -> value
-  if d->current->next == d->current: 
-    d->current->next = None
-    d->current->prev = None
-    d->current=None
-  else: 
-    currNext = d -> current -> next
-    currPrev = d -> current -> prev
-    currPrev -> next = currNext
-    currNext -> prev = currPrev
-    d -> current = currNext
-  return returnVal
-  release(?d -> lock)
+    acquire(?d -> lock)
+    if d->current == None: 
+        release(?d -> lock)
+        return None
+    returnVal = d -> current -> value
+    if d->current->next == d->current: 
+        d->current->next = None
+        d->current->prev = None
+        d->current=None
+    else: 
+        currNext = d -> current -> next
+        currPrev = d -> current -> prev
+        currPrev -> next = currNext
+        currNext -> prev = currPrev
+        d -> current = currNext
+    release(?d -> lock)
+    return returnVal
+  
 
 def next(d):
-  pass
-
-# 3 --> 5 --> 6 --> 7
-# 2 at postition 1
-# 3 --> 2 --> 5 --> 6 --> 7
+    acquire(?d -> lock)
+    if d -> current == None: 
+        release(?d -> lock)
+        return None
+    else:
+        returnVal = d -> current -> value
+        d-> current = d->current-> next
+        release(?d -> lock)
+        return returnVal
