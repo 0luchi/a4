@@ -1,15 +1,15 @@
 {
   "symbols": [
     { "type": "list", "value": [{ "type": "atom", "value": "Testing insert" }, { "type": "int", "value": "1" } ] },
-    { "type": "list", "value": [{ "type": "atom", "value": "Done inserting" }, { "type": "int", "value": "2" } ] },
     { "type": "list", "value": [{ "type": "atom", "value": "Done inserting" }, { "type": "int", "value": "1" } ] },
-    { "type": "list", "value": [{ "type": "atom", "value": "Testing insert" }, { "type": "int", "value": "2" } ] }
+    { "type": "list", "value": [{ "type": "atom", "value": "Testing insert" }, { "type": "int", "value": "2" } ] },
+    { "type": "list", "value": [{ "type": "atom", "value": "Done inserting" }, { "type": "int", "value": "2" } ] }
   ],
   "initial": "0",
   "nodes": [
     { "idx": "10", "type": "final" },
-    { "idx": "6", "type": "normal" },
     { "idx": "7", "type": "normal" },
+    { "idx": "6", "type": "normal" },
     { "idx": "5", "type": "normal" },
     { "idx": "4", "type": "normal" },
     { "idx": "3", "type": "normal" },
@@ -18,17 +18,17 @@
     { "idx": "0", "type": "normal" }
   ],
   "edges": [
-     { "src": "6", "dst": "10", "sym": 2 },
      { "src": "7", "dst": "10", "sym": 1 },
-     { "src": "5", "dst": "6", "sym": 0 },
+     { "src": "6", "dst": "10", "sym": 3 },
+     { "src": "5", "dst": "7", "sym": 0 },
      { "src": "4", "dst": "7", "sym": 3 },
-     { "src": "3", "dst": "6", "sym": 1 },
-     { "src": "3", "dst": "7", "sym": 2 },
-     { "src": "2", "dst": "5", "sym": 1 },
-     { "src": "2", "dst": "3", "sym": 0 },
-     { "src": "1", "dst": "3", "sym": 3 },
+     { "src": "4", "dst": "6", "sym": 1 },
+     { "src": "3", "dst": "6", "sym": 2 },
+     { "src": "2", "dst": "5", "sym": 3 },
+     { "src": "2", "dst": "4", "sym": 0 },
+     { "src": "1", "dst": "3", "sym": 1 },
      { "src": "1", "dst": "4", "sym": 2 },
      { "src": "0", "dst": "1", "sym": 0 },
-     { "src": "0", "dst": "2", "sym": 3 }
+     { "src": "0", "dst": "2", "sym": 2 }
   ]
 }

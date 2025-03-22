@@ -38,6 +38,7 @@ def delete(d) returns returnVal:
           d -> current = currNext
 
     release(?d -> lock)
+  
 
 def next(d) returns returnVal:
     acquire(?d -> lock)
