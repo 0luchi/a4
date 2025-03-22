@@ -14,6 +14,9 @@
                 "  atomically:",
                 "    d->elements = lists.subseq(d->elements, 0, d->current) + [v,] + lists.subseq(d->elements, d->current, len d->elements)",
                 "",
+                "# [1, 2]",
+                "#",
+                "",
                 "def delete(d) returns returnVal:",
                 "  atomically:",
                 "    returnVal = None",
@@ -22,7 +25,7 @@
                 "      returnVal = d->elements[d->current]",
                 "      d->elements = lists.subseq(d->elements, 0, d->current) + lists.subseq(d->elements, d->current + 1, len d->elements)",
                 "      d->current += 1",
-                "      ",
+                "",
                 "      if d->current >= len d->elements: ",
                 "        d->current = 0",
                 "",
@@ -2744,11 +2747,11 @@
     "locs": [
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
                 1,
                 1,
-                31,
+                34,
                 28
               ],
             "line": 1,
@@ -9127,1977 +9130,1977 @@
           },
         {
             "module": "__main__",
-            "endline": 9,
+            "endline": 12,
             "stmt": [
-                9,
+                12,
                 1,
-                9,
+                12,
                 6
               ],
-            "line": 9,
+            "line": 12,
             "endcolumn": 6,
             "column": 1
           },
         {
             "module": "__main__",
-            "endline": 10,
+            "endline": 13,
             "stmt": [
-                10,
+                13,
                 1,
-                10,
+                13,
                 32
               ],
-            "line": 10,
+            "line": 13,
             "endcolumn": 3,
             "column": 1
           },
         {
             "module": "__main__",
-            "endline": 10,
+            "endline": 13,
             "stmt": [
-                10,
+                13,
                 1,
-                10,
+                13,
                 32
               ],
-            "line": 10,
+            "line": 13,
             "endcolumn": 32,
             "column": 1
           },
         {
             "module": "__main__",
-            "endline": 11,
+            "endline": 14,
             "stmt": [
-                11,
+                14,
                 3,
-                11,
+                14,
                 13
               ],
-            "line": 11,
+            "line": 14,
             "endcolumn": 13,
             "column": 3
           },
         {
             "module": "__main__",
-            "endline": 12,
+            "endline": 15,
             "stmt": [
-                12,
+                15,
                 5,
-                12,
+                15,
                 20
               ],
-            "line": 12,
+            "line": 15,
             "endcolumn": 20,
             "column": 17
           },
         {
             "module": "__main__",
-            "endline": 12,
+            "endline": 15,
             "stmt": [
-                12,
+                15,
                 5,
-                12,
+                15,
                 20
               ],
-            "line": 12,
+            "line": 15,
             "endcolumn": 15,
             "column": 5
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 12,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 22,
             "column": 15
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 22,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 22,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 22,
             "column": 8
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 26,
             "column": 26
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 26,
             "column": 8
           },
         {
             "module": "__main__",
-            "endline": 14,
+            "endline": 17,
             "stmt": [
-                14,
+                17,
                 5,
-                14,
+                17,
                 27
               ],
-            "line": 14,
+            "line": 17,
             "endcolumn": 6,
             "column": 5
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 19,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 19,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 29,
             "column": 22
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 29,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 31,
             "column": 31
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 40,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 40,
             "column": 31
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 40,
             "column": 31
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 41,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 41,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 15,
+            "endline": 18,
             "stmt": [
-                15,
+                18,
                 7,
-                15,
+                18,
                 41
               ],
-            "line": 15,
+            "line": 18,
             "endcolumn": 17,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 7,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 17,
             "column": 10
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 17,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 32,
             "column": 21
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 59,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 34,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 44,
             "column": 37
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 44,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 44,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 59,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 47,
             "column": 47
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 59,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 50,
             "column": 50
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 59,
             "column": 53
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 59,
             "column": 50
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 59,
             "column": 50
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 59,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 60,
             "column": 21
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 60,
             "column": 21
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 75,
             "column": 64
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 77
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 77,
             "column": 77
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 87,
             "column": 80
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 87,
             "column": 77
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 87,
             "column": 77
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 77
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 90,
             "column": 90
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 99,
             "column": 93
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 99,
             "column": 90
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 99,
             "column": 90
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 103,
             "column": 103
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 103,
             "column": 90
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 77
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 110,
             "column": 110
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 113
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 110
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 110
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 106
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 120,
             "column": 77
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 121,
             "column": 64
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 121,
             "column": 64
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 121,
             "column": 21
           },
         {
             "module": "__main__",
-            "endline": 16,
+            "endline": 19,
             "stmt": [
-                16,
+                19,
                 7,
-                16,
+                19,
                 121
               ],
-            "line": 16,
+            "line": 19,
             "endcolumn": 19,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 7,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 16,
             "column": 10
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 16,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 21,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 21,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 21,
             "column": 21
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 21,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 17,
+            "endline": 20,
             "stmt": [
-                17,
+                20,
                 7,
-                17,
+                20,
                 21
               ],
-            "line": 17,
+            "line": 20,
             "endcolumn": 19,
             "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 10,
-            "column": 10
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 19,
-            "column": 13
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 19,
-            "column": 10
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 19,
-            "column": 10
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 28,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 38,
-            "column": 31
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 38,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 38,
-            "column": 28
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 38,
-            "column": 24
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 38,
-            "column": 10
-          },
-        {
-            "module": "__main__",
-            "endline": 19,
-            "stmt": [
-                19,
-                7,
-                19,
-                39
-              ],
-            "line": 19,
-            "endcolumn": 8,
-            "column": 7
-          },
-        {
-            "module": "__main__",
-            "endline": 20,
-            "stmt": [
-                20,
-                9,
-                20,
-                22
-              ],
-            "line": 20,
-            "endcolumn": 9,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 20,
-            "stmt": [
-                20,
-                9,
-                20,
-                22
-              ],
-            "line": 20,
-            "endcolumn": 9,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 20,
-            "stmt": [
-                20,
-                9,
-                20,
-                22
-              ],
-            "line": 20,
-            "endcolumn": 18,
-            "column": 12
-          },
-        {
-            "module": "__main__",
-            "endline": 20,
-            "stmt": [
-                20,
-                9,
-                20,
-                22
-              ],
-            "line": 20,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 20,
-            "stmt": [
-                20,
-                9,
-                20,
-                22
-              ],
-            "line": 20,
-            "endcolumn": 22,
-            "column": 22
-          },
-        {
-            "module": "__main__",
-            "endline": 20,
-            "stmt": [
-                20,
-                9,
-                20,
-                22
-              ],
-            "line": 20,
-            "endcolumn": 20,
-            "column": 9
-          },
-        {
-            "module": "__main__",
-            "endline": 11,
-            "stmt": [
-                11,
-                3,
-                11,
-                13
-              ],
-            "line": 11,
-            "endcolumn": 13,
-            "column": 3
-          },
-        {
-            "module": "__main__",
-            "endline": 11,
-            "stmt": [
-                11,
-                3,
-                11,
-                13
-              ],
-            "line": 11,
-            "endcolumn": 13,
-            "column": 3
-          },
-        {
-            "module": "__main__",
-            "endline": 21,
-            "stmt": [
-                21,
-                1,
-                21,
-                6
-              ],
-            "line": 21,
-            "endcolumn": 6,
-            "column": 1
-          },
-        {
-            "module": "__main__",
-            "endline": 21,
-            "stmt": [
-                21,
-                1,
-                21,
-                6
-              ],
-            "line": 21,
-            "endcolumn": 6,
-            "column": 1
           },
         {
             "module": "__main__",
             "endline": 22,
             "stmt": [
                 22,
-                1,
+                7,
                 22,
-                30
+                39
               ],
             "line": 22,
+            "endcolumn": 10,
+            "column": 10
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 19,
+            "column": 13
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 19,
+            "column": 10
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 19,
+            "column": 10
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 28,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 38,
+            "column": 31
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 38,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 38,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 38,
+            "column": 24
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 38,
+            "column": 10
+          },
+        {
+            "module": "__main__",
+            "endline": 22,
+            "stmt": [
+                22,
+                7,
+                22,
+                39
+              ],
+            "line": 22,
+            "endcolumn": 8,
+            "column": 7
+          },
+        {
+            "module": "__main__",
+            "endline": 23,
+            "stmt": [
+                23,
+                9,
+                23,
+                22
+              ],
+            "line": 23,
+            "endcolumn": 9,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 23,
+            "stmt": [
+                23,
+                9,
+                23,
+                22
+              ],
+            "line": 23,
+            "endcolumn": 9,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 23,
+            "stmt": [
+                23,
+                9,
+                23,
+                22
+              ],
+            "line": 23,
+            "endcolumn": 18,
+            "column": 12
+          },
+        {
+            "module": "__main__",
+            "endline": 23,
+            "stmt": [
+                23,
+                9,
+                23,
+                22
+              ],
+            "line": 23,
+            "endcolumn": 18,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 23,
+            "stmt": [
+                23,
+                9,
+                23,
+                22
+              ],
+            "line": 23,
+            "endcolumn": 22,
+            "column": 22
+          },
+        {
+            "module": "__main__",
+            "endline": 23,
+            "stmt": [
+                23,
+                9,
+                23,
+                22
+              ],
+            "line": 23,
+            "endcolumn": 20,
+            "column": 9
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                3,
+                14,
+                13
+              ],
+            "line": 14,
+            "endcolumn": 13,
+            "column": 3
+          },
+        {
+            "module": "__main__",
+            "endline": 14,
+            "stmt": [
+                14,
+                3,
+                14,
+                13
+              ],
+            "line": 14,
+            "endcolumn": 13,
+            "column": 3
+          },
+        {
+            "module": "__main__",
+            "endline": 24,
+            "stmt": [
+                24,
+                1,
+                24,
+                6
+              ],
+            "line": 24,
+            "endcolumn": 6,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 24,
+            "stmt": [
+                24,
+                1,
+                24,
+                6
+              ],
+            "line": 24,
+            "endcolumn": 6,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 25,
+            "stmt": [
+                25,
+                1,
+                25,
+                30
+              ],
+            "line": 25,
             "endcolumn": 3,
             "column": 1
           },
         {
             "module": "__main__",
-            "endline": 22,
+            "endline": 25,
             "stmt": [
-                22,
+                25,
                 1,
-                22,
+                25,
                 30
               ],
-            "line": 22,
+            "line": 25,
             "endcolumn": 30,
             "column": 1
           },
         {
             "module": "__main__",
-            "endline": 23,
+            "endline": 26,
             "stmt": [
-                23,
+                26,
                 3,
-                23,
+                26,
                 13
               ],
-            "line": 23,
+            "line": 26,
             "endcolumn": 13,
             "column": 3
           },
         {
             "module": "__main__",
-            "endline": 24,
+            "endline": 27,
             "stmt": [
-                24,
+                27,
                 5,
-                24,
+                27,
                 20
               ],
-            "line": 24,
+            "line": 27,
             "endcolumn": 20,
             "column": 17
           },
         {
             "module": "__main__",
-            "endline": 24,
+            "endline": 27,
             "stmt": [
-                24,
+                27,
                 5,
-                24,
+                27,
                 20
               ],
-            "line": 24,
+            "line": 27,
             "endcolumn": 15,
             "column": 5
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 12,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 22,
             "column": 15
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 22,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 22,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 22,
             "column": 8
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 26,
             "column": 26
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 26,
             "column": 8
           },
         {
             "module": "__main__",
-            "endline": 26,
+            "endline": 29,
             "stmt": [
-                26,
+                29,
                 5,
-                26,
+                29,
                 27
               ],
-            "line": 26,
+            "line": 29,
             "endcolumn": 6,
             "column": 5
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 19,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 19,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 29,
             "column": 22
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 29,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 31,
             "column": 31
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 40,
             "column": 34
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 40,
             "column": 31
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 40,
             "column": 31
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 41,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 41,
             "column": 19
           },
         {
             "module": "__main__",
-            "endline": 27,
+            "endline": 30,
             "stmt": [
-                27,
+                30,
                 7,
-                27,
+                30,
                 41
               ],
-            "line": 27,
+            "line": 30,
             "endcolumn": 17,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 7,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 16,
             "column": 10
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 16,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 21,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 21,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 21,
             "column": 21
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 21,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 28,
+            "endline": 31,
             "stmt": [
-                28,
+                31,
                 7,
-                28,
+                31,
                 21
               ],
-            "line": 28,
+            "line": 31,
             "endcolumn": 19,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 10,
             "column": 10
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 19,
             "column": 13
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 19,
             "column": 10
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 19,
             "column": 10
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 28,
             "column": 28
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 38,
             "column": 31
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 38,
             "column": 28
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 38,
             "column": 28
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 38,
             "column": 24
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 38,
             "column": 10
           },
         {
             "module": "__main__",
-            "endline": 30,
+            "endline": 33,
             "stmt": [
-                30,
+                33,
                 7,
-                30,
+                33,
                 39
               ],
-            "line": 30,
+            "line": 33,
             "endcolumn": 8,
             "column": 7
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 9,
-                31,
+                34,
                 22
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 9,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 9,
-                31,
+                34,
                 22
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 9,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 9,
-                31,
+                34,
                 22
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 18,
             "column": 12
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 9,
-                31,
+                34,
                 22
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 18,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 9,
-                31,
+                34,
                 22
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 22,
             "column": 22
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 9,
-                31,
+                34,
                 22
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 20,
             "column": 9
           },
         {
             "module": "__main__",
-            "endline": 23,
+            "endline": 26,
             "stmt": [
-                23,
+                26,
                 3,
-                23,
+                26,
                 13
               ],
-            "line": 23,
+            "line": 26,
             "endcolumn": 13,
             "column": 3
           },
         {
             "module": "__main__",
-            "endline": 23,
+            "endline": 26,
             "stmt": [
-                23,
+                26,
                 3,
-                23,
+                26,
                 13
               ],
-            "line": 23,
+            "line": 26,
             "endcolumn": 13,
             "column": 3
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 23,
-                31,
+                34,
                 28
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 28,
             "column": 23
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 23,
-                31,
+                34,
                 28
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 28,
             "column": 23
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 28,
-                31,
+                34,
                 28
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 28,
             "column": 28
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 34,
             "stmt": [
-                31,
+                34,
                 28,
-                31,
+                34,
                 28
               ],
-            "line": 31,
+            "line": 34,
             "endcolumn": 28,
             "column": 28
           }

@@ -7,9 +7,6 @@ def insert(d, v):
   atomically:
     d->elements = lists.subseq(d->elements, 0, d->current) + [v,] + lists.subseq(d->elements, d->current, len d->elements)
 
-# [1, 2]
-#
-
 def delete(d) returns returnVal:
   atomically:
     returnVal = None
