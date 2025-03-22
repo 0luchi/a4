@@ -47,10 +47,14 @@ def delete(d) returns returnVal:
 
 def next(d) returns returnVal:
     acquire(?d -> lock)
-    returnVal = None
 
-    if d -> current != None: 
-      returnVal = d -> current -> value
-      d-> current = d->current-> next
+    let node = d -> current:
+      if node == None:
+        returnVal = None
+      else:
+        returnVal = d -> current -> value
+        d -> current = d -> current -> next
+
+        free(node)
 
     release(?d -> lock)
