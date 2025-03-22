@@ -13,7 +13,7 @@ def insert_test(self):
 
 def delete_test(self):
     print("Testing delete", self)
-    let v = disque.delete(?d, self):
+    let v = disque.delete(?d):
         print("Done deleting", self, v)
 
 def next_test(self):
@@ -24,8 +24,8 @@ def next_test(self):
 
 for i in {1..N_INSERT}:
     spawn insert_test(i)
-# for i in {1..N_DELETE}:
-#     spawn delete_test(i)
-# for i in {1..N_NEXT}:
-#     spawn next_test(i)
+for i in {1..N_DELETE}:
+    spawn delete_test(i)
+for i in {1..N_NEXT}:
+    spawn next_test(i)
 
