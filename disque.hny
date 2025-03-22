@@ -15,7 +15,7 @@ def delete(d) returns returnVal:
       returnVal = d->elements[d->current]
       d->elements = lists.subseq(d->elements, 0, d->current) + lists.subseq(d->elements, d->current + 1, len d->elements)
       d->current += 1
-      if d->current == len d->elements: d->current = 0
+      if d->current >= len d->elements: d->current = 0
 
 def next(d) returns returnVal:
   atomically:
@@ -23,5 +23,5 @@ def next(d) returns returnVal:
     if len d->elements > 0:
       returnVal = d->elements[d->current]
       d->current += 1
-      if d->current == len d->elements: d->current = 0
+      if d->current >= len d->elements: d->current = 0
       return returnVal
