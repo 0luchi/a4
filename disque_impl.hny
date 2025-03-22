@@ -13,14 +13,10 @@ def insert(d, v):
         node->prev = node
         d->current = node
     else:
-        d -> current -> prev -> next = node
-        node -> prev = d -> current ->prev
-        node->next = d -> current
-        d -> current -> prev = node
-        print("prev:" + node -> prev)
-        print("next:" + node -> next)
-        print("curr:" + node -> value)
-
+        node->prev = d->current->prev;  
+        node->next = d->current
+        d->current->prev->next = node
+        d->current->prev = node
 
     release(?d -> lock)
 
