@@ -41,10 +41,6 @@ def delete(d) returns returnVal:
               currNext -> prev = currPrev
               d -> current = currNext
 
-              # free(currPrev)
-
-          # free(currNext)
-
         free(node)
 
     release(?d -> lock)
@@ -59,8 +55,6 @@ def next(d) returns returnVal:
       else:
         returnVal = d -> current -> value
         d -> current = d -> current -> next
-
-        free(node)
 
     release(?d -> lock)
 

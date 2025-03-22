@@ -1,5 +1,5 @@
 {
-  "nstates": 18072,
+  "nstates": 2642832,
   "hvm": {
     "modules": {
         "alloc": {
@@ -70,8 +70,8 @@
                 "for i in {1..N_DELETE}:",
                 "    spawn delete_test(i)",
                 "",
-                "# for i in {1..N_NEXT}:",
-                "#     spawn next_test(i)"
+                "for i in {1..N_NEXT}:",
+                "    spawn next_test(i)"
               ],
             "identifiers": {
                 "d": "global",
@@ -368,10 +368,6 @@
                 "              currNext -> prev = currPrev",
                 "              d -> current = currNext",
                 "",
-                "              # free(currPrev)",
-                "",
-                "          # free(currNext)",
-                "",
                 "        free(node)",
                 "",
                 "    release(?d -> lock)",
@@ -387,7 +383,7 @@
                 "        returnVal = d -> current -> value",
                 "        d -> current = d -> current -> next",
                 "",
-                "        free(node)",
+                "        # free(node)",
                 "",
                 "    release(?d -> lock)",
                 ""
@@ -529,7 +525,7 @@
           }
       },
     "labels": {
-        "__end__": 1502
+        "__end__": 1512
       },
     "pretty": [
         [
@@ -4973,8 +4969,8 @@
             "pop a value and store it in shared variable next"
           ],
         [
-            "Jump 1394",
-            "jump over method definition: set program counter to 1394"
+            "Jump 1390",
+            "jump over method definition: set program counter to 1390"
           ],
         [
             "Frame malloc(v)",
@@ -5053,8 +5049,8 @@
             "delete method variable copy"
           ],
         [
-            "Jump 1394",
-            "jump over method definition: set program counter to 1394"
+            "Jump 1390",
+            "jump over method definition: set program counter to 1390"
           ],
         [
             "Frame free(r)",
@@ -5085,8 +5081,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1394",
-            "jump over method definition: set program counter to 1394"
+            "Jump 1390",
+            "jump over method definition: set program counter to 1390"
           ],
         [
             "Frame leak_check()",
@@ -5133,8 +5129,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1394",
-            "jump over method definition: set program counter to 1394"
+            "Jump 1390",
+            "jump over method definition: set program counter to 1390"
           ],
         [
             "Frame Disque()",
@@ -5185,8 +5181,8 @@
             "delete method variable d"
           ],
         [
-            "Jump 1394",
-            "jump over method definition: set program counter to 1394"
+            "Jump 1390",
+            "jump over method definition: set program counter to 1390"
           ],
         [
             "Frame insert(d, v)",
@@ -5565,8 +5561,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1394",
-            "jump over method definition: set program counter to 1394"
+            "Jump 1390",
+            "jump over method definition: set program counter to 1390"
           ],
         [
             "Frame delete(d)",
@@ -5905,8 +5901,8 @@
             "delete method variable returnVal"
           ],
         [
-            "Jump 1394",
-            "jump over method definition: set program counter to 1394"
+            "Jump 1390",
+            "jump over method definition: set program counter to 1390"
           ],
         [
             "Frame next(d)",
@@ -5957,6 +5953,10 @@
             "push the value of node"
           ],
         [
+            "DelVar node",
+            "delete method variable node"
+          ],
+        [
             "Push None",
             "push constant None"
           ],
@@ -5969,10 +5969,6 @@
             "pop a value and jump to 1363 if the value is False"
           ],
         [
-            "DelVar node",
-            "delete method variable node"
-          ],
-        [
             "Push None",
             "push constant None"
           ],
@@ -5981,8 +5977,8 @@
             "pop a value and store in returnVal"
           ],
         [
-            "Jump 1386",
-            "set program counter to 1386"
+            "Jump 1382",
+            "set program counter to 1382"
           ],
         [
             "LoadVar d",
@@ -6061,22 +6057,6 @@
             "pop a value and an address and store the value at the address"
           ],
         [
-            "LoadVar node",
-            "push the value of node"
-          ],
-        [
-            "DelVar node",
-            "delete method variable node"
-          ],
-        [
-            "Apply PC(1131)",
-            "call method PC(1131)"
-          ],
-        [
-            "Pop",
-            "discard the top value on the stack"
-          ],
-        [
             "LoadVar d",
             "push the value of d"
           ],
@@ -6129,8 +6109,8 @@
             "pop a value and store it in shared variable d"
           ],
         [
-            "Jump 1472",
-            "jump over method definition: set program counter to 1472"
+            "Jump 1468",
+            "jump over method definition: set program counter to 1468"
           ],
         [
             "Frame insert_test(self)",
@@ -6229,8 +6209,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1472",
-            "jump over method definition: set program counter to 1472"
+            "Jump 1468",
+            "jump over method definition: set program counter to 1468"
           ],
         [
             "Frame delete_test(self)",
@@ -6325,8 +6305,8 @@
             "restore caller method state and push result"
           ],
         [
-            "Jump 1472",
-            "jump over method definition: set program counter to 1472"
+            "Jump 1468",
+            "jump over method definition: set program counter to 1468"
           ],
         [
             "Frame next_test(self)",
@@ -6441,12 +6421,12 @@
             "get next element and assign to i; push False or True depending on success"
           ],
         [
-            "JumpCond False 1485",
-            "check if loop is done: pop a value and jump to 1485 if the value is False"
+            "JumpCond False 1481",
+            "check if loop is done: pop a value and jump to 1481 if the value is False"
           ],
         [
-            "Push ?PC(1400)",
-            "push constant ?PC(1400)"
+            "Push ?PC(1396)",
+            "push constant ?PC(1396)"
           ],
         [
             "LoadVar i",
@@ -6469,8 +6449,8 @@
             "pop thread-local state, argument, and pc and spawn a new thread"
           ],
         [
-            "Jump 1476",
-            "set program counter to 1476"
+            "Jump 1472",
+            "set program counter to 1472"
           ],
         [
             "DelVar i",
@@ -6497,12 +6477,12 @@
             "get next element and assign to i; push False or True depending on success"
           ],
         [
-            "JumpCond False 1499",
-            "check if loop is done: pop a value and jump to 1499 if the value is False"
+            "JumpCond False 1495",
+            "check if loop is done: pop a value and jump to 1495 if the value is False"
           ],
         [
-            "Push ?PC(1425)",
-            "push constant ?PC(1425)"
+            "Push ?PC(1421)",
+            "push constant ?PC(1421)"
           ],
         [
             "LoadVar i",
@@ -6525,8 +6505,64 @@
             "pop thread-local state, argument, and pc and spawn a new thread"
           ],
         [
-            "Jump 1490",
-            "set program counter to 1490"
+            "Jump 1486",
+            "set program counter to 1486"
+          ],
+        [
+            "DelVar i",
+            "delete method variable i"
+          ],
+        [
+            "Push 1",
+            "push constant 1"
+          ],
+        [
+            "Push 2",
+            "push constant 2"
+          ],
+        [
+            "2-ary ..",
+            "pop 2 values and push the result of applying .."
+          ],
+        [
+            "Push 0",
+            "push constant 0"
+          ],
+        [
+            "Cut(i)",
+            "get next element and assign to i; push False or True depending on success"
+          ],
+        [
+            "JumpCond False 1509",
+            "check if loop is done: pop a value and jump to 1509 if the value is False"
+          ],
+        [
+            "Push ?PC(1445)",
+            "push constant ?PC(1445)"
+          ],
+        [
+            "LoadVar i",
+            "push the value of i"
+          ],
+        [
+            "DelVar i",
+            "delete method variable i"
+          ],
+        [
+            "2-ary AddArg",
+            "pop 2 values and push the result of applying AddArg"
+          ],
+        [
+            "Push {:}",
+            "push constant {:}"
+          ],
+        [
+            "Spawn",
+            "pop thread-local state, argument, and pc and spawn a new thread"
+          ],
+        [
+            "Jump 1500",
+            "set program counter to 1500"
           ],
         [
             "DelVar i",
@@ -6549,10 +6585,10 @@
                 1,
                 1,
                 31,
-                30
+                28
               ],
             "line": 1,
-            "endcolumn": 30,
+            "endcolumn": 28,
             "column": 1
           },
         {
@@ -23847,404 +23883,521 @@
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 44,
             "stmt": [
-                48,
+                44,
                 9,
-                48,
+                44,
                 18
               ],
-            "line": 48,
+            "line": 44,
             "endcolumn": 17,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 44,
             "stmt": [
-                48,
+                44,
                 9,
-                48,
+                44,
                 18
               ],
-            "line": 48,
+            "line": 44,
             "endcolumn": 17,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 44,
             "stmt": [
-                48,
+                44,
                 9,
-                48,
+                44,
                 18
               ],
-            "line": 48,
+            "line": 44,
             "endcolumn": 18,
             "column": 9
           },
         {
             "module": "disque",
-            "endline": 48,
+            "endline": 44,
             "stmt": [
-                48,
+                44,
                 9,
-                48,
+                44,
                 18
               ],
-            "line": 48,
+            "line": 44,
             "endcolumn": 18,
             "column": 9
           },
         {
             "module": "disque",
-            "endline": 50,
+            "endline": 46,
             "stmt": [
-                50,
+                46,
                 5,
-                50,
+                46,
                 23
               ],
-            "line": 50,
+            "line": 46,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 50,
+            "endline": 46,
             "stmt": [
-                50,
+                46,
                 5,
-                50,
+                46,
                 23
               ],
-            "line": 50,
+            "line": 46,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 50,
+            "endline": 46,
             "stmt": [
-                50,
+                46,
                 5,
-                50,
+                46,
                 23
               ],
-            "line": 50,
+            "line": 46,
             "endcolumn": 22,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 50,
+            "endline": 46,
             "stmt": [
-                50,
+                46,
                 5,
-                50,
+                46,
                 23
               ],
-            "line": 50,
+            "line": 46,
             "endcolumn": 22,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 50,
+            "endline": 46,
             "stmt": [
-                50,
+                46,
                 5,
-                50,
+                46,
                 23
               ],
-            "line": 50,
+            "line": 46,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 50,
+            "endline": 46,
             "stmt": [
-                50,
+                46,
                 5,
-                50,
+                46,
                 23
               ],
-            "line": 50,
+            "line": 46,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 52,
+            "endline": 48,
             "stmt": [
-                52,
+                48,
                 1,
-                52,
+                48,
                 6
               ],
-            "line": 52,
+            "line": 48,
             "endcolumn": 6,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 52,
+            "endline": 48,
             "stmt": [
-                52,
+                48,
                 1,
-                52,
+                48,
                 6
               ],
-            "line": 52,
+            "line": 48,
             "endcolumn": 6,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 53,
+            "endline": 49,
             "stmt": [
-                53,
+                49,
                 1,
-                53,
+                49,
                 30
               ],
-            "line": 53,
+            "line": 49,
             "endcolumn": 3,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 53,
+            "endline": 49,
             "stmt": [
-                53,
+                49,
                 1,
-                53,
+                49,
                 30
               ],
-            "line": 53,
+            "line": 49,
             "endcolumn": 30,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 54,
+            "endline": 50,
             "stmt": [
-                54,
+                50,
                 5,
-                54,
+                50,
                 23
               ],
-            "line": 54,
+            "line": 50,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 54,
+            "endline": 50,
             "stmt": [
-                54,
+                50,
                 5,
-                54,
+                50,
                 23
               ],
-            "line": 54,
+            "line": 50,
             "endcolumn": 22,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 54,
+            "endline": 50,
             "stmt": [
-                54,
+                50,
                 5,
-                54,
+                50,
                 23
               ],
-            "line": 54,
+            "line": 50,
             "endcolumn": 22,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 54,
+            "endline": 50,
             "stmt": [
-                54,
+                50,
                 5,
-                54,
+                50,
                 23
               ],
-            "line": 54,
+            "line": 50,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 54,
+            "endline": 50,
             "stmt": [
-                54,
+                50,
                 5,
-                54,
+                50,
                 23
               ],
-            "line": 54,
+            "line": 50,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 56,
+            "endline": 52,
             "stmt": [
-                56,
+                52,
                 5,
-                56,
+                52,
                 27
               ],
-            "line": 56,
+            "line": 52,
             "endcolumn": 16,
             "column": 16
           },
         {
             "module": "disque",
-            "endline": 56,
+            "endline": 52,
             "stmt": [
-                56,
+                52,
                 5,
-                56,
+                52,
                 27
               ],
-            "line": 56,
+            "line": 52,
             "endcolumn": 27,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 56,
+            "endline": 52,
             "stmt": [
-                56,
+                52,
                 5,
-                56,
+                52,
                 27
               ],
-            "line": 56,
+            "line": 52,
             "endcolumn": 27,
             "column": 16
           },
         {
             "module": "disque",
-            "endline": 56,
+            "endline": 52,
             "stmt": [
-                56,
+                52,
                 5,
-                56,
+                52,
                 27
               ],
-            "line": 56,
+            "line": 52,
             "endcolumn": 27,
             "column": 16
           },
         {
             "module": "disque",
-            "endline": 56,
+            "endline": 52,
             "stmt": [
-                56,
+                52,
                 5,
-                56,
+                52,
                 27
               ],
-            "line": 56,
+            "line": 52,
             "endcolumn": 14,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 57,
+            "endline": 53,
             "stmt": [
-                57,
+                53,
                 7,
-                57,
+                53,
                 22
               ],
-            "line": 57,
+            "line": 53,
             "endcolumn": 13,
             "column": 10
           },
         {
             "module": "disque",
-            "endline": 57,
+            "endline": 53,
             "stmt": [
-                57,
+                53,
                 7,
-                57,
+                53,
                 22
               ],
-            "line": 57,
+            "line": 53,
+            "endcolumn": 13,
+            "column": 10
+          },
+        {
+            "module": "disque",
+            "endline": 53,
+            "stmt": [
+                53,
+                7,
+                53,
+                22
+              ],
+            "line": 53,
             "endcolumn": 21,
             "column": 18
           },
         {
             "module": "disque",
-            "endline": 57,
+            "endline": 53,
             "stmt": [
-                57,
+                53,
                 7,
-                57,
+                53,
                 22
               ],
-            "line": 57,
+            "line": 53,
             "endcolumn": 21,
             "column": 10
           },
         {
             "module": "disque",
-            "endline": 57,
+            "endline": 53,
             "stmt": [
-                57,
+                53,
                 7,
-                57,
+                53,
                 22
               ],
-            "line": 57,
+            "line": 53,
             "endcolumn": 8,
             "column": 7
           },
         {
             "module": "disque",
-            "endline": 58,
+            "endline": 54,
             "stmt": [
-                58,
+                54,
                 9,
-                58,
+                54,
                 24
               ],
-            "line": 58,
+            "line": 54,
             "endcolumn": 24,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 58,
+            "endline": 54,
             "stmt": [
-                58,
+                54,
                 9,
-                58,
+                54,
                 24
               ],
-            "line": 58,
-            "endcolumn": 24,
+            "line": 54,
+            "endcolumn": 19,
+            "column": 9
+          },
+        {
+            "module": "disque",
+            "endline": 53,
+            "stmt": [
+                53,
+                7,
+                53,
+                22
+              ],
+            "line": 53,
+            "endcolumn": 22,
+            "column": 7
+          },
+        {
+            "module": "disque",
+            "endline": 56,
+            "stmt": [
+                56,
+                9,
+                56,
+                41
+              ],
+            "line": 56,
+            "endcolumn": 21,
             "column": 21
           },
         {
             "module": "disque",
-            "endline": 58,
+            "endline": 56,
             "stmt": [
-                58,
+                56,
                 9,
-                58,
-                24
+                56,
+                41
               ],
-            "line": 58,
+            "line": 56,
+            "endcolumn": 32,
+            "column": 26
+          },
+        {
+            "module": "disque",
+            "endline": 56,
+            "stmt": [
+                56,
+                9,
+                56,
+                41
+              ],
+            "line": 56,
+            "endcolumn": 32,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 56,
+            "stmt": [
+                56,
+                9,
+                56,
+                41
+              ],
+            "line": 56,
+            "endcolumn": 32,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 56,
+            "stmt": [
+                56,
+                9,
+                56,
+                41
+              ],
+            "line": 56,
+            "endcolumn": 41,
+            "column": 37
+          },
+        {
+            "module": "disque",
+            "endline": 56,
+            "stmt": [
+                56,
+                9,
+                56,
+                41
+              ],
+            "line": 56,
+            "endcolumn": 41,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 56,
+            "stmt": [
+                56,
+                9,
+                56,
+                41
+              ],
+            "line": 56,
+            "endcolumn": 41,
+            "column": 21
+          },
+        {
+            "module": "disque",
+            "endline": 56,
+            "stmt": [
+                56,
+                9,
+                56,
+                41
+              ],
+            "line": 56,
             "endcolumn": 19,
             "column": 9
           },
@@ -24253,414 +24406,245 @@
             "endline": 57,
             "stmt": [
                 57,
-                7,
+                9,
                 57,
-                22
-              ],
-            "line": 57,
-            "endcolumn": 22,
-            "column": 7
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 21,
-            "column": 21
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 32,
-            "column": 26
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 32,
-            "column": 21
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 32,
-            "column": 21
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 41,
-            "column": 37
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 41,
-            "column": 21
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 41,
-            "column": 21
-          },
-        {
-            "module": "disque",
-            "endline": 60,
-            "stmt": [
-                60,
-                9,
-                60,
-                41
-              ],
-            "line": 60,
-            "endcolumn": 19,
-            "column": 9
-          },
-        {
-            "module": "disque",
-            "endline": 61,
-            "stmt": [
-                61,
-                9,
-                61,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 9,
             "column": 9
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 20,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 20,
             "column": 9
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 24,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 35,
             "column": 29
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 35,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 35,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 43,
             "column": 40
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 43,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 43,
             "column": 24
           },
         {
             "module": "disque",
-            "endline": 61,
+            "endline": 57,
             "stmt": [
-                61,
+                57,
                 9,
-                61,
+                57,
                 43
               ],
-            "line": 61,
+            "line": 57,
             "endcolumn": 22,
             "column": 9
           },
         {
             "module": "disque",
-            "endline": 63,
+            "endline": 61,
             "stmt": [
-                63,
-                9,
-                63,
-                18
-              ],
-            "line": 63,
-            "endcolumn": 17,
-            "column": 14
-          },
-        {
-            "module": "disque",
-            "endline": 63,
-            "stmt": [
-                63,
-                9,
-                63,
-                18
-              ],
-            "line": 63,
-            "endcolumn": 17,
-            "column": 14
-          },
-        {
-            "module": "disque",
-            "endline": 63,
-            "stmt": [
-                63,
-                9,
-                63,
-                18
-              ],
-            "line": 63,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "disque",
-            "endline": 63,
-            "stmt": [
-                63,
-                9,
-                63,
-                18
-              ],
-            "line": 63,
-            "endcolumn": 18,
-            "column": 9
-          },
-        {
-            "module": "disque",
-            "endline": 65,
-            "stmt": [
-                65,
+                61,
                 5,
-                65,
+                61,
                 23
               ],
-            "line": 65,
+            "line": 61,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 65,
+            "endline": 61,
             "stmt": [
-                65,
+                61,
                 5,
-                65,
+                61,
                 23
               ],
-            "line": 65,
+            "line": 61,
             "endcolumn": 14,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 65,
+            "endline": 61,
             "stmt": [
-                65,
+                61,
                 5,
-                65,
+                61,
                 23
               ],
-            "line": 65,
+            "line": 61,
             "endcolumn": 22,
             "column": 19
           },
         {
             "module": "disque",
-            "endline": 65,
+            "endline": 61,
             "stmt": [
-                65,
+                61,
                 5,
-                65,
+                61,
                 23
               ],
-            "line": 65,
+            "line": 61,
             "endcolumn": 22,
             "column": 14
           },
         {
             "module": "disque",
-            "endline": 65,
+            "endline": 61,
             "stmt": [
-                65,
+                61,
                 5,
-                65,
+                61,
                 23
               ],
-            "line": 65,
+            "line": 61,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 65,
+            "endline": 61,
             "stmt": [
-                65,
+                61,
                 5,
-                65,
+                61,
                 23
               ],
-            "line": 65,
+            "line": 61,
             "endcolumn": 23,
             "column": 5
           },
         {
             "module": "disque",
-            "endline": 67,
+            "endline": 63,
             "stmt": [
-                67,
+                63,
                 1,
-                67,
+                63,
                 6
               ],
-            "line": 67,
+            "line": 63,
             "endcolumn": 6,
             "column": 1
           },
         {
             "module": "disque",
-            "endline": 67,
+            "endline": 63,
             "stmt": [
-                67,
+                63,
                 1,
-                67,
+                63,
                 6
               ],
-            "line": 67,
+            "line": 63,
             "endcolumn": 6,
             "column": 1
           },
@@ -26031,42 +26015,224 @@
           },
         {
             "module": "__main__",
-            "endline": 31,
+            "endline": 30,
             "stmt": [
-                31,
                 30,
-                31,
-                30
+                1,
+                30,
+                20
               ],
-            "line": 31,
-            "endcolumn": 30,
-            "column": 30
+            "line": 30,
+            "endcolumn": 11,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                1,
+                30,
+                20
+              ],
+            "line": 30,
+            "endcolumn": 11,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                1,
+                30,
+                20
+              ],
+            "line": 30,
+            "endcolumn": 19,
+            "column": 14
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                1,
+                30,
+                20
+              ],
+            "line": 30,
+            "endcolumn": 19,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                1,
+                30,
+                20
+              ],
+            "line": 30,
+            "endcolumn": 3,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                1,
+                30,
+                20
+              ],
+            "line": 30,
+            "endcolumn": 3,
+            "column": 1
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                1,
+                30,
+                20
+              ],
+            "line": 30,
+            "endcolumn": 3,
+            "column": 1
           },
         {
             "module": "__main__",
             "endline": 31,
             "stmt": [
                 31,
-                30,
+                5,
                 31,
-                30
+                22
               ],
             "line": 31,
-            "endcolumn": 30,
-            "column": 30
+            "endcolumn": 19,
+            "column": 11
           },
         {
             "module": "__main__",
             "endline": 31,
             "stmt": [
                 31,
-                30,
+                5,
                 31,
-                30
+                22
               ],
             "line": 31,
-            "endcolumn": 30,
-            "column": 30
+            "endcolumn": 21,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                5,
+                31,
+                22
+              ],
+            "line": 31,
+            "endcolumn": 21,
+            "column": 21
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                5,
+                31,
+                22
+              ],
+            "line": 31,
+            "endcolumn": 22,
+            "column": 11
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                5,
+                31,
+                22
+              ],
+            "line": 31,
+            "endcolumn": 22,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                5,
+                31,
+                22
+              ],
+            "line": 31,
+            "endcolumn": 22,
+            "column": 5
+          },
+        {
+            "module": "__main__",
+            "endline": 30,
+            "stmt": [
+                30,
+                1,
+                30,
+                20
+              ],
+            "line": 30,
+            "endcolumn": 20,
+            "column": 20
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                28,
+                31,
+                28
+              ],
+            "line": 31,
+            "endcolumn": 28,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                28,
+                31,
+                28
+              ],
+            "line": 31,
+            "endcolumn": 28,
+            "column": 28
+          },
+        {
+            "module": "__main__",
+            "endline": 31,
+            "stmt": [
+                31,
+                28,
+                31,
+                28
+              ],
+            "line": 31,
+            "endcolumn": 28,
+            "column": 28
           }
       ],
     "code": [
@@ -31328,7 +31494,7 @@
             "op": "Store"
           },
         {
-            "pc": "1394",
+            "pc": "1390",
             "op": "Jump"
           },
         {
@@ -31457,7 +31623,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1394",
+            "pc": "1390",
             "op": "Jump"
           },
         {
@@ -31491,7 +31657,7 @@
             "op": "Return"
           },
         {
-            "pc": "1394",
+            "pc": "1390",
             "op": "Jump"
           },
         {
@@ -31553,7 +31719,7 @@
             "op": "Return"
           },
         {
-            "pc": "1394",
+            "pc": "1390",
             "op": "Jump"
           },
         {
@@ -31629,7 +31795,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1394",
+            "pc": "1390",
             "op": "Jump"
           },
         {
@@ -32101,7 +32267,7 @@
             "op": "Return"
           },
         {
-            "pc": "1394",
+            "pc": "1390",
             "op": "Jump"
           },
         {
@@ -32506,7 +32672,7 @@
             "op": "DelVar"
           },
         {
-            "pc": "1394",
+            "pc": "1390",
             "op": "Jump"
           },
         {
@@ -32568,6 +32734,10 @@
             "op": "LoadVar"
           },
         {
+            "value": "node",
+            "op": "DelVar"
+          },
+        {
             "value": {
                 "type": "address"
               },
@@ -32587,10 +32757,6 @@
             "op": "JumpCond"
           },
         {
-            "value": "node",
-            "op": "DelVar"
-          },
-        {
             "value": {
                 "type": "address"
               },
@@ -32601,7 +32767,7 @@
             "op": "StoreVar"
           },
         {
-            "pc": "1386",
+            "pc": "1382",
             "op": "Jump"
           },
         {
@@ -32696,24 +32862,6 @@
             "op": "Store"
           },
         {
-            "value": "node",
-            "op": "LoadVar"
-          },
-        {
-            "value": "node",
-            "op": "DelVar"
-          },
-        {
-            "value": {
-                "type": "pc",
-                "value": "1131"
-              },
-            "op": "Apply"
-          },
-        {
-            "op": "Pop"
-          },
-        {
             "value": "d",
             "op": "LoadVar"
           },
@@ -32785,7 +32933,7 @@
             "op": "Store"
           },
         {
-            "pc": "1472",
+            "pc": "1468",
             "op": "Jump"
           },
         {
@@ -32928,7 +33076,7 @@
             "op": "Return"
           },
         {
-            "pc": "1472",
+            "pc": "1468",
             "op": "Jump"
           },
         {
@@ -33062,7 +33210,7 @@
             "op": "Return"
           },
         {
-            "pc": "1472",
+            "pc": "1468",
             "op": "Jump"
           },
         {
@@ -33226,7 +33374,7 @@
             "op": "Cut"
           },
         {
-            "pc": "1485",
+            "pc": "1481",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -33241,7 +33389,7 @@
                   ],
                 "func": {
                     "type": "pc",
-                    "value": "1400"
+                    "value": "1396"
                   }
               },
             "op": "Push"
@@ -33273,7 +33421,7 @@
             "op": "Spawn"
           },
         {
-            "pc": "1476",
+            "pc": "1472",
             "op": "Jump"
           },
         {
@@ -33311,7 +33459,7 @@
             "op": "Cut"
           },
         {
-            "pc": "1499",
+            "pc": "1495",
             "cond": {
                 "type": "bool",
                 "value": "False"
@@ -33326,7 +33474,7 @@
                   ],
                 "func": {
                     "type": "pc",
-                    "value": "1425"
+                    "value": "1421"
                   }
               },
             "op": "Push"
@@ -33358,7 +33506,92 @@
             "op": "Spawn"
           },
         {
-            "pc": "1490",
+            "pc": "1486",
+            "op": "Jump"
+          },
+        {
+            "value": "i",
+            "op": "DelVar"
+          },
+        {
+            "value": {
+                "type": "int",
+                "value": 1
+              },
+            "op": "Push"
+          },
+        {
+            "value": {
+                "type": "int",
+                "value": 2
+              },
+            "op": "Push"
+          },
+        {
+            "arity": 2,
+            "value": "..",
+            "op": "Nary"
+          },
+        {
+            "value": {
+                "type": "int",
+                "value": 0
+              },
+            "op": "Push"
+          },
+        {
+            "value": "i",
+            "op": "Cut"
+          },
+        {
+            "pc": "1509",
+            "cond": {
+                "type": "bool",
+                "value": "False"
+              },
+            "op": "JumpCond"
+          },
+        {
+            "value": {
+                "type": "address",
+                "args": [
+
+                  ],
+                "func": {
+                    "type": "pc",
+                    "value": "1445"
+                  }
+              },
+            "op": "Push"
+          },
+        {
+            "value": "i",
+            "op": "LoadVar"
+          },
+        {
+            "value": "i",
+            "op": "DelVar"
+          },
+        {
+            "arity": 2,
+            "value": "AddArg",
+            "op": "Nary"
+          },
+        {
+            "value": {
+                "type": "dict",
+                "value": [
+
+                  ]
+              },
+            "op": "Push"
+          },
+        {
+            "eternal": "False",
+            "op": "Spawn"
+          },
+        {
+            "pc": "1500",
             "op": "Jump"
           },
         {
@@ -34223,41 +34456,41 @@
     0,
     0,
     0,
-    224,
-    650,
-    650,
-    650,
-    244,
-    244,
-    244,
-    62,
-    182,
-    182,
-    182,
-    62,
-    62,
-    62,
-    62,
-    62,
-    62,
-    62,
+    444,
+    1260,
+    1260,
+    1260,
+    464,
+    464,
+    464,
+    112,
+    352,
+    352,
+    352,
+    112,
+    112,
+    112,
+    112,
+    112,
+    112,
+    112,
     0,
-    62,
-    120,
-    120,
-    120,
-    120,
-    58,
-    58,
-    58,
-    58,
-    58,
-    58,
-    58,
-    58,
-    58,
-    58,
-    58,
+    112,
+    220,
+    220,
+    220,
+    220,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
     0,
     0,
     0,
@@ -34725,55 +34958,51 @@
     44,
     0,
     0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
+    220,
+    220,
+    220,
+    220,
+    220,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    22,
+    22,
+    22,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    28,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
     0,
     1,
     1,
@@ -34830,29 +35059,43 @@
     280,
     280,
     0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
+    220,
+    220,
+    220,
+    220,
+    220,
+    220,
+    220,
+    220,
+    220,
+    220,
+    220,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    496,
+    496,
+    1,
+    1,
+    1,
+    1,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
     1,
     1,
     1,
