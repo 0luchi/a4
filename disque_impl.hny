@@ -13,8 +13,10 @@ def insert(d, v):
       node -> prev = node
       d->current = node
     else:
-      d -> current -> prev -> next = node
+      node -> prev = d -> current -> prev
       node -> next = d -> current
+      d -> current -> prev -> next = node
+      d -> current -> prev = node
 
     release(?d -> lock)
 
@@ -36,7 +38,6 @@ def delete(d) returns returnVal:
           d -> current = currNext
 
     release(?d -> lock)
-  
 
 def next(d) returns returnVal:
     acquire(?d -> lock)
